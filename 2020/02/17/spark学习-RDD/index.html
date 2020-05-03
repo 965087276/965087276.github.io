@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spark," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Interstellar" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Spark-RDD摘自spark中文文档及官方英文文档  https:&#x2F;&#x2F;spark-reference-doc-cn.readthedocs.io&#x2F;zh_CN&#x2F;latest&#x2F;programming-guide&#x2F;rdd-guide.htmlhttps:&#x2F;&#x2F;spark.apache.org&#x2F;docs&#x2F;latest&#x2F;rdd-programming-guide.html#rdd-persistence">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spark学习-RDD">
+<meta property="og:url" content="965087276.github.io/2020/02/17/spark%E5%AD%A6%E4%B9%A0-RDD/index.html">
+<meta property="og:site_name" content="Interstellar">
+<meta property="og:description" content="Spark-RDD摘自spark中文文档及官方英文文档  https:&#x2F;&#x2F;spark-reference-doc-cn.readthedocs.io&#x2F;zh_CN&#x2F;latest&#x2F;programming-guide&#x2F;rdd-guide.htmlhttps:&#x2F;&#x2F;spark.apache.org&#x2F;docs&#x2F;latest&#x2F;rdd-programming-guide.html#rdd-persistence">
+<meta property="article:published_time" content="2020-02-17T05:08:09.000Z">
+<meta property="article:modified_time" content="2020-05-03T06:01:41.688Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Spark">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="965087276.github.io/2020/02/17/spark学习-RDD/"/>
+
+
+
+
+
+  <title>spark学习-RDD | Interstellar</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Interstellar</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/02/17/spark%E5%AD%A6%E4%B9%A0-RDD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spark学习-RDD</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-17T13:08:09+08:00">
+                2020-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- 
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script> -->
+<h1 id="Spark-RDD"><a href="#Spark-RDD" class="headerlink" title="Spark-RDD"></a>Spark-RDD</h1><p>摘自spark中文文档及官方英文文档</p>
+<blockquote>
+<p><a href="https://spark-reference-doc-cn.readthedocs.io/zh_CN/latest/programming-guide/rdd-guide.html" target="_blank" rel="noopener">https://spark-reference-doc-cn.readthedocs.io/zh_CN/latest/programming-guide/rdd-guide.html</a><br><a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-persistence" target="_blank" rel="noopener">https://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-persistence</a></p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>使用spark时要先创建一个<strong>JavaSparkContext</strong>对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// appName为应用名称，这个名称会显示在cluster UI界面上</span></span><br><span class="line"><span class="comment">// 关于master参数可参考https://spark.apache.org/docs/latest/submitting-applications.html#master-urls</span></span><br><span class="line">SparkConf conf = <span class="keyword">new</span> SparkConf().setAppName(appName).setMaster(master);</span><br><span class="line">JavaSparkContext sc = <span class="keyword">new</span> JavaSparkContext(conf);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="Resilient-Distributed-Datasets-RDDs"><a href="#Resilient-Distributed-Datasets-RDDs" class="headerlink" title="Resilient Distributed Datasets (RDDs)"></a>Resilient Distributed Datasets (RDDs)</h2><p>RDD是一个可容错、可并行操作的分布式元素集合。总体上有两种方法可以创建 RDD 对象：由驱动程序中的集合对象通过并行化操作创建，或者从外部存储系统中数据集加载（如：共享文件系统、HDFS、HBase或者其他Hadoop支持的数据源）。</p>
+<h3 id="并行集合"><a href="#并行集合" class="headerlink" title="并行集合"></a>并行集合</h3><p>并行集合的创建：调用<strong>JavaSparkContext的parallelize</strong>方法来创建，传入一个已有的集合对象作为参数。集合对象中所有的元素都将被复制到一个可并行操作的分布式数据集中<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; data = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>);</span><br><span class="line">JavaRDD&lt;Integer&gt; distData = sc.parallelize(data);</span><br></pre></td></tr></table></figure><br>并行集合一个重要参数是<strong>partitions</strong>分区数，spark的每个任务（task）都是基于partition的，每个分区一个对应的任务（task）。典型场景下，一般每个CPU对应2~4个分区。并且一般而言，Spark会基于集群的情况，自动设置这个分区数。当然，你还是可以手动控制这个分区数，只需给parallelize方法再传一个参数即可（如：sc.parallelize(data, 10) ）</p>
+<h3 id="外部数据集"><a href="#外部数据集" class="headerlink" title="外部数据集"></a>外部数据集</h3><p>例如读取文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; distFile = sc.textFile(<span class="string">"data.txt"</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="RDD-Operation"><a href="#RDD-Operation" class="headerlink" title="RDD Operation"></a>RDD Operation</h3><p>RDD支持两种类型的算子</p>
+<ol>
+<li><strong>transformations</strong>: 将一个已有的RDD转换成一个新的RDD,例如<strong>map</strong>操作</li>
+<li><strong>action</strong>: 基于RDD的计算，并将结果返回给驱动器(driver), 例如<strong>reduce</strong>操作 </li>
+</ol>
+<p>所有的<strong>transformations</strong>算子都是懒惰(lazy)运算。只有当action算子需要结果时才计算。</p>
+<blockquote>
+<p>All transformations in Spark are lazy, in that they do not compute their results right away. Instead, they just remember the transformations applied to some base dataset (e.g. a file). The transformations are only computed when an action requires a result to be returned to the driver program. This design enables Spark to run more efficiently. For example, we can realize that a dataset created through map will be used in a reduce and return only the result of the reduce to the driver, rather than the larger mapped dataset.</p>
+</blockquote>
+<p>默认情况下，在执行<strong>action</strong>算子时，每个<strong>transformed RDD</strong>都会被重新计算，这可能比较耗费时间。因此，可以将这些RDD持久化(persist)到内存中来节省下一次的时间。</p>
+<h3 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h3><p>考虑下面的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"data.txt"</span>);</span><br><span class="line">JavaRDD&lt;Integer&gt; lineLengths = lines.map(s -&gt; s.length());</span><br><span class="line"><span class="keyword">int</span> totalLength = lineLengths.reduce((a, b) -&gt; a + b);</span><br></pre></td></tr></table></figure><br>其中，第一行是从外部文件加载数据，并创建一个基础RDD。这时候，数据集并没有加载进内存除非有其他操作施加于lines，这时候的lines RDD其实可以说只是一个指向 data.txt 文件的指针。第二行，用lines通过map转换得到一个lineLengths RDD，同样，lineLengths也是懒惰计算的。最后，我们使用 reduce算子计算长度之和，reduce是一个action算子。此时，Spark将会把计算分割为一些小的任务，分别在不同的机器上运行，每台机器上都运行相关的一部分map任务，并在本地进行reduce，并将这些reduce结果都返回给驱动器。</p>
+<p>如果后续我们想复用lineLengths, 可以在第三行前加一句<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lineLengths.persist(StorageLevel.MEMORY_ONLY());</span><br></pre></td></tr></table></figure><br>这样的话lineLengths在第一次计算完成后，spark会将它保存在内存中。</p>
+<h3 id="Passing-Functions-to-Spark"><a href="#Passing-Functions-to-Spark" class="headerlink" title="Passing Functions to Spark"></a>Passing Functions to Spark</h3><p>一些较复杂的操作，可以定义成函数（Function）传递给spark。这里需要实现spark的Function接口。<br><a href="https://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/api/java/function/package-summary.html" target="_blank" rel="noopener">https://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/api/java/function/package-summary.html</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"data.txt"</span>);</span><br><span class="line">JavaRDD&lt;Integer&gt; lineLengths = lines.map(<span class="keyword">new</span> Function&lt;String, Integer&gt;() &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(String s)</span> </span>&#123; <span class="keyword">return</span> s.length(); &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">int</span> totalLength = lineLengths.reduce(<span class="keyword">new</span> Function2&lt;Integer, Integer, Integer&gt;() &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer a, Integer b)</span> </span>&#123; <span class="keyword">return</span> a + b; &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>也可以写在外边<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GetLength</span> <span class="keyword">implements</span> <span class="title">Function</span>&lt;<span class="title">String</span>, <span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(String s)</span> </span>&#123; <span class="keyword">return</span> s.length(); &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sum</span> <span class="keyword">implements</span> <span class="title">Function2</span>&lt;<span class="title">Integer</span>, <span class="title">Integer</span>, <span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer a, Integer b)</span> </span>&#123; <span class="keyword">return</span> a + b; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"data.txt"</span>);</span><br><span class="line">JavaRDD&lt;Integer&gt; lineLengths = lines.map(<span class="keyword">new</span> GetLength());</span><br><span class="line"><span class="keyword">int</span> totalLength = lineLengths.reduce(<span class="keyword">new</span> Sum());</span><br></pre></td></tr></table></figure></p>
+<h3 id="Understanding-closures-闭包"><a href="#Understanding-closures-闭包" class="headerlink" title="Understanding closures(闭包)"></a>Understanding closures(闭包)</h3><p>Spark里一个比较难的事情就是，理解在整个集群上跨节点执行的变量和方法的作用域以及生命周期。Spark里一个频繁出现的问题就是RDD算子在变量作用域之外修改了其值。下面的例子，我们将会以foreach() 算子为例，来递增一个计数器counter，不过类似的问题在其他算子上也会出现。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">JavaRDD&lt;Integer&gt; rdd = sc.parallelize(data);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Wrong: Don't do this!!</span></span><br><span class="line">rdd.foreach(x -&gt; counter += x);</span><br><span class="line"></span><br><span class="line">println(<span class="string">"Counter value: "</span> + counter);</span><br></pre></td></tr></table></figure>
+<p>在集群模式下，为了执行这个作业，Spark会将 RDD 算子的计算过程分割成多个独立的<strong>task</strong>, 每个task分发给一个<strong>executor</strong>去执行。而执行之前，Spark需要计算<strong>闭包</strong>。闭包是由执行器执行RDD算子（本例中的foreach()）时所需要的变量和方法组成的。闭包将会被<strong>序列化</strong>，并发送给每个executor。</p>
+<p>在上面的例子中，闭包中的变量会跟随不同的闭包副本，发送到不同的executor上，所以等到foreach真正在executor上运行时，其引用的counter已经不再是驱动器上所定义的那个counter副本了，驱动器内存中仍然会有一个counter变量副本，但是这个副本对executor是不可见的！executor只能看到其所收到的序列化闭包中包含的counter副本。因此，最终驱动器上得到的counter将会是0。</p>
+<p>为了确保类似这样的场景下，代码能有确定的行为，这里应该使用<strong>累加器（Accumulator）</strong>。累加器是Spark中专门用于集群跨节点分布式执行计算中，安全地更新同一变量的机制。</p>
+<h4 id="打印RDD中的元素"><a href="#打印RDD中的元素" class="headerlink" title="打印RDD中的元素"></a>打印RDD中的元素</h4><p>另一种常见习惯是，试图用 rdd.foreach(println) 或者 rdd.map(println) 来打印RDD中所有的元素。如果是在单机上，这种写法能够如预期一样，打印出RDD所有元素。然后，在集群模式下，这些输出将会被打印到执行器的标准输出（stdout）上，因此驱动器的标准输出（stdout）上神马也看不到！如果真要在驱动器上把所有RDD元素都打印出来，你可以先调用collect算子，把RDD元素先拉到驱动器上来，代码可能是这样：rdd.collect().foreach(println)。不过如果RDD很大的话，有可能导致驱动器内存溢出，因为collect会把整个RDD都弄到驱动器所在单机上来；如果你只是需要打印一部分元素，那么take是更安全的选择：rdd.take(100).foreach(println)</p>
+<h3 id="使用键值对"><a href="#使用键值对" class="headerlink" title="使用键值对"></a>使用键值对</h3><p>通过<strong>scala.Tuple2</strong>类来使用键值对。下面的代码统计了data.txt中每行文本出现的次数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"data.txt"</span>);</span><br><span class="line">JavaPairRDD&lt;String, Integer&gt; pairs = lines.mapToPair(s -&gt; <span class="keyword">new</span> Tuple2(s, <span class="number">1</span>));</span><br><span class="line">JavaPairRDD&lt;String, Integer&gt; counts = pairs.reduceByKey((a, b) -&gt; a + b);</span><br></pre></td></tr></table></figure></p>
+<h3 id="Transformation算子"><a href="#Transformation算子" class="headerlink" title="Transformation算子"></a>Transformation算子</h3><p>spark所支持的的转换算子列表参见<br><a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#transformations" target="_blank" rel="noopener">https://spark.apache.org/docs/latest/rdd-programming-guide.html#transformations</a></p>
+<h3 id="action算子"><a href="#action算子" class="headerlink" title="action算子"></a>action算子</h3><p>spark所支持的action算子参见<br><a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#actions" target="_blank" rel="noopener">https://spark.apache.org/docs/latest/rdd-programming-guide.html#actions</a></p>
+<h3 id="混洗（Shuffle）算子"><a href="#混洗（Shuffle）算子" class="headerlink" title="混洗（Shuffle）算子"></a>混洗（Shuffle）算子</h3><p>有一些Spark算子会触发众所周知的混洗（Shuffle）事件。Spark中的混洗机制是用于将数据重新分布，其结果是所有数据将在各个分区间重新分组。一般情况下，混洗需要跨执行器（Executor）或跨机器复制数据，这也是混洗操作一般都比较复杂而且开销大的原因。</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>以 reduceByKey 算子为例来看一下。reduceByKey算子会生成一个新的RDD，将源RDD中一个key对应的多个value组合进一个tuple - 然后将这些values输入给reduce函数，得到的result再和key关联放入新的RDD中。这个算子的难点在于对于某一个key来说，并非其对应的所有values都在同一个分区（partition）中，甚至有可能都不在同一台机器上，但是这些values又必须放到一起计算reduce结果。</p>
+<p>在Spark中，通常是由于为了进行某种计算操作，而将数据分布到所需要的各个分区当中。而在计算阶段，单个任务（task）只会操作单个分区中的数据 – 因此，为了组织好每个 reduceByKey 中 reduce 任务执行时所需的数据，Spark需要执行一个多对多操作。即，Spark需要读取RDD的所有分区，并找到所有key对应的所有values，然后跨分区传输这些values，并将每个key对应的所有values放到同一分区，以便后续计算各个key对应values的reduce结果 – 这个过程就叫做混洗（Shuffle）。</p>
+<p>虽然混洗好后，各个分区中的元素和分区自身的顺序都是确定的，但是分区中元素的顺序并非确定的。如果需要混洗后分区内的元素有序，可以参考使用以下混洗操作：</p>
+<ol>
+<li>mapPartitions 使用 .sorted 对每个分区排序</li>
+<li>repartitionAndSortWithinPartitions 重分区的同时，对分区进行排序，比自行组合repartition和sort更高效</li>
+<li>sortBy 创建一个全局有序的RDD</li>
+</ol>
+<h4 id="性能影响"><a href="#性能影响" class="headerlink" title="性能影响"></a>性能影响</h4><p>混洗（Shuffle）之所以开销大，是因为混洗操作需要引入磁盘I/O，数据序列化以及网络I/O等操作。为了组织好混洗数据，Spark需要生成对应的任务集 – 一系列map任务用于组织数据，再用一系列reduce任务来聚合数据。注意这里的map、reduce是来自MapReduce的术语，和Spark的map、reduce算子并没有直接关系。</p>
+<p>在Spark内部，单个map任务的输出会尽量保存在内存中，直至放不下为止。然后，这些输出会基于目标分区重新排序，并写到一个文件里。在reduce端，reduce任务只读取与之相关的并已经排序好的blocks。</p>
+<p>某些混洗算子会导致非常明显的内存开销增长，因为这些算子需要在数据传输前后，在内存中维护组织数据记录的各种数据结构。特别地，reduceByKey和aggregateByKey都会在map端创建这些数据结构，而ByKey系列算子都会在reduce端创建这些数据结构。如果数据在内存中存不下，Spark会把数据吐到磁盘上，当然这回导致额外的磁盘I/O以及垃圾回收的开销。</p>
+<p>混洗还会再磁盘上生成很多临时文件。以Spark-1.3来说，这些临时文件会一直保留到其对应的RDD被垃圾回收才删除。之所以这样做，是因为如果这些信息需要重新计算的时候，这些混洗文件可以不必重新生成。如果程序持续引用这些RDD或者垃圾回收启动频率较低，那么这些垃圾回收可能需要等较长的一段时间。这就意味着，长时间运行的Spark作业可能会消耗大量的磁盘。Spark的临时存储目录，是由spark.local.dir 配置参数指定的。</p>
+<p>spark混洗操作的相关配置可以参考</p>
+<blockquote>
+<p><a href="https://spark.apache.org/docs/latest/configuration.html#shuffle-behavior" target="_blank" rel="noopener">https://spark.apache.org/docs/latest/configuration.html#shuffle-behavior</a></p>
+</blockquote>
+<h3 id="RDD持久化"><a href="#RDD持久化" class="headerlink" title="RDD持久化"></a>RDD持久化</h3><p>spark的一项关键能力就是它可以持久化（或者缓存）数据集在内存中，从而跨操作复用这些数据集。如果你持久化了一个RDD，那么每个节点上都会存储该RDD的一些分区，这些分区是由对应的节点计算出来并保持在内存中，后续可以在其他施加在该RDD上的action算子中复用（或者从这些数据集派生新的RDD）。这使得后续动作的速度提高很多（通常高于10倍）。</p>
+<h4 id="持久化数据"><a href="#持久化数据" class="headerlink" title="持久化数据"></a>持久化数据</h4><p>你可以用persist() 或者 cache() 来标记一下需要持久化的RDD。等到该RDD首次被施加action算子的时候，其对应的数据分区就会被保留在内存里。同时，Spark的缓存具备一定的容错性 – 如果RDD的任何一个分区丢失了，Spark将自动根据其原来的混洗信息重新计算这个分区。</p>
+<p>另外，每个持久化的RDD可以使用不同的存储级别，比如，你可以把RDD保存在磁盘上，或者以java序列化对象保存到内存里（为了省空间），或者跨节点多副本，或者使用 Tachyon 存到虚拟机以外的内存里。这些存储级别都可以由persist()的参数StorageLevel对象来控制。cache() 方法本身就是一个使用默认存储级别做持久化的快捷方式，默认存储级别是 StorageLevel.MEMORY_ONLY（以Java序列化方式存到内存里）。</p>
+<p>完整的存储级别列表参见</p>
+<blockquote>
+<p><a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-persistence" target="_blank" rel="noopener">https://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-persistence</a></p>
+</blockquote>
+<h4 id="删除持久化的数据"><a href="#删除持久化的数据" class="headerlink" title="删除持久化的数据"></a>删除持久化的数据</h4><p>Spark会自动监控各个节点上的缓存使用率，并通过LRU（最近最少使用）算法将老数据逐出内存。也可以通过RDD.unpersist()方法来手动删除删除无用的缓存</p>
+<h2 id="共享变量"><a href="#共享变量" class="headerlink" title="共享变量"></a>共享变量</h2><p>一般而言，当我们给Spark算子（如 map 或 reduce）传递一个函数时，这些函数将会在远程的集群节点上运行，并且这些函数所引用的变量都是各个节点上的独立副本。这些变量都会以副本的形式复制到各个机器节点上，如果更新这些变量副本的话，这些更新并不会传回到驱动器（driver）程序。通常来说，支持跨任务的可读写共享变量是比较低效的。不过，Spark还是提供了两种比较通用的共享变量：广播变量（Broadcast Variables）和累加器（Accumulators）。</p>
+<h3 id="广播变量"><a href="#广播变量" class="headerlink" title="广播变量"></a>广播变量</h3><p>广播变量提供了一种只读的共享变量，它是在每个机器节点上保存一个缓存，而不是每个任务保存一份副本。通常可以用来在每个节点上保存一个较大的输入数据集，这要比常规的变量副本更高效（一般的变量是每个任务一个副本，一个节点上可能有多个任务）。Spark还会尝试使用高效的广播算法来分发广播变量，以减少通信开销。</p>
+<p>Spark的操作有时会有多个阶段（stage），不同阶段之间的分割线就是混洗（shuffle）操作。Spark会自动广播各个阶段用到的公共数据。这些方式广播的数据都是序列化过的，并且在运行各个任务前需要反序列化。这也意味着，显示地创建广播变量，只有在跨多个阶段（stage）的任务需要同样的数据 或者 缓存数据的序列化和反序列化格式很重要的情况下 才是必须的。</p>
+<p>广播变量可以通过一个变量v来创建，只需调用 SparkContext.broadcast(v)即可。这个广播变量是对变量v的一个包装，要访问其值，可以调用广播变量的 value 方法。代码示例如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Broadcast&lt;<span class="keyword">int</span>[]&gt; broadcastVar = sc.broadcast(<span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;);</span><br><span class="line"></span><br><span class="line">broadcastVar.value();</span><br><span class="line"><span class="comment">// returns [1, 2, 3]</span></span><br></pre></td></tr></table></figure><br>广播变量创建之后，集群中任何函数都不应该再使用原始变量v，这样才能保证v不会被多次复制到同一个节点上。另外，对象v在广播后不应该再被更新，这样才能保证所有节点上拿到同样的值（例如，更新后，广播变量又被同步到另一新节点，新节点有可能得到的值和其他节点不一样）。</p>
+<h3 id="累加器"><a href="#累加器" class="headerlink" title="累加器"></a>累加器</h3><p>累加器是一种只支持满足结合律的“累加”操作的变量，因此它可以很高效地支持并行计算。利用累加器可以实现计数（类似MapReduce中的计数器）或者求和。Spark原生支持了数字类型的累加器，开发者也可以自定义新的累加器。如果创建累加器的时候给了一个名字，那么这个名字会展示在Spark UI上，这对于了解程序运行处于哪个阶段非常有帮助（注意：Python尚不支持该功能）。</p>
+<p>创捷累加器时需要赋一个初始值v，调用 SparkContext.accumulator(v) 可以创建一个累加器。后续集群中运行的任务可以使用 add 方法 或者 += 操作符 （仅Scala和Python支持）来进行累加操作。不过，任务本身并不能读取累加器的值，只有驱动器程序可以用 value 方法访问累加器的值。代码示例如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LongAccumulator accum = jsc.sc().longAccumulator();</span><br><span class="line"></span><br><span class="line">sc.parallelize(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)).foreach(x -&gt; accum.add(x));</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="comment">// 10/09/29 18:41:08 INFO SparkContext: Tasks finished in 0.317106 s</span></span><br><span class="line"></span><br><span class="line">accum.value();</span><br><span class="line"><span class="comment">// returns 10</span></span><br></pre></td></tr></table></figure></p>
+<p>也可以通过实现AccumulatorV2来自定义自己的累加器<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VectorAccumulatorV2</span> <span class="keyword">implements</span> <span class="title">AccumulatorV2</span>&lt;<span class="title">MyVector</span>, <span class="title">MyVector</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> MyVector myVector = MyVector.createZeroVector();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    myVector.reset();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(MyVector v)</span> </span>&#123;</span><br><span class="line">    myVector.add(v);</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Then, create an Accumulator of this type:</span></span><br><span class="line">VectorAccumulatorV2 myVectorAcc = <span class="keyword">new</span> VectorAccumulatorV2();</span><br><span class="line"><span class="comment">// Then, register it into spark context:</span></span><br><span class="line">jsc.sc().register(myVectorAcc, <span class="string">"MyVectorAcc1"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>若某个task任务失败，在进行累加时，spark会忽视这个任务。因此，累加时若出现失败任务可能会导致运算不正确</p>
+<blockquote>
+<p> When a Spark task finishes, Spark will try to merge the accumulated updates in this task to an accumulator. If it fails, Spark will ignore the failure and still mark the task successful and continue to run other tasks. Hence, a buggy accumulator will not impact a Spark job, but it may not get updated correctly although a Spark job is successful.</p>
+</blockquote>
+<p>对于在action算子中更新的累加器，Spark保证每个任务对累加器的更新只会被应用一次，例如，某些任务如果重启过，则不会再次更新累加器。而如果在transformation算子中更新累加器，那么用户需要注意，一旦某个任务因为失败被重新执行，那么其对累加器的更新可能会实施多次。</p>
+<p>累加器并不会改变Spark懒惰求值的运算模型。如果在RDD算子中更新累加器，那么其值只会在RDD做action算子计算的时候被更新一次。因此，在transformation算子（如：map）中更新累加器，其值并不能保证一定被更新。以下代码片段说明了这一特性：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LongAccumulator accum = jsc.sc().longAccumulator();</span><br><span class="line">data.map(x -&gt; &#123; accum.add(x); <span class="keyword">return</span> f(x); &#125;);</span><br><span class="line"><span class="comment">// Here, accum is still 0 because no actions have caused the `map` to be computed.</span></span><br></pre></td></tr></table></figure></p>
+<!-- <style type="text/css">
+    h1 { counter-reset: h2counter; }
+    h2 { counter-reset: h3counter; }
+    h3 { counter-reset: h4counter; }
+    h4 { counter-reset: h5counter; }
+    h5 { counter-reset: h6counter; }
+    h6 { }
+    h2:before {
+      counter-increment: h2counter;
+      content: counter(h2counter) ".\0000a0\0000a0";
+    }
+    h3:before {
+      counter-increment: h3counter;
+      content: counter(h2counter) "."
+                counter(h3counter) ".\0000a0\0000a0";
+    }
+    h4:before {
+      counter-increment: h4counter;
+      content: counter(h2counter) "."
+                counter(h3counter) "."
+                counter(h4counter) ".\0000a0\0000a0";
+    }
+    h5:before {
+      counter-increment: h5counter;
+      content: counter(h2counter) "."
+                counter(h3counter) "."
+                counter(h4counter) "."
+                counter(h5counter) ".\0000a0\0000a0";
+    }
+    h6:before {
+      counter-increment: h6counter;
+      content: counter(h2counter) "."
+                counter(h3counter) "."
+                counter(h4counter) "."
+                counter(h5counter) "."
+                counter(h6counter) ".\0000a0\0000a0";
+    }
+</style> -->
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" rel="next" title="23种设计模式-装饰模式">
+                <i class="fa fa-chevron-left"></i> 23种设计模式-装饰模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/20/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="prev" title="23种设计模式-装饰者模式">
+                23种设计模式-装饰者模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-RDD"><span class="nav-number">1.</span> <span class="nav-text">Spark-RDD</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">1.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resilient-Distributed-Datasets-RDDs"><span class="nav-number">1.2.</span> <span class="nav-text">Resilient Distributed Datasets (RDDs)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并行集合"><span class="nav-number">1.2.1.</span> <span class="nav-text">并行集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部数据集"><span class="nav-number">1.2.2.</span> <span class="nav-text">外部数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD-Operation"><span class="nav-number">1.2.3.</span> <span class="nav-text">RDD Operation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basics"><span class="nav-number">1.2.4.</span> <span class="nav-text">Basics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Passing-Functions-to-Spark"><span class="nav-number">1.2.5.</span> <span class="nav-text">Passing Functions to Spark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Understanding-closures-闭包"><span class="nav-number">1.2.6.</span> <span class="nav-text">Understanding closures(闭包)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#打印RDD中的元素"><span class="nav-number">1.2.6.2.</span> <span class="nav-text">打印RDD中的元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用键值对"><span class="nav-number">1.2.7.</span> <span class="nav-text">使用键值对</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformation算子"><span class="nav-number">1.2.8.</span> <span class="nav-text">Transformation算子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#action算子"><span class="nav-number">1.2.9.</span> <span class="nav-text">action算子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#混洗（Shuffle）算子"><span class="nav-number">1.2.10.</span> <span class="nav-text">混洗（Shuffle）算子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例"><span class="nav-number">1.2.10.1.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#性能影响"><span class="nav-number">1.2.10.2.</span> <span class="nav-text">性能影响</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD持久化"><span class="nav-number">1.2.11.</span> <span class="nav-text">RDD持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#持久化数据"><span class="nav-number">1.2.11.1.</span> <span class="nav-text">持久化数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除持久化的数据"><span class="nav-number">1.2.11.2.</span> <span class="nav-text">删除持久化的数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享变量"><span class="nav-number">1.3.</span> <span class="nav-text">共享变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#广播变量"><span class="nav-number">1.3.1.</span> <span class="nav-text">广播变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#累加器"><span class="nav-number">1.3.2.</span> <span class="nav-text">累加器</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

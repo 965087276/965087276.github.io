@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Interstellar" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="动机在某些情况下我们可能会“过度地使用继承来扩展对象的功能”，由于继承为类型引入的静态特质，使得这种扩展方式缺乏灵活性；并且随着子类的增多（扩展功能的增多），各种子类的组合（扩展功能的组合）会导致更多子类的膨胀。 如何使“对象功能的扩展”能够根据需要来动态地实现？同时避免“扩展功能的增多”带来的子类膨胀问题？从而使得任何“功能扩展变化”所导致的影响将为最低？ 实例这里我们引用《HeadFirst设">
+<meta property="og:type" content="article">
+<meta property="og:title" content="23种设计模式-装饰模式">
+<meta property="og:url" content="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Interstellar">
+<meta property="og:description" content="动机在某些情况下我们可能会“过度地使用继承来扩展对象的功能”，由于继承为类型引入的静态特质，使得这种扩展方式缺乏灵活性；并且随着子类的增多（扩展功能的增多），各种子类的组合（扩展功能的组合）会导致更多子类的膨胀。 如何使“对象功能的扩展”能够根据需要来动态地实现？同时避免“扩展功能的增多”带来的子类膨胀问题？从而使得任何“功能扩展变化”所导致的影响将为最低？ 实例这里我们引用《HeadFirst设">
+<meta property="og:image" content="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/1.png">
+<meta property="og:image" content="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/2.png">
+<meta property="og:image" content="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/3.png">
+<meta property="og:image" content="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/4.png">
+<meta property="og:image" content="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/5-1.png">
+<meta property="og:image" content="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/5-2.png">
+<meta property="og:image" content="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/5-3.png">
+<meta property="og:image" content="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/6.png">
+<meta property="og:image" content="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/7.png">
+<meta property="article:published_time" content="2020-02-16T03:55:12.000Z">
+<meta property="article:modified_time" content="2020-05-03T06:01:41.662Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="965087276.github.io/2020/02/16/23种设计模式-装饰模式/"/>
+
+
+
+
+
+  <title>23种设计模式-装饰模式 | Interstellar</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Interstellar</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">23种设计模式-装饰模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-16T11:55:12+08:00">
+                2020-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><p>在某些情况下我们可能会“过度地使用继承来扩展对象的功能”，由于继承为类型引入的静态特质，使得这种扩展方式缺乏灵活性；并且随着子类的增多（扩展功能的增多），各种子类的组合（扩展功能的组合）会导致更多子类的膨胀。</p>
+<p>如何使“对象功能的扩展”能够根据需要来动态地实现？同时避免“扩展功能的增多”带来的子类膨胀问题？从而使得任何“功能扩展变化”所导致的影响将为最低？</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>这里我们引用《HeadFirst设计模式》中的例子。</p>
+<p>星巴兹是一家咖啡连锁店，由于扩张速度太快，他们准备更新他们的订单系统以合乎饮料的供应要求。他们原先的类设计如下。<br><img src="1.png" alt=""><br>系统中包含一个Beverage(饮料)抽象类，所有的饮料都必须继承这个抽象类;Beverage类中包含一个描述饮料信息的description实例变量以及计算饮料价格的cost()抽象方法。每种饮料子类，如HouseBlend(混合咖啡)、DarkToast(深焙咖啡)都必须实现cost()方法来计算自己的价格。</p>
+<p>购买咖啡时，还可以向其中加入各种调料，如豆浆(Soy)、摩卡(Mocha)等，咖啡店会根据加入的调料收取不同的费用。在初始设计中，他们枚举了顾客所有可能的购买组合（如混合豆浆咖啡、混合摩卡咖啡、深焙豆浆咖啡、深焙摩卡咖啡），每种组合都建立了一个类。<br><img src="2.png" alt=""></p>
+<p>这种实现方式有明显的弊端。例如，假设某种调料的价格改变，那么所有包含该调料的类都要修改cost()方法；如果新增加了一种咖啡或调料，那么又需要增加很多的类。假如有$n$种咖啡、$m$种调料，仅调料的组合就有$2^m$种，再乘以咖啡的数量，可以算出类的总数目为$1 + n*2^m$种（+1是因为还有个Beverage抽象类），数量相当之大了，这对后期的维护来说简直是噩梦。</p>
+<h4 id="改进1"><a href="#改进1" class="headerlink" title="改进1"></a>改进1</h4><p>上面的实现最大的问题是类是呈指数级增长的，那么我们可以先从减少类的数量为切入点进行改进。</p>
+<p>首先对Beverage基类进行修改，对每种调料都设置一个boolean类型的变量，表示饮料中是否加入该调料，将这些变量都放到Beverage基类中，通过set方法设置变量的值。<br><img src="3.png" alt=""><br><img src="4.png" alt=""><br>Beverage根据各boolean变量的值，计算所有调料的价钱<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (hasMilk()) sum += <span class="number">1.0</span>;</span><br><span class="line">        <span class="keyword">if</span> (hasSoy()) sum += <span class="number">1.5</span>;</span><br><span class="line">        <span class="keyword">if</span> (hasMocha())  sum += <span class="number">0.6</span>;</span><br><span class="line">        <span class="keyword">if</span> (hasWhip())  sum += <span class="number">0.8</span>;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>子类（每种咖啡类）调用自己的cost()方法计算自己咖啡的价钱，同时调用超类的cost()方法加入调料的价钱<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DarkRoast</span> <span class="keyword">extends</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DarkRoast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        description = <span class="string">"Most Excellent Dark Roast"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span> + <span class="keyword">super</span>.cost();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>现在假设要购买一杯加豆浆（Joy）和摩卡（Mocha）的深焙咖啡，只需要在原有DarkRoast的基础上，设置相应的调料变量即可，而不需要专门创建一个新的类。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DarkRoast darkRoast = <span class="keyword">new</span> DarkRoast();</span><br><span class="line">darkRoast.setJoy(<span class="keyword">true</span>);</span><br><span class="line">darkRoast.setMocha(<span class="keyword">true</span>);</span><br><span class="line">System.out.println(<span class="string">"咖啡的价格为 “ + darkRoast.cost());</span></span><br></pre></td></tr></table></figure><br>这种实现方式相比第一种，类的数目大大减小，只需要$1+m$个类（$m$为咖啡的数量）。但是，这种实现方式还是有欠缺的。</p>
+<ol>
+<li>若调料价钱改变，则需要修改Beverage类的cost()方法</li>
+<li>若出现新的调料，则要在Beverage类中添加新的boolean变量，并修改cost()方法</li>
+<li>对某些饮料而言，一些调料并不适合，如在茶水(Tea类)中加奶泡(whip)。但是，Tea类仍然会继承这些不合适的方法(hasWhip())</li>
+<li>若顾客想要双倍摩卡咖啡，这种实现方式就不适用了</li>
+</ol>
+<h4 id="改进2-装饰者模式"><a href="#改进2-装饰者模式" class="headerlink" title="改进2 装饰者模式"></a>改进2 装饰者模式</h4><p>装饰者模式是以饮料为主体，在运行时以饮料来“装饰对象”。比如说，顾客要买一杯加摩卡和奶泡的深焙咖啡，那么要做的是</p>
+<ol>
+<li>构造一个深焙咖啡（DarkRoast）对象</li>
+<li>用摩卡（Mocha）对象装饰它</li>
+<li>用奶泡（Whip）对象装饰它</li>
+<li>调用cost()方法</li>
+</ol>
+<p>可以参考下面的图片解释<br><img src="5-1.png" alt=""><br><img src="5-2.png" alt=""><br><img src="5-3.png" alt=""></p>
+<p>接下来用代码来实现一下。<br>首先还是一个Beverage（饮料）的抽象类，里面包含一个抽象的cost()方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> description;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来，建立各种饮料类。每种饮料类都要实现自己的cost()方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 深焙咖啡</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DarkRoast</span> <span class="keyword">extends</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DarkRoast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        description = <span class="string">"DarkRoast"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.99</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 混合咖啡</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HouseBlend</span> <span class="keyword">extends</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HouseBlend</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        description = <span class="string">"HouseBlend"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.89</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来建立调料类。因为调料类是用来装饰饮料类的，所以调料类中包含了一个饮料类的实例对象,如摩卡类的代码如下。计算价格时，只需将摩卡的价格(0.2)与被包装的饮料的价格相加即可。因为多态的缘故，被包装的是谁，并不需要关心，这就大大增加了代码的灵活性。饮料的description字段的设置同理，为被包装的饮料的description与调料的description相加。</p>
+<p>同时，作为装饰者，调料类中的方法还要与饮料类中的方法保持一致。为了满足这个约束，各调料类还要继承饮料类以确保包含饮料类的所有方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 摩卡</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mocha</span> <span class="keyword">extends</span> <span class="title">Beverage</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Beverage beverage;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Mocha</span><span class="params">(Beverage beverage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.beverage = beverage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.cost() + <span class="number">0.1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.getDescription() + <span class="string">", Mocha"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意，摩卡类中既继承了Beverage类，还拥有一个Beverage实例，这两个所起的作用是不一样的。</p>
+<ol>
+<li>拥有Beverage实例是因为调料类需要装饰饮料类，这里的Beverage实例是被Mocha类装饰的对象</li>
+<li>继承是因为饮料类中的方法要与调料类中的方法保持一致，即装饰者类的方法要与被装饰者类的方法保持一致，这里的继承是个约束作用，确保装饰者拥有了被装饰者的所有方法。</li>
+</ol>
+<p>同理，建立其它两种饮料的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 豆浆</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Soy</span> <span class="keyword">extends</span> <span class="title">Beverage</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Beverage beverage;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Soy</span><span class="params">(Beverage beverage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.beverage = beverage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.cost() + <span class="number">0.2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.getDescription() + <span class="string">", Soy"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 奶泡</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Whip</span> <span class="keyword">extends</span> <span class="title">Beverage</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Beverage beverage;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Whip</span><span class="params">(Beverage beverage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.beverage = beverage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.cost() + <span class="number">0.3</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.getDescription() + <span class="string">", Whip"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>再看这三个饮料类，它们有共同的实例参数(beverage)。因此，可以将抽离出来单独放到一个基类中，这个基类在装饰者模式中被称为组件(Component)类，即用来装饰别的类。同时，getDescription()方法在各种调料中都有不同的实现，在原先的Beverage类中，它不是一个抽象方法。在这里，也将它放到基类中，同时声明为一个抽象方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">CondimentDecorator</span> <span class="keyword">extends</span> <span class="title">Beverage</span></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> Beverage beverage;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title">getDescription</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>修改后的饮料类代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mocha</span> <span class="keyword">extends</span> <span class="title">CondimentDecorator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Mocha</span><span class="params">(Beverage beverage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.beverage = beverage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.cost() + <span class="number">0.1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.getDescription() + <span class="string">", Mocha"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Soy</span> <span class="keyword">extends</span> <span class="title">CondimentDecorator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Soy</span><span class="params">(Beverage beverage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.beverage = beverage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.cost() + <span class="number">0.2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.getDescription() + <span class="string">", Soy"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Whip</span> <span class="keyword">extends</span> <span class="title">CondimentDecorator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Whip</span><span class="params">(Beverage beverage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.beverage = beverage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.cost() + <span class="number">0.3</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.getDescription() + <span class="string">", Whip"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试一下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先建立一个深焙咖啡 $0.99</span></span><br><span class="line">Beverage beverage = <span class="keyword">new</span> DarkRoast();</span><br><span class="line"><span class="comment">// 不加任何调料装饰，直接输出</span></span><br><span class="line"><span class="comment">// 输出结果：DarkRoast $0.99</span></span><br><span class="line">System.out.println(beverage.getDescription() + <span class="string">" $"</span> + beverage.cost());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 再建立一个深焙咖啡（被装饰者） $0.99</span></span><br><span class="line">Beverage beverage2 = <span class="keyword">new</span> DarkRoast();</span><br><span class="line"><span class="comment">// 加一点摩卡（装饰者） $0.1</span></span><br><span class="line">beverage2 = <span class="keyword">new</span> Mocha(beverage2);</span><br><span class="line"><span class="comment">// 再加一份摩卡（双倍的摩卡）（装饰者）$0.1</span></span><br><span class="line">beverage2 = <span class="keyword">new</span> Mocha(beverage2);</span><br><span class="line"><span class="comment">// 加点奶泡（装饰者）$0.3</span></span><br><span class="line">beverage2 = <span class="keyword">new</span> Whip(beverage2);</span><br><span class="line"><span class="comment">//输出结果：DarkRoast, Mocha, Mocha, Whip $1.49</span></span><br><span class="line">System.out.println(beverage2.getDescription() + <span class="string">" $"</span> + beverage2.cost());</span><br></pre></td></tr></table></figure></p>
+<p>本例的类图如下<br><img src="6.png" alt=""></p>
+<h3 id="装饰者模式定义"><a href="#装饰者模式定义" class="headerlink" title="装饰者模式定义"></a>装饰者模式定义</h3><p>装饰者模式动态地将责任附加到对象上。若要扩展功能，装饰者提供了比继承更有弹性的替代方案。<br><img src="7.png" alt=""></p>
+<h3 id="要点总结"><a href="#要点总结" class="headerlink" title="要点总结"></a>要点总结</h3><ol>
+<li>通过采用组合而非继承的手法， Decorator模式实现了在运行时动态扩展对象功能的能力，而且可以根据需要扩展多个功能。避免了使用继承带来的“灵活性差”和“多子类衍生问题”。</li>
+<li>Decorator类在接口上表现为is-a Component的继承关系，即Decorator类继承了Component类所具有的接口。但在实现上又表现为has-a Component的组合关系，即Decorator类又使用了另外一个Component类。</li>
+<li>Decorator模式的目的并非解决“多子类衍生的多继承”问题，Decorator模式应用的要点在于解决“主体类在多个方向上的扩展功能”——是为“装饰”的含义。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/14/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="next" title="23种设计模式-观察者模式">
+                <i class="fa fa-chevron-left"></i> 23种设计模式-观察者模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/17/spark%E5%AD%A6%E4%B9%A0-RDD/" rel="prev" title="spark学习-RDD">
+                spark学习-RDD <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#动机"><span class="nav-number">1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">2.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#改进1"><span class="nav-number">2.1.</span> <span class="nav-text">改进1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#改进2-装饰者模式"><span class="nav-number">2.2.</span> <span class="nav-text">改进2 装饰者模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰者模式定义"><span class="nav-number">3.</span> <span class="nav-text">装饰者模式定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#要点总结"><span class="nav-number">4.</span> <span class="nav-text">要点总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
