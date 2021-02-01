@@ -262,6 +262,510 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/05/31/CMU-15-213-%E5%AE%9E%E9%AA%8C1-Data-Lab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/31/CMU-15-213-%E5%AE%9E%E9%AA%8C1-Data-Lab/" itemprop="url">CMU 15-213 实验1: Data Lab</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-31T09:29:59+08:00">
+                2020-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">课程学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/CMU-15-213/" itemprop="url" rel="index">
+                    <span itemprop="name">CMU 15-213</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  19
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Data Lab 都是与位运算相关的一些题目，总共有13个题。每个题都是按要求实现一个函数，题目中规定了可以使用的操作符（不能使用规定之外的操作），并对使用次数作出了限制，要求就是用这些给定的操作符，在一定次数内，完成函数所要实现的功能。</p>
+<h1 id="整数部分"><a href="#整数部分" class="headerlink" title="整数部分"></a>整数部分</h1><p>整数部分的题目限制比较多：不允许使用条件与循环，不能使用大于8 bit 的常数，也不能使用数组、结构体等结构。</p>
+<h2 id="1-bitXor"><a href="#1-bitXor" class="headerlink" title="1. bitXor"></a>1. bitXor</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * bitXor - x^y using only ~ and &amp; </span></span><br><span class="line"><span class="comment"> *   Example: bitXor(4, 5) = 1</span></span><br><span class="line"><span class="comment"> *   Legal ops: ~ &amp;</span></span><br><span class="line"><span class="comment"> *   Max ops: 14</span></span><br><span class="line"><span class="comment"> *   Rating: 1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bitXor</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// exclude x’s bit is 1 and y's bit is 1</span></span><br><span class="line">    <span class="keyword">int</span> allOne = ~(x &amp; y);</span><br><span class="line">    <span class="comment">// exclude x’s bit is 0 and y's bit is 0</span></span><br><span class="line">    <span class="keyword">int</span> allZero = ~(~x &amp; ~y);</span><br><span class="line">    <span class="comment">// neither (x’s bit is 1 and y's bit is 1) nor (x’s bit is 0 and y's bit is 0)</span></span><br><span class="line">    <span class="keyword">return</span> allOne &amp; allZero;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这一题要用 <code>~</code> 和 <code>&amp;</code> 两个符号实现两个数的 <code>异或</code> 操作。</p>
+<p><strong>思路：</strong> 通过逆向法，使用一个各个 bit 均为 1 的数 $ans = (2^{31}-1)$，找出 <code>x, y</code> 相应位置均为 1 的 bit 和 <code>x, y</code> 相应位置均为 0 的 bit，在 <code>ans</code> 中这些 bit 设为 0，剩余的结果即为 <code>x ^ y</code>。</p>
+<p>上面代码中，<code>allOne = ~(x &amp; y)</code> 相当于 $(2^{31} - 1)$ 排除掉 <code>x, y</code> 相应位置均为 1 的 bit 后的结果；<code>allZero = ~(~x &amp; ~y)</code> 是将 <code>x, y</code> 相应位置均为 0 的 bit 设置为 0 ，其它位置设为 1；<code>allOne</code> 再通过与 <code>allZero</code> 按位 and 后便将 <code>x, y</code> 均为 0 的 bit 排除掉了，剩下的便是 <code>x ^ y</code> 。</p>
+<h2 id="2-tmin"><a href="#2-tmin" class="headerlink" title="2. tmin"></a>2. tmin</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * tmin - return minimum two's complement integer: 0x80000000</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 4</span></span><br><span class="line"><span class="comment"> *   Rating: 1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">tmin</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> &lt;&lt; <span class="number">31</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回二进制补码表示中最小的数。</p>
+<p>最小的数就是 符号位为1，其余位为0，也就是 $INT_MIN = -2^{31}$。</p>
+<h2 id="3-isTmax"><a href="#3-isTmax" class="headerlink" title="3. isTmax"></a>3. isTmax</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * isTmax - returns 1 if x is the maximum, two's complement number,</span></span><br><span class="line"><span class="comment"> *     and 0 otherwise </span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | +</span></span><br><span class="line"><span class="comment"> *   Max ops: 10</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isTmax</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 判断x是否为 ~(1&lt;&lt;31)</span></span><br><span class="line">    <span class="comment">// !!(~x)排除~x为0的情况;</span></span><br><span class="line">    <span class="comment">// 若~x=(1&lt;&lt;31), 则 ~x + ~x = 0</span></span><br><span class="line">    <span class="keyword">return</span> !!(~x) &amp; !(~x + ~x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>判断一个数是否为二进制补码表示中最大的数。</p>
+<p>最大的数就是 符号位为0，其余为均为1，也就是 <code>INT_MAX = ~(1&lt;&lt;31)</code> 。</p>
+<h2 id="4-allOddBits"><a href="#4-allOddBits" class="headerlink" title="4. allOddBits"></a>4. allOddBits</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * allOddBits - return 1 if all odd-numbered bits in word set to 1</span></span><br><span class="line"><span class="comment"> *   Examples allOddBits(0xFFFFFFFD) = 0, allOddBits(0xAAAAAAAA) = 1</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 12</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">allOddBits</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> slice = <span class="number">0xAA</span>;</span><br><span class="line">    <span class="keyword">int</span> oddBits = (slice &lt;&lt; <span class="number">24</span>) | (slice &lt;&lt; <span class="number">16</span>) | (slice &lt;&lt; <span class="number">8</span>) | slice;</span><br><span class="line">    <span class="keyword">return</span> !((x &amp; oddBits) ^ (oddBits));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>判断一个数的二进制的奇数位是否均为1。</p>
+<p><strong>思路：</strong>构造一个奇数位均为1，偶数位均为0的二进制数：<code>0xAAAAAAAA</code> 。将该数与 x 按位 and，若得到结果为 <code>0xAAAAAAAA</code> ，则该数的奇数二进制位均为1.</p>
+<p>因为最终要返回 0 或 1，所以再将结果与 <code>0xAAAAAAAA</code> 异或并使用 <code>!</code> 取否，将结果变为 0 或 1。</p>
+<h2 id="5-negate"><a href="#5-negate" class="headerlink" title="5.  negate"></a>5.  negate</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * negate - return -x </span></span><br><span class="line"><span class="comment"> *   Example: negate(1) = -1.</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 5</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">negate</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ~x + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>求 -x。</p>
+<p>将 x 按位取反，末位 +1 即可。</p>
+<h2 id="6-isAsciiDigit"><a href="#6-isAsciiDigit" class="headerlink" title="6. isAsciiDigit"></a>6. isAsciiDigit</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * isAsciiDigit - return 1 if 0x30 &lt;= x &lt;= 0x39 (ASCII codes for characters '0' to '9')</span></span><br><span class="line"><span class="comment"> *   Example: isAsciiDigit(0x35) = 1.</span></span><br><span class="line"><span class="comment"> *            isAsciiDigit(0x3a) = 0.</span></span><br><span class="line"><span class="comment"> *            isAsciiDigit(0x05) = 0.</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 15</span></span><br><span class="line"><span class="comment"> *   Rating: 3</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isAsciiDigit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = x + ~<span class="number">47</span> + <span class="number">1</span>; <span class="comment">// x - 47</span></span><br><span class="line">    <span class="keyword">int</span> right = x + ~<span class="number">58</span> + <span class="number">1</span>; <span class="comment">// x - 58</span></span><br><span class="line">    <span class="keyword">return</span> !!left &amp; !(left &gt;&gt; <span class="number">31</span>) &amp; (right &gt;&gt; <span class="number">31</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>判断 x 是否是 ASCII 中的数字字符。</p>
+<p><strong>思路：</strong>ASCII 数字字符的范围是 $48 \leq x \leq 57$ ，因此只需要判断 $x$ 是否在该范围即可。</p>
+<p>将上面的左右区间各扩大 1 ，得到 $x$ 的范围为 $47 &lt; x &lt; 58$ 。若 $x$ 是一个数字字符，那么 $x - 47 &gt; 0$ 且 $x - 58 &lt; 0$ 。</p>
+<p>分别计算出 $x - 47$ 的结果 <code>left</code> 和 $x - 58$ 的结果 <code>right</code> 。<code>left</code> 的符号位需要为0 并且 <code>left</code> 本身不能为 0，<code>right</code> 的符号位需要为 1。</p>
+<h2 id="7-conditional"><a href="#7-conditional" class="headerlink" title="7. conditional"></a>7. conditional</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * conditional - same as x ? y : z </span></span><br><span class="line"><span class="comment"> *   Example: conditional(2,4,5) = 4</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 16</span></span><br><span class="line"><span class="comment"> *   Rating: 3</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">conditional</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span> </span>&#123;</span><br><span class="line">    x = !!x;</span><br><span class="line">    x = ~x + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> (x &amp; y) + (~x &amp; z);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现三目运算符 <code>x ? y : z</code> 。<br><strong>思路：</strong>首先通过 <code>!!x</code> 将 <code>x</code> 变为 <code>0 或 1</code> ，然后通过 <code>~x + 1</code> 将 <code>x</code> 变为 <code>0x00000000 或 0xffffffff</code> 。当 <code>x = 0</code> 时，<code>~x + 1 = 0x00000000</code>；当 <code>x = 1</code> 时，<code>~x + 1 = 0xffffffff</code> 。</p>
+<p><code>(x &amp; y) + (~x &amp; z)</code> 根据 <code>x</code> 的不同会等于 <code>y</code> 或 <code>z</code> 。</p>
+<h2 id="8-isLessOrEqual"><a href="#8-isLessOrEqual" class="headerlink" title="8.  isLessOrEqual"></a>8.  isLessOrEqual</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * isLessOrEqual - if x &lt;= y  then return 1, else return 0 </span></span><br><span class="line"><span class="comment"> *   Example: isLessOrEqual(4,5) = 1.</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 24</span></span><br><span class="line"><span class="comment"> *   Rating: 3</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isLessOrEqual</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// x &lt; 0 and y &gt;= 0</span></span><br><span class="line">    <span class="keyword">int</span> negateXandNorNegateY = (x &gt;&gt; <span class="number">31</span>) &amp; !(y &gt;&gt; <span class="number">31</span>);</span><br><span class="line">    <span class="comment">// x &gt;= 0 and y &lt; 0</span></span><br><span class="line">    <span class="keyword">int</span> norNegateXandNegateY = !(x &gt;&gt; <span class="number">31</span>) &amp; (y &gt;&gt; <span class="number">31</span>);</span><br><span class="line">    <span class="comment">// x - y</span></span><br><span class="line">    <span class="keyword">int</span> diff = x + ~y + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// x - y &lt;= 0</span></span><br><span class="line">    <span class="keyword">int</span> negateDiff = !diff | (diff &gt;&gt; <span class="number">31</span>);</span><br><span class="line">    <span class="keyword">return</span> negateXandNorNegateY | (!norNegateXandNegateY &amp; negateDiff);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现 $\leq$ 运算符。</p>
+<p><strong>思路：</strong> 这个题的关键是判断 $x - y$ 是否 $\leq $ 0 。基本思路是首先计算出 $x-y$ 的值，然后判断结果是否为 0 或者是否为负数（符号位为1）。</p>
+<p>然而，这个题会出现运算溢出的情况，当 $x$ 与 $y$ 不同号时，二者相减可能会超出 <code>int</code> 的范围，因此需要特殊处理 $x$ 与 $y$ 不同号的情况。</p>
+<h2 id="9-logicalNeg"><a href="#9-logicalNeg" class="headerlink" title="9. logicalNeg"></a>9. logicalNeg</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * logicalNeg - implement the ! operator, using all of </span></span><br><span class="line"><span class="comment"> *              the legal operators except !</span></span><br><span class="line"><span class="comment"> *   Examples: logicalNeg(3) = 0, logicalNeg(0) = 1</span></span><br><span class="line"><span class="comment"> *   Legal ops: ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 12</span></span><br><span class="line"><span class="comment"> *   Rating: 4 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">logicalNeg</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    x = x | x &gt;&gt; <span class="number">16</span>;</span><br><span class="line">    x = x | x &gt;&gt; <span class="number">8</span>;</span><br><span class="line">    x = x | x &gt;&gt; <span class="number">4</span>;</span><br><span class="line">    x = x | x &gt;&gt; <span class="number">2</span>;</span><br><span class="line">    x = x | x &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> ~x &amp; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现 <code>!</code> 运算符。</p>
+<p><strong>思路：</strong> 这个题的关键时判断 <code>x</code> 的二进制表示中是否含有 1 。这个解法是从网上看到的一个，比较巧妙。他用了类似分治的方法，将前16位的1放到后16位中，再将后16位中前8位的1放到后8位中，再将后8位中前4位的1放到后4位中，以此类推。若 <code>x</code> 的二进制表示中含有1，经过这一系列变化后，<code>x</code> 的二进制最后一位一定为 1 .</p>
+<h2 id="10-howManyBits"><a href="#10-howManyBits" class="headerlink" title="10. howManyBits"></a>10. howManyBits</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* howManyBits - return the minimum number of bits required to represent x in</span></span><br><span class="line"><span class="comment"> *             two's complement</span></span><br><span class="line"><span class="comment"> *  Examples: howManyBits(12) = 5</span></span><br><span class="line"><span class="comment"> *            howManyBits(298) = 10</span></span><br><span class="line"><span class="comment"> *            howManyBits(-5) = 4</span></span><br><span class="line"><span class="comment"> *            howManyBits(0)  = 1</span></span><br><span class="line"><span class="comment"> *            howManyBits(-1) = 1</span></span><br><span class="line"><span class="comment"> *            howManyBits(0x80000000) = 32</span></span><br><span class="line"><span class="comment"> *  Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *  Max ops: 90</span></span><br><span class="line"><span class="comment"> *  Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">howManyBits</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sign, b16, b8, b4, b2, b1, b0;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// sign = 0x00000000 或 0xffffffff</span></span><br><span class="line">    sign = x &gt;&gt; <span class="number">31</span>;</span><br><span class="line">    <span class="comment">// 若x非负，保持不变；否则将x按位取反</span></span><br><span class="line">    x = (sign &amp; ~x) | (~sign &amp; x);</span><br><span class="line"></span><br><span class="line">    b16 = !!(x &gt;&gt; <span class="number">16</span>) &lt;&lt; <span class="number">4</span>; <span class="comment">// 高16位是否有1</span></span><br><span class="line">    x &gt;&gt;= b16; <span class="comment">//如果有（至少需要16位），则将原数右移16位</span></span><br><span class="line">    b8 = !!(x &gt;&gt; <span class="number">8</span>) &lt;&lt; <span class="number">3</span>; <span class="comment">//剩余位高8位是否有1</span></span><br><span class="line">    x &gt;&gt;= b8; <span class="comment">// 如果还有（至少需要16+8=24位），则右移8位</span></span><br><span class="line">    b4 = !!(x &gt;&gt; <span class="number">4</span>) &lt;&lt; <span class="number">2</span>;</span><br><span class="line">    x &gt;&gt;= b4;</span><br><span class="line">    b2 = !!(x &gt;&gt; <span class="number">2</span>) &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    x &gt;&gt;= b2;</span><br><span class="line">    b1 = !!(x &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    x &gt;&gt;= b1;</span><br><span class="line">    b0 = x;</span><br><span class="line">    <span class="keyword">return</span> b16 + b8 + b4 + b2 + b1 + b0 + <span class="number">1</span>; <span class="comment">// 最后的+1表示符号位</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将一个数用补码表示最少需要几个bit？</p>
+<p>例如 <script type="math/tex">12_{10} = 01100_2; \ -5_{10} = 1011_2; \ 0_{10} = 0_2; \ -1_{10} = 1_2</script> . <strong>最高一位为符号位</strong></p>
+<p><strong>思路：</strong> 对于一个正数，我们需要找到它最高的一位是1的，再加上符号位即可；对于一个负数，我们则需要找到它最高一位是0的（例如 5 位的 11101 和 4 位的 1101 以及 3 位的 101 表示的都是同一个值 -3，因此最高位连续的 1 是没有意义的），再加上符号位即可。因此，我们首先做一下统一，将负数都按位取反，这样统一都去找最高位是1的，再加上最后的符号位即为最终的答案。</p>
+<p>如何找到最高位是1的那个位置呢？我们可以采用分治（divide and conquer）的方法。</p>
+<ul>
+<li><p>首先将这个 32 位的数 x 分成两半：高16位，低16位。先判断高16位中是否有1。</p>
+<ul>
+<li>若高16位有1，则说明最终答案肯定大于16，答案就等于 16 加上（x的高16位）这个数中最高位1的位置；</li>
+<li>若高16位中没有1，则说明最终答案肯定不超过16，答案就等于（x的低16位） 这个数中最高位1的位置；</li>
+</ul>
+<p>怎么判断判断高16位中是否有1呢？只需将 x 右移16位，判断剩下的数是否为0即可。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( !!(x &gt;&gt; <span class="number">16</span>) ) &#123;</span><br><span class="line">     <span class="comment">// 高16位有1</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="comment">// 高16位没有1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来根据上一步的结果继续对 x的高16位 或 x的低16位 重复相同的步骤：将这个 16 位的数 y 分成两半：高8位，低8位。</p>
+<p>先判断高8位中是否有1，其它的步骤与上一步类似。</p>
+</li>
+<li><p>一直这么分下去即可。</p>
+</li>
+</ul>
+<h1 id="浮点数部分"><a href="#浮点数部分" class="headerlink" title="浮点数部分"></a>浮点数部分</h1><p>首先复习下浮点数的相关概念。</p>
+<p>在计算机中，浮点数以 “阶码—尾数” 的方式进行表示，一个浮点数可以写成如下形式</p>
+<script type="math/tex; mode=display">
+(-1)^s \ M \ 2^E</script><p>其中，$s$ 是一个符号位，标识了浮点数的正负，其取值为 $0$ 或 $1$，当 $s = 0$ 时，浮点数为正数，当 $s = 1$ 时，浮点数为负数。</p>
+<p>$M$ 为尾数，其取值范围为 $[1.0, 2.0)$ ，$E$ 为阶码，这两个参数可以类比十进制中的科学计数法表示。例如，对于二进制数 $x = 1001$，将其表示成上述方式后为 $x = (-1)^0 \ast 1.001 \ast 2^3$。</p>
+<p>C语言的浮点数类型有两种：32位的 <code>float</code> 和 64位的 <code>double</code>，这些 bit 存储了上面的符号位 $s$、阶码 $E$ 和 尾数 $M$，<code>double</code> 能够表示的浮点数的范围和精度都要比 <code>float</code> 大。</p>
+<p><code>float</code> 是单精度浮点数，如下图所示，在它的 32 位中，最高 1 位是符号位，后 8 位是阶码位 ，最后 23 位是尾数位。</p>
+<p><img src="float.png" alt=""></p>
+<p><code>double</code> 是双精度浮点数，如下图所示，在它的 64 位中，最高 1 位是符号位，后 11 位是阶码位，最后 52 位是尾数位。</p>
+<p><img src="double.png" alt=""></p>
+<p>对于阶码 $E$ 和尾数 $M$ ，<code>float</code> 和 <code>double</code> 在存储时会将其进行一定编码后存储，如上图中的 exp 和 frac 存储的就是经过编码后的阶码和尾数。例如，对于阶码 $E$，在编码时会将其加上一个偏差 bias，也就是说， <code>exp = E + bias</code>；</p>
+<p>而根据 <code>exp</code> 取值的不同，可将浮点数分类 <code>规格化(Normalized)浮点数</code> 和 <code>非规格化(Denormalized)浮点数</code> 两大类。</p>
+<p>当 <code>exp != 000...0</code> 并且 <code>exp != 111...1</code> 时，浮点数为<strong>规格化浮点数</strong>。</p>
+<ul>
+<li><p>规格化浮点数中，阶码 $E$ 的偏差 bias 等于 $2^{k-1} - 1$ ，其中 $k$ 为 阶码位的位数。对于 <code>float</code> 来说，$k = 8$， $bias = 2^{8-1}-1 = 127$；对于 <code>double</code> 来说，$k = 11$，$bias = 2^{11-1}-1=1023$。</p>
+</li>
+<li><p>尾数 $M$ 为 $1.xxx…x_2$，因为规格化浮点数的尾数都是一点几，所以在存储时，会舍弃掉最前面那个大家都有的 $1$，不足 23 位的要添加后导零补齐23位。也就是说，frac 中存储的是 $xxx…x_2$，并添加后导零补齐23位。</p>
+</li>
+<li><p>举个栗子，我们看一下十进制数 15213 存储在 float 中是什么样的。</p>
+<ul>
+<li>首先将其写成阶码-尾数的方式<script type="math/tex; mode=display">
+\begin{aligned}
+15213_{10} &= 11101101101101_2 \\
+&= (-1)^0 \times 1.1101101101101_2 \times 2^{13} \\
+\end{aligned}</script></li>
+</ul>
+</li>
+<li><p>$M = 1.1101101101101$，去掉最前面的 1，将剩余的数添加后导零补齐23位，得到 frac 的值</p>
+<script type="math/tex; mode=display">
+  frac = 11011011011010000000000_2</script></li>
+<li><p>$E = 13$，添加 bias = 127 后，得到 exp 的值：$exp = 17 + 127 = 140 = 1001100_2$</p>
+</li>
+<li><p>最终得到32位的 float 如下图所示</p>
+<p><img src="eg-normalized.png" alt=""></p>
+</li>
+<li><p>由于规格化浮点数中 $1 \leq M &lt; 2$，所以其无法表示 $0$ </p>
+</li>
+</ul>
+<p>当 <code>exp = 000...0</code> 时，这是非规格化浮点数的一种，这时用来表示特别小的数。</p>
+<ul>
+<li>阶码 $E = 1 - bias$ 而不是 $0 - bias$</li>
+<li>尾数 $M = 0.000…0_2$，没有前面的 1 了。</li>
+<li>这种情况可以表示 0 了，当 <code>exp = 000...0</code> 且 <code>frac = 000...0</code> 时，浮点数为 0。但是，这时根据 符号位$s$ 的不同会出现 $+0$ 和 $-0$ 两种情况。</li>
+</ul>
+<p>当 <code>exp = 111...1</code> 时，这是非规格化浮点数的另一种，这时用来表示无穷大或NaN。</p>
+<ul>
+<li>当 <code>frac = 000...0</code> 时，表示 $\infty$ 。例如，$1.0 / 0.0 = -1.0 / 0.0 = +\infty, 1.0 / -0.0 = -\infty$    </li>
+<li>当 <code>frac != 000...0</code> 时，表示 NaN（Not-a-Number）。例如，$\sqrt{-1} = NaN$ </li>
+</ul>
+<hr>
+<p>浮点数相关的三个题目要求就比较松了，可以使用条件判断和循环，可以使用任何符号，定义任意大小的常数，但是不可以使用 <code>float</code> 和 <code>double</code> 。</p>
+<h2 id="1-float-twice"><a href="#1-float-twice" class="headerlink" title="1.  float_twice"></a>1.  float_twice</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * float_twice - Return bit-level equivalent of expression 2*f for</span></span><br><span class="line"><span class="comment"> *   floating point argument f.</span></span><br><span class="line"><span class="comment"> *   Both the argument and result are passed as unsigned int's, but</span></span><br><span class="line"><span class="comment"> *   they are to be interpreted as the bit-level representation of</span></span><br><span class="line"><span class="comment"> *   single-precision floating point values.</span></span><br><span class="line"><span class="comment"> *   When argument is NaN, return argument</span></span><br><span class="line"><span class="comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span></span><br><span class="line"><span class="comment"> *   Max ops: 30</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="title">float_twice</span><span class="params">(<span class="keyword">unsigned</span> uf)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="built_in">exp</span> = (uf &gt;&gt; <span class="number">23</span>) &amp; <span class="number">0xff</span>;</span><br><span class="line">    <span class="keyword">int</span> frac = uf &amp; <span class="number">0x7fffff</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">exp</span> == <span class="number">0xff</span>) &#123; <span class="comment">// The ans is NaN</span></span><br><span class="line">        </span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">exp</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 直接将 uf * 2 再保留符号位即可</span></span><br><span class="line">        uf =  (<span class="number">0x80000000</span> &amp; uf) | (uf &lt;&lt; <span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 阶码加1</span></span><br><span class="line">        uf += <span class="number">1</span> &lt;&lt; <span class="number">23</span>;</span><br><span class="line">        <span class="comment">// 若阶码加1后变为0xff, 则令结果为无穷大（否则就变成NaN了，这个结果显然不是NaN）</span></span><br><span class="line">        <span class="keyword">if</span> (((uf &gt;&gt; <span class="number">23</span>) &amp; <span class="number">0xff</span>) == <span class="number">0xff</span>) &#123;</span><br><span class="line">            uf &amp;= <span class="number">0xff800000</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> uf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>计算 2 乘以 一个浮点数。浮点数为 float，以 32 位 unsigned 的形式给出。</p>
+<p><strong>思路：</strong> 这个题主要考察浮点数的基本表示方法。首先排除无穷大、NaN 的情况，这两种情况直接返回原参数即可。对于 exp = 0 的情况，直接将原参数乘以2并保留符号位即可。对于规格化浮点数的情况，乘以2 相当于 阶码加1，由于阶码在第23位，因此其加1就相当于 <code>uf + (1 &lt;&lt; 23)</code> 。若阶码加1后变为 <code>0xff</code>，此时的结果应为无穷大，而不是 NaN，因此需要将后23位的尾数位都设为0。</p>
+<h2 id="2-float-i2f"><a href="#2-float-i2f" class="headerlink" title="2. float_i2f"></a>2. float_i2f</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * float_i2f - Return bit-level equivalent of expression (float) x</span></span><br><span class="line"><span class="comment"> *   Result is returned as unsigned int, but</span></span><br><span class="line"><span class="comment"> *   it is to be interpreted as the bit-level representation of a</span></span><br><span class="line"><span class="comment"> *   single-precision floating point values.</span></span><br><span class="line"><span class="comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span></span><br><span class="line"><span class="comment"> *   Max ops: 30</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="title">float_i2f</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sign = x &amp; (<span class="number">1</span> &lt;&lt; <span class="number">31</span>);</span><br><span class="line">    <span class="keyword">int</span> E = <span class="number">31</span>;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">exp</span>, frac, add, mx, back, ans;</span><br><span class="line">    <span class="keyword">int</span> diff, var, p;</span><br><span class="line">    <span class="keyword">if</span> (x == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (sign) &#123;</span><br><span class="line">            <span class="comment">// 把x变成非负数，因为浮点数的正负由前面的符号位s决定</span></span><br><span class="line">            x = -x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 找到最高位的1所在的位置</span></span><br><span class="line">        <span class="keyword">while</span> (!((p = (<span class="number">1</span>&lt;&lt;E)) &amp; x)) &#123;</span><br><span class="line">            E--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">exp</span> = E + <span class="number">127</span>;</span><br><span class="line">        <span class="comment">// 获取尾数(1.xxxxx 即获取小数点后面的xxxxx )</span></span><br><span class="line">        frac = x &amp; (p - <span class="number">1</span>);</span><br><span class="line">        diff = E - <span class="number">23</span>;</span><br><span class="line">        <span class="keyword">if</span> (E &lt; <span class="number">23</span>) &#123;</span><br><span class="line">            <span class="comment">// 尾数不足23位，补齐23位</span></span><br><span class="line">            frac &lt;&lt;= <span class="number">23</span> - E;</span><br><span class="line">        &#125;</span><br><span class="line">        add = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (E &gt; <span class="number">23</span>) &#123; <span class="comment">// 尾数超过23位，向偶数舍入</span></span><br><span class="line">            <span class="comment">// 设尾数为 1.xxxx...xyyyy, y需要被舍入</span></span><br><span class="line">            <span class="comment">// 这里假设y共有四位</span></span><br><span class="line">            <span class="comment">// 如果 (yyyy大于1000) 或者 (yyyy=1000且最后一个x为1)，则需要加1摄入；其它情况直接截断即可</span></span><br><span class="line">            mx = <span class="number">1</span> &lt;&lt; diff;</span><br><span class="line">            var = mx &gt;&gt; <span class="number">1</span>;</span><br><span class="line">            back = frac &amp; (mx - <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (back &gt; var || (back == var &amp;&amp; (frac &amp; mx))) &#123;</span><br><span class="line">                add = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            frac &gt;&gt;= diff;</span><br><span class="line">        &#125;</span><br><span class="line">        ans = (sign | (<span class="built_in">exp</span> &lt;&lt; <span class="number">23</span>) | frac) + add;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将一个整数转换为单精度浮点数。</p>
+<p><strong>思路：</strong> 这个题思路还是比较简单的，只是实现起来细节很多。</p>
+<ol>
+<li>要注意把 $x$ 变为非负数，因为 float 浮点数的正负是由最前面的1个符号位 s 决定的，所以后31位的阶码和尾数都是以非负数为前提的。</li>
+<li>找到最高位 1 所在的位置，由此可以计算出阶码 exp 的值，这个 1 后面的数作为尾数的值。</li>
+<li>第 2 步中计算出的尾数可能不足 23 位或者超出 23 位。对于不足 32 位的情况，需要添加后置 0 凑齐23位；对于超过 23 位的情况，需要进行向偶数舍入。</li>
+</ol>
+<h2 id="3-float-f2i"><a href="#3-float-f2i" class="headerlink" title="3. float_f2i"></a>3. float_f2i</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * float_f2i - Return bit-level equivalent of expression (int) f</span></span><br><span class="line"><span class="comment"> *   for floating point argument f.</span></span><br><span class="line"><span class="comment"> *   Argument is passed as unsigned int, but</span></span><br><span class="line"><span class="comment"> *   it is to be interpreted as the bit-level representation of a</span></span><br><span class="line"><span class="comment"> *   single-precision floating point value.</span></span><br><span class="line"><span class="comment"> *   Anything out of range (including NaN and infinity) should return</span></span><br><span class="line"><span class="comment"> *   0x80000000u.</span></span><br><span class="line"><span class="comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span></span><br><span class="line"><span class="comment"> *   Max ops: 30</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">float_f2i</span><span class="params">(<span class="keyword">unsigned</span> uf)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sign = uf &amp; (<span class="number">1</span> &lt;&lt; <span class="number">31</span>);</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">exp</span> = (uf &amp; <span class="number">0x7f800000</span>) &gt;&gt; <span class="number">23</span>;</span><br><span class="line">    <span class="keyword">int</span> frac = uf &amp; <span class="number">0x7fffff</span>;</span><br><span class="line">    <span class="keyword">int</span> bias = <span class="number">127</span>;</span><br><span class="line">    <span class="keyword">int</span> outOfRange = <span class="number">0x80000000</span>u;</span><br><span class="line">    <span class="keyword">int</span> ans, E;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">exp</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">exp</span> == <span class="number">0xff</span>) &#123;</span><br><span class="line">        ans = outOfRange;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        E = <span class="built_in">exp</span> - bias;</span><br><span class="line">        <span class="keyword">if</span> (E &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            ans = <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (E &gt; <span class="number">30</span>) &#123;</span><br><span class="line">            ans = outOfRange;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            frac += <span class="number">0x800000</span>;</span><br><span class="line">            <span class="keyword">if</span> (E &gt; <span class="number">23</span>) &#123;</span><br><span class="line">                frac &lt;&lt;= E - <span class="number">23</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                frac &gt;&gt;= <span class="number">23</span> - E;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (sign) &#123;</span><br><span class="line">                frac = -frac;</span><br><span class="line">            &#125;</span><br><span class="line">            ans = frac;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将一个单精度浮点数转换为整数（向下取整，截断小数位）。</p>
+<p><strong>思路：</strong> 这个题不难，只需要提取出 符号位 $s$，阶码 $E$，尾数 $M$。根据 $ans = (-1)^s \ast M \ast 2^E$，排除掉越界的情况，对不越界的数截断小数点后面的位即可。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/05/15/LeetCode-560-%E5%92%8C%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/15/LeetCode-560-%E5%92%8C%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/" itemprop="url">LeetCode 560 和为K的子数组</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-15T09:27:31+08:00">
+                2020-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  447
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个整数数组和一个整数 <strong>k，</strong>你需要找到该数组中和为 <strong>k</strong> 的连续的子数组的个数。</p>
+<p><strong>示例 1 :</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入:nums &#x3D; [1,1,1], k &#x3D; 2</span><br><span class="line">输出: 2 , [1,1] 与 [1,1] 为两种不同的情况。</span><br></pre></td></tr></table></figure>
+<p><strong>说明 :</strong></p>
+<ol>
+<li>数组的长度为 [1, 20,000]。</li>
+<li>数组中元素的范围是 [-1000, 1000] ，且整数 <strong>k</strong> 的范围是 [-1e7, 1e7]。</li>
+</ol>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>直接二重循环的时间复杂度为 $O(n^2)$，肯定是不可取的。</p>
+<p>这个题抽象一下就是寻找不同的元组对 $(i, j)$ 的个数，满足 $i \leq j$ 且 $nums[i] + \cdots + nums[j] = k$。</p>
+<p>考虑前缀和的形式，令 $pre[i]$ 为 $nums$ 数组中前 $i$ 个 元素的和，则有</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> i == <span class="number">0</span> </span><br><span class="line">	pre[i] = <span class="number">0</span></span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">	pre[i] = pre[i<span class="number">-1</span>] + pre[i]</span><br></pre></td></tr></table></figure>
+<p>我们要找满足 $i \leq j$ 且 $nums[i] + \cdots + nums[j] = k$ 的元组 $(i, j)$ 的数量 ，将 $pre$ 数组带入这个式子，可得</p>
+<script type="math/tex; mode=display">
+pre[j] - pre[i-1] = k</script><p>移向得</p>
+<script type="math/tex; mode=display">
+pre[i-1] = pre[j] - k</script><p>我们可以顺序遍历 $j$ ，考虑以 $j$ 结尾的和为 $k$ 的子数组的数量。根据上面的式子，对于每个 $j$ ，我们只需要寻找在 $j$ 前面有多少个前缀和为 $pre[j] - k$ 的 $pre[i]$ 即可。</p>
+<p>我们建立哈希表 $mp$，以和为键，出现次数为对应的值，记录 $pre[i]$ 的出现次数，从左往右边更新 $mp$ 边计算答案（从左往右边更新边计算的时候已经保证了 $mp[pre[j]-k]$ 里记录的 $pre[i]$ 的下标范围是 $0 \leq i &lt; j$）</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">subarraySum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line">    mp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>, pre = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; x : nums) &#123;</span><br><span class="line">        pre += x;</span><br><span class="line">        <span class="keyword">if</span> (mp.<span class="built_in">find</span>(pre - k) != mp.<span class="built_in">end</span>()) count += mp[pre - k];</span><br><span class="line">        mp[pre]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/04/08/%E5%89%91%E6%8C%87Offer-%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -444,444 +948,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/04/07/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/07/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/" itemprop="url">程序员面试金典 旋转矩阵</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-07T09:17:04+08:00">
-                2020-04-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
-                    <span itemprop="name">刷题</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8/" itemprop="url" rel="index">
-                    <span itemprop="name">程序员面试金典</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  522
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一幅由 <code>N × N</code> 矩阵表示的图像，其中每个像素的大小为 4 字节。请你设计一种算法，将图像旋转 90 度。<strong>不能使用额外的内存空间</strong></p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">给定 matrix &#x3D; </span><br><span class="line">[</span><br><span class="line">  [1,2,3],</span><br><span class="line">  [4,5,6],</span><br><span class="line">  [7,8,9]</span><br><span class="line">],</span><br><span class="line">原地旋转输入矩阵，使其变为:</span><br><span class="line">[</span><br><span class="line">  [7,4,1],</span><br><span class="line">  [8,5,2],</span><br><span class="line">  [9,6,3]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">给定 matrix &#x3D;</span><br><span class="line">[</span><br><span class="line">  [ 5, 1, 9,11],</span><br><span class="line">  [ 2, 4, 8,10],</span><br><span class="line">  [13, 3, 6, 7],</span><br><span class="line">  [15,14,12,16]</span><br><span class="line">], </span><br><span class="line">原地旋转输入矩阵，使其变为:</span><br><span class="line">[</span><br><span class="line">  [15,13, 2, 5],</span><br><span class="line">  [14, 3, 4, 1],</span><br><span class="line">  [12, 6, 8, 9],</span><br><span class="line">  [16, 7,10,11]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p><strong>转运下面大神的思路</strong></p>
-<blockquote>
-<p><a href="https://leetcode-cn.com/problems/rotate-matrix-lcci/solution/c-tu-jie-yuan-di-cao-zuo-ji-bai-shuang-bai-vv-by-t/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/rotate-matrix-lcci/solution/c-tu-jie-yuan-di-cao-zuo-ji-bai-shuang-bai-vv-by-t/</a></p>
-</blockquote>
-<p><strong>来观察下正方形矩阵旋转90度时究竟发生了什么。</strong></p>
-<p><img src="1.gif" alt=""></p>
-<p>观察图中颜色相同的四个位置，当旋转90度后，对应位置的元素发生了顺时针的交换。</p>
-<p>设四个位置中，位于<strong>左上角区域</strong>的位置坐标为 $(i,j)$，则按顺时针顺序，四个位置分别为 $(i,j)$,  $(j, n-i-1)$,  $(n-i-1,n-j-1)$,  $(n-j-1,i)$ </p>
-<p>matrix.size() 为奇数时，位置的对应关系相同，但左上角区域并<strong>不是整个矩阵的四分之一</strong>，如下图示：</p>
-<p><img src="2.png" alt=""></p>
-<p>其实就是<strong>多了中间列的上半部分</strong>。</p>
-<p>那么现在捋一下如何<strong>原地操作元素</strong>：<br>枚举左上区域的所有位置，然后通过上面总结的位置关系直接交换元素。<br>对于一个位置 (i,j)，需要<strong>交换三次</strong>：</p>
-<ol>
-<li><code>swap(matrix[i][j], matrix[j][n-i-1]);</code></li>
-<li><code>swap(matrix[i][j], matrix[n-i-1][n-j-1]);</code></li>
-<li><code>swap(matrix[i][j], matrix[n-j-1][i]);</code></li>
-</ol>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = matrix.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 这里行 或 列，谁多出一个都可以。即也可以是 i &lt; (n+1) / 2</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n / <span class="number">2</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (n + <span class="number">1</span>) / <span class="number">2</span>; j++) &#123;</span><br><span class="line">        swap(matrix[i][j], matrix[j][n-i<span class="number">-1</span>]);</span><br><span class="line">        swap(matrix[i][j], matrix[n-i<span class="number">-1</span>][n-j<span class="number">-1</span>]);</span><br><span class="line">        swap(matrix[i][j], matrix[n-j<span class="number">-1</span>][i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/04/04/LeetCode-42-%E6%8E%A5%E9%9B%A8%E6%B0%B4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/04/LeetCode-42-%E6%8E%A5%E9%9B%A8%E6%B0%B4/" itemprop="url">LeetCode 42 接雨水</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-04T17:16:38+08:00">
-                2020-04-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
-                    <span itemprop="name">刷题</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.6k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定 <em>n</em> 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
-<p><img src="1.png" alt=""></p>
-<p>上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 <strong>感谢 Marcos</strong> 贡献此图。</p>
-<p><strong>示例:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [0,1,0,2,1,0,1,3,2,1,2,1]</span><br><span class="line">输出: 6</span><br></pre></td></tr></table></figure>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>根据木桶原理，每根柱子能够承接雨水的数量等于其两边最大高度柱子中的较小者减去当前柱子的高度。</p>
-<p>举个栗子，对于下面的柱子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[4, 3, 1, 2, 5, 4]</span><br></pre></td></tr></table></figure>
-<p>柱子 1 所能承接雨水的数量为 3。计算方法是：分别寻找柱子 1 左右两边高度最高的柱子——柱子 4 和 柱子 5；取两个柱子中高度较小者——柱子 4；柱子 4 的高度减去柱子 1 的高度 得到结果为3。</p>
-<p>因此，问题求解的核心在于，对于数组中的每个元素，如何找到其左右两边元素的最大值。</p>
-<h2 id="思路1-动态规划"><a href="#思路1-动态规划" class="headerlink" title="思路1  动态规划"></a>思路1  动态规划</h2><ul>
-<li><p>令 $left_max[i]$ 表示数组 $height$ 中从最左端到下标 i 最高的柱子高度，则 $left_max[i] = max(left_max[i-1], height[i])$</p>
-</li>
-<li><p>令 $right_max[i]$ 表示数组 $height$ 中从下标 i 到最右端最高的柱子高度，则  $right_max[i] = max(right_max[i+1], height[i])$</p>
-</li>
-<li><p>遍历数组 $height$，将 $min(left_max[i], right_max[i]) - height[i]$ 更新到答案中</p>
-</li>
-</ul>
-<p>算法时间复杂度为 $O(n)$，空间复杂度为 $O(n)$</p>
-<p><strong>代码如下</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">height</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">height</span> == null)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span> = <span class="built_in">height</span>.<span class="built_in">size</span>();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left_max(<span class="built_in">size</span>), right_max(<span class="built_in">size</span>);</span><br><span class="line">    left_max[<span class="number">0</span>] = <span class="built_in">height</span>[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="built_in">size</span>; i++) &#123;</span><br><span class="line">        left_max[i] = <span class="built_in">max</span>(<span class="built_in">height</span>[i], left_max[i - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    right_max[<span class="built_in">size</span> - <span class="number">1</span>] = <span class="built_in">height</span>[<span class="built_in">size</span> - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="built_in">size</span> - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        right_max[i] = <span class="built_in">max</span>(<span class="built_in">height</span>[i], right_max[i + <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="built_in">size</span> - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        ans += <span class="built_in">min</span>(left_max[i], right_max[i]) - <span class="built_in">height</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="思路2-双指针"><a href="#思路2-双指针" class="headerlink" title="思路2 双指针"></a>思路2 双指针</h2><p>在上面动态规划的解法中，我们用到了 $left_max, right_max$ 两个数组，但是这两个数组中的每个元素其实我们只使用了一次，也就是说，当我们使用 $left_max[i]$ 时，$left_max[0] \ 至 \ left_max[i-1]$ 都不会再用到了。把这些不会用到的元素也存下来就有些浪费空间了，现在我们就来看一下如何去掉这两个数组。</p>
-<p>先回顾一下两个数组是如何更新的</p>
-<p>$left_max[i] = max(left_max[i-1], height[i])$</p>
-<p>$right_max[i] = max(right_max[i+1], height[i])$</p>
-<p>可以看到：left_max[i] 的值只与 left_max[i-1] 有关，与 left_max[0] 至 left_max[i-2] 的值都无关。设 left_max[i] 是本次遍历中所要计算的最大值，那么 left_max[i-1] 就是遍历所要计算的最大值，因此，我们完全可以只通过left_max这一个变量来维护这一系列的最大值</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等号左边的left_max是本次要计算的left_max，相当于left_max[i]</span></span><br><span class="line"><span class="comment">// 等号右边的left_max是前一次遍历中计算的left_max, 相当于left_max[i-1]</span></span><br><span class="line">left_max = <span class="built_in">max</span>(left_max, <span class="built_in">height</span>[i])</span><br></pre></td></tr></table></figure>
-<p>同理，right_max[i] 也可由 right_max 替代</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等号左边的right_max是本次要计算的right_max，相当于right_max[i]</span></span><br><span class="line"><span class="comment">// 等号右边的right_max是前一次遍历中计算的right_max, 相当于right_max[i+1]</span></span><br><span class="line">right_max = <span class="built_in">max</span>(right_max, <span class="built_in">height</span>[i])</span><br></pre></td></tr></table></figure>
-<p>回到我们的题目中来，我们可以使用上面的优化，先将代码中的left_max数组去掉</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">height</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">height</span> == null)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span> = <span class="built_in">height</span>.<span class="built_in">size</span>();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; right_max(<span class="built_in">size</span>);</span><br><span class="line">    left_max = <span class="built_in">height</span>[<span class="number">0</span>];</span><br><span class="line">    right_max[<span class="built_in">size</span> - <span class="number">1</span>] = <span class="built_in">height</span>[<span class="built_in">size</span> - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="built_in">size</span> - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        right_max[i] = <span class="built_in">max</span>(<span class="built_in">height</span>[i], right_max[i + <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="built_in">size</span> - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        left_max = <span class="built_in">max</span>(left_max, <span class="built_in">height</span>[i]);</span><br><span class="line">        ans += <span class="built_in">min</span>(left_max, right_max[i]) - <span class="built_in">height</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那么，right_max数组是否也能直接去掉呢？显然是不行的，因此我们的求解过程是<strong>从左到右</strong>遍历的，left_max数组可以去掉的原因是它的计算过程也是从左到右遍历的，而right_max数组的计算过程是<strong>从右到左</strong>遍历的，因此不能直接去掉。</p>
-<p>也就是说，无论是我们从左往右算，还是从右往左算，都只能去掉两个数组中的一个，那怎么做才能把这两个数组都去掉呢？相信你已经想到了，那就是<strong>既从左往右算，又从右往左算</strong>。</p>
-<p>我们使用两个双指针 left 和 right 分别指向 height 数组的左右端点，同时使用上面的 left_max 和 right_max 分别维护左右两个方向的最大值。</p>
-<p>在思路 1 中，对于位置 left 的柱子，其载水量为</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">min</span>(left_max[left], right_max[left]) - <span class="built_in">height</span>[left];</span><br></pre></td></tr></table></figure>
-<p>现在我们可以把两个数组去掉，其结果为</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">min</span>(left_max, <span class="built_in">max</span>(<span class="built_in">height</span>[left], <span class="built_in">height</span>[left+<span class="number">1</span>], ... , <span class="built_in">height</span>[right]) ) - <span class="built_in">height</span>[left];</span><br></pre></td></tr></table></figure>
-<p>如果 <code>left_max &lt; height[right]</code>  或是小于这其中的任意一个，那么上式等于 <code>left_max - height[left]</code>。这种情况下，我们不需要遍历 left 位置右边那一堆柱子的高度就可以得到 left 位置的载水量。</p>
-<p>同理，对于位置 right 的柱子，其载水量为</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">min</span>(right_max, <span class="built_in">max</span>(<span class="built_in">height</span>[<span class="number">0</span>], <span class="built_in">height</span>[<span class="number">1</span>], ... , <span class="built_in">height</span>[right]) ) - <span class="built_in">height</span>[right];</span><br></pre></td></tr></table></figure>
-<p>如果 <code>right_max &lt; height[0]</code> 或是小于这其中的任意一个，那么上式等于 <code>right_max - height[right]</code>。</p>
-<p>这样我们得到了下面的算法</p>
-<ul>
-<li>使用两个双指针 left 和 right 分别指向 height 数组的左右端点，同时使用上面的 left_max 和 right_max 分别维护左右两个方向的最大值。</li>
-<li>当 left &lt;= right 时<ul>
-<li>更新 <code>left_max = max(left_max, height[left])</code></li>
-<li>更新 <code>right_max = max(right_max, height[right])</code></li>
-<li>如果 <code>left_max &lt;= right_max</code>，根据木桶效应， left 位置的柱子的载水量可以直接算出，结果为 <code>left_max - height[left]</code>。</li>
-<li>如果 <code>right_max &lt;= left_max</code>，根据木桶效应， right 位置的柱子的载水量可以直接算出，结果为 <code>right_max - height[right]</code>。</li>
-<li>更新 left 指针或 right 指针位置，重复以上步骤</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">height</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left_max = <span class="number">0</span>, right_max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = <span class="built_in">height</span>.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        left_max = <span class="built_in">max</span>(left_max, <span class="built_in">height</span>[left]);</span><br><span class="line">        right_max = <span class="built_in">max</span>(right_max, <span class="built_in">height</span>[right]);</span><br><span class="line">        <span class="keyword">if</span> (left_max &lt; right_max) &#123; <span class="comment">// 右边再大也没用，因为左边是短板</span></span><br><span class="line">            ans += left_max - <span class="built_in">height</span>[left++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123; <span class="comment">// right_max &lt;= left_max // 做百年再大也没用，因为右边是短板</span></span><br><span class="line">            ans += right_max - <span class="built_in">height</span>[right--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
  <nav class="pagination">
-   <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
+   <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
  </nav>
 
 
@@ -926,7 +997,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -937,7 +1008,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -948,7 +1019,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -992,7 +1063,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

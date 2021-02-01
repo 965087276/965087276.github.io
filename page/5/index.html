@@ -262,6 +262,429 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/03/22/LeetCode-945-%E4%BD%BF%E6%95%B0%E7%BB%84%E5%94%AF%E4%B8%80%E7%9A%84%E6%9C%80%E5%B0%8F%E5%A2%9E%E9%87%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/22/LeetCode-945-%E4%BD%BF%E6%95%B0%E7%BB%84%E5%94%AF%E4%B8%80%E7%9A%84%E6%9C%80%E5%B0%8F%E5%A2%9E%E9%87%8F/" itemprop="url">LeetCode 945 使数组唯一的最小增量</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-22T11:52:43+08:00">
+                2020-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定整数数组 A，每次 <em>move</em> 操作将会选择任意 <code>A[i]</code>，并将其递增 <code>1</code>。</p>
+<p>返回使 <code>A</code> 中的每个值都是唯一的最少操作次数。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,2,2]</span><br><span class="line">输出：1</span><br><span class="line">解释：经过一次 move 操作，数组将变为 [1, 2, 3]。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：[3,2,1,2,1,7]</span><br><span class="line">输出：6</span><br><span class="line">解释：经过 6 次 move 操作，数组将变为 [3, 4, 1, 2, 5, 7]。</span><br><span class="line">可以看出 5 次或 5 次以下的 move 操作是不能让数组的每个值唯一的。</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ol>
+<li><code>0 &lt;= A.length &lt;= 40000</code></li>
+<li><code>0 &lt;= A[i] &lt; 40000</code></li>
+</ol>
+<h1 id="思路及代码"><a href="#思路及代码" class="headerlink" title="思路及代码"></a>思路及代码</h1><h2 id="解法一：普通排序再遍历"><a href="#解法一：普通排序再遍历" class="headerlink" title="解法一：普通排序再遍历"></a>解法一：普通排序再遍历</h2><p>将数组 <code>A</code> 排序，遍历每个元素，如果当前元素小于等于其前面的元素，就将当前元素等于前面元素加1</p>
+<p>时间复杂度为 $O(n\log n)$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minIncrementForUnique</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">    sort (A.<span class="built_in">begin</span>(), A.<span class="built_in">end</span>());</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; A.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (A[i] &lt;= A[i<span class="number">-1</span>]) &#123;</span><br><span class="line">            ans += A[i<span class="number">-1</span>] - A[i] + <span class="number">1</span>;</span><br><span class="line">            A[i] = A[i<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法二：计数法（预存每个数的出现次数）"><a href="#解法二：计数法（预存每个数的出现次数）" class="headerlink" title="解法二：计数法（预存每个数的出现次数）"></a>解法二：计数法（预存每个数的出现次数）</h2><p>注意到数组 <code>A</code> 各元素的范围在 <code>[0, 40000)</code> 之间。因此，我们可以开辟一个大小为 40000 的数组 $times$，存储每个数的出现次数。然后遍历数组 $times$，如果某个数 $i$ 的出现次数 $times[i]$ 大于1，那么这个数只留下 1 个，剩下 $times[i]-1$ 个数都 加 1 变为 $i+1$ ，如此循环下去。</p>
+<p>时间复杂度为 $O(n)$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> times[<span class="number">40000</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minIncrementForUnique</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(times, <span class="number">0</span>, <span class="keyword">sizeof</span> times);</span><br><span class="line">    <span class="keyword">int</span> minV = <span class="number">40000</span>, maxV = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        times[A[i]]++;</span><br><span class="line">        minV = <span class="built_in">min</span>(minV, A[i]);</span><br><span class="line">        maxV = <span class="built_in">max</span>(maxV, A[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = minV; i &lt; maxV; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (times[i] &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 更新答案</span></span><br><span class="line">            ans += times[i] - <span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 将剩下的 times[i]-1 个数变为 i+1</span></span><br><span class="line">            times[i+<span class="number">1</span>] += times[i] - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设 maxV 有 x 个，则需要更新 (x - 1) * x / 2 次</span></span><br><span class="line">    ans += (times[maxV] - <span class="number">1</span>) * times[maxV] / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法三：线性探测"><a href="#解法三：线性探测" class="headerlink" title="解法三：线性探测"></a>解法三：线性探测</h2><p><strong>该解法摘自 LeetCode</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">作者：sweetiee</span><br><span class="line">链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;minimum-increment-to-make-array-unique&#x2F;solution&#x2F;ji-shu-onxian-xing-tan-ce-fa-onpai-xu-onlogn-yi-ya&#x2F;</span><br><span class="line">来源：力扣（LeetCode）</span><br></pre></td></tr></table></figure>
+<p>这道题可以看作是 把原数组映射到一个地址不冲突的区域，映射后的地址不小于原数组对应的元素。</p>
+<p>比如，<code>[3, 2, 1, 2, 1, 7]</code> 就映射成了 <code>[3, 2, 1, 4, 5, 7]</code></p>
+<p>那么这其实和 <strong>解决hash冲突的线性探测法</strong>很像，只不过这里的探测是单向（往右）的：如果地址冲突了，会探测它的下一个位置，如果下一个位置还是冲突，继续向后看，直到第一个不冲突的位置为止。</p>
+<p>但是，直接进行线性探测可以会因为多次冲突导致探测时间太长，因此我们可以考虑在探测的过程中进行<strong>路径压缩</strong>。</p>
+<p>如何路径压缩呢？<strong>就是经过某条路径最终探测到一个空位置x后，将这条路径上的值都变成空位置所在的下标x，那么假如下次探测的点又是这条路径上的点，则可以直接跳转到这次探测到的空位置x，从x开始继续探测。</strong></p>
+<p>下面用样例2：[3, 2, 1, 2, 1, 7]，来模拟一遍线性探测的过程.</p>
+<p><strong>step1: 插入3：</strong></p>
+<p><img src="1.png" alt=""></p>
+<p>因为3的位置是空的，所以直接放入3即可。（此时数组变成了上图，红色表示本次的更改）</p>
+<p><strong>step2: 插入2：</strong></p>
+<p><img src="2.png" alt=""></p>
+<p><strong>step3: 插入1：</strong></p>
+<p><img src="3.png" alt=""></p>
+<p><strong>step4: 插入2：</strong></p>
+<p><img src="4.png" alt=""></p>
+<p>此时我们发现2的位置已经有值了，于是继续向后探测，直到找到空位4，于是2映射到了4。<br>并且！！我们要对刚刚走过的路径2-&gt;3-&gt;4进行压缩，即将他们的值都设置为本次探测到的空位4(那么下次探测就可以直接从4往后找了)。</p>
+<p><strong>step5: 插入1：</strong></p>
+<p><img src="5.png" alt=""></p>
+<p><strong>step6: 插入7：</strong></p>
+<p><img src="6.png" alt=""></p>
+<p>代码如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">move</span>[<span class="number">80000</span>];</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findPos</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="built_in">move</span>[x];</span><br><span class="line">        <span class="keyword">return</span> b == <span class="number">-1</span> ? <span class="built_in">move</span>[x] = x : <span class="built_in">move</span>[x] = findPos(b + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minIncrementForUnique</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">memset</span>(<span class="built_in">move</span>, <span class="number">-1</span>, <span class="keyword">sizeof</span> <span class="built_in">move</span>);</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x : A) &#123;</span><br><span class="line">            ans += findPos(x) - x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/03/22/%E5%89%91%E6%8C%87Offer-%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AD%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/22/%E5%89%91%E6%8C%87Offer-%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AD%97/" itemprop="url">剑指Offer-旋转数组的最小数字</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-22T10:16:32+08:00">
+                2020-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  502
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组（存在重复元素）的一个旋转，输出旋转数组的最小元素。例如，数组 <code>[3,4,5,1,2]</code> 为 <code>[1,2,3,4,5]</code> 的一个旋转，该数组的最小值为1。 </p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[3,4,5,1,2]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[2,2,2,0,1]</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>采用二分法，设  $l$ , $r$ 分别指向数组左右两端，$mid$ 为数组的中点</p>
+<p>那么这道题的关键在于怎么用 $l, r, mid$ 这三个位置的数值判断出最小值是位于 $mid$ 的左边还是右边</p>
+<ul>
+<li><p>用左边位置 $l$ 和中间位置 $mid$ 比较可以吗？</p>
+<p>答案是不可以。这个数组可以看作是两段 非递减的数据 拼接起来的。像 <code>[3, 4, 5, 1, 2]</code>  与  <code>[1, 2, 3, 4, 5]</code> ，中间位置的值都比左边大，但最小值一个在后面，一个在前面，因此这种做法不可以。</p>
+</li>
+<li><p>用右边位置 $r$ 和中间位置 $mid$ 比较可以吗？</p>
+<p>答案是可以的。<code>[1, 2, 3, 4, 5]  [3, 4, 5, 1, 2]  [2, 3, 4, 5 ,4]  [10, 1, 10, 10, 10]</code>；当中间位置大于右边位置时，最小值一定在右边；当中间位置大于左边位置时，最小值一定在左边；当中间位置等于右边位置时，不能判断最小值在哪边，但是可以排除右端点。</p>
+</li>
+</ul>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minArray</span><span class="params">(self, numbers: List[int])</span> -&gt; int:</span></span><br><span class="line">    l, r = <span class="number">0</span>, len(numbers) - <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> l &lt; r:</span><br><span class="line">        mid = (l + r) &gt;&gt; <span class="number">1</span></span><br><span class="line">        <span class="comment"># 最小值一定在右边</span></span><br><span class="line">        <span class="keyword">if</span> numbers[mid] &gt; numbers[r]: l = mid + <span class="number">1</span></span><br><span class="line">        <span class="comment"># 最小值一定在左边（也可能是 numbers[mid]）</span></span><br><span class="line">        <span class="keyword">elif</span> numbers[mid] &lt; numbers[r]: r = mid</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 最小值一定在左边</span></span><br><span class="line">            <span class="keyword">if</span> numbers[mid] &gt; numbers[l]: r = mid - <span class="number">1</span></span><br><span class="line">            <span class="comment"># numbers[mid] == numbers[l] 此时不能判断最小值在哪边 </span></span><br><span class="line">            <span class="keyword">else</span>: r = r - <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> numbers[r]</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/03/20/%E5%89%91%E6%8C%87Offer%E2%80%94%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -446,428 +869,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/03/16/%E5%89%91%E6%8C%87Offer%E2%80%94%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/16/%E5%89%91%E6%8C%87Offer%E2%80%94%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97/" itemprop="url">剑指Offer—数组中重复的数字</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-16T18:26:44+08:00">
-                2020-03-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
-                    <span itemprop="name">刷题</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87Offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指Offer</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  290
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
-<p><strong>样例1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入</span><br><span class="line">[2, 3, 1, 0, 2, 5, 3]</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">2 或 3</span><br></pre></td></tr></table></figure>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>这个题有个关键点：<strong>所有数组都在 0～n-1 的范围内</strong>。</p>
-<p>那么在没有重复数字的情况下，我们可以通过下面的算法使得对每个下标 $i$ 都有 $nums[i] = i$</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 若nums[i] != i, 则将 nums[i] 放在位置 nums[i]</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums[i].<span class="built_in">size</span>(); i++) <span class="keyword">if</span> (nums[i] != i)</span><br><span class="line">    swap(nums[i], nums[nums[i]]);</span><br></pre></td></tr></table></figure>
-<p>在有重复数字的情况下，必然存在一个 $nums[i]$，在执行上述代码第3行前，已经有 $nums[i] == nums[nums[i]]$ 了，此时这个 $nums[i]$ 就是一个重复数字</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) <span class="keyword">if</span> (nums[i] != i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[nums[i]] == nums[i]) <span class="keyword">return</span> nums[i];</span><br><span class="line">        swap(nums[i], nums[nums[i]]); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/02/20/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/20/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/" itemprop="url">23种设计模式-装饰者模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-20T18:47:10+08:00">
-                2020-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  5.7k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  23
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>装饰(Decorator)模式属于“单一职责”模式的一种，它讲的是在软件组件的设计中，如果责任划分的不清晰，那么使用继承得到的结果往往是随着需求的变化，子类急剧膨胀，同时充斥着大量重复代码（也叫代码的bad smell），这时候的关键是划清责任。</p>
-<p>当然，这里并不是说别的模式就没有责任问题了。只是装饰者模式，以及后面要说的桥(Bridge)模式，这两个模式在责任的问题上表现得特别突出，因此把它们俩划分到单一职责模式类别中。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><h4 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h4><p>假设我们在设计一个IO的库，就是一些流操作。针对这些流操作呢，我们有一些需求，比如说，我们需要有针对文件的的文件流、针对内存的内存流以及针对网络的网络流，也需要有一些对流进行加密、缓冲等等各种操作。</p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>这个时候我们可能很快会想到，关于流的操作，我们需要有一个基类，这个基类里呢需要有一些读(read)、写(write)以及定位(seek)等等这样一些公共操作，我们将这些操作定义成抽象方法。（这里也可以用接口，但是因为装饰者模式一般都用抽象类，所以这里就使用了抽象类）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Stream</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 读</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span></span>;</span><br><span class="line">    <span class="comment">// 定位</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>;</span><br><span class="line">    <span class="comment">// 写</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那么接下来，针对文件流，我们去继承Stream基类，然后去实现这三个方法(这里为了简便起见，就不具体实现每个方法了)。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileStream</span> <span class="keyword">extends</span> <span class="title">Stream</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 读文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定位文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 写文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>同样的，针对网络流和内存流，我们也去继承Stream基类并去实现这三个方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NetworkStream</span> <span class="keyword">extends</span> <span class="title">Stream</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 读网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定位网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 写网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MemoryStream</span> <span class="keyword">extends</span> <span class="title">Stream</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 读内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定位内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>接下来，我们需要去考虑加密、缓冲等拓展操作。但是我们会发现，这些拓展操作是不能单独存在的。比如说，加密，我们很难说对一个流直接进行加密，我们需要先把数据从流中读出来然后在这基础上对这些数据进行加密。所以说这里的对流加密其实是针对数据的加密，对于缓冲来说也是一样。也就是说，这些拓展操作需要在对流先进行一个主体操作后才能进行。</p>
-<p>在上面我们已经定义了三种不同的流类型：文件流、网络流、内存流。因此，加密和缓冲也要在这三种流的基础上进行。</p>
-<p>那么我们怎么做呢？我们这里针对文件流的加密定义一个“加密文件流”类，这个类去继承FileStream类，然后在FileStream这个类的基础上作加密操作</p>
-<p>如下面的代码所示，我们去Override父类的三个方法。对于read()方法，我们先调用<strong>父类</strong>的read()方法读取数据，然后对读取的数据再进行一些加密操作后返回；对于write()方法，我们可能要在写数据前进行加密；对于seek()方法，我们可能前后都要加密。这里为了方便起见，在代码用注释来表示加密的过程。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoFileStream</span> <span class="keyword">extends</span> <span class="title">FileStream</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读文件流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位文件流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>不只是文件流需要有加密操作，网络流和内存流也需要加密操作，我们按照相同的方法定义网络流和内存流的加密操作。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoNetworkStream</span> <span class="keyword">extends</span> <span class="title">NetworkStream</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读网络流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位网络流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoMemoryStream</span> <span class="keyword">extends</span> <span class="title">MemoryStream</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>同样的道理，对于缓冲(Buffer)，我们也要考虑对文件流进行缓冲、对网络流进行缓冲、对内存流进行缓冲，因此我们也要定义针对这三种流的缓冲操作的类。（这里为了方便，代码中就不写具体的实现了）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> BufferedFileStream extends FileStream &#123;</span><br><span class="line">    <span class="comment">// ... ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> BufferedNetworkStream extends NetworkStream &#123;</span><br><span class="line">    <span class="comment">// ... ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> BufferedMemoryStream extends MemoryStream &#123;</span><br><span class="line">    <span class="comment">// ... ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那么再往后呢，我们还可能有对文件流即进行加密又进行缓冲的双重操作需求，那么这时候我们可能要新建一个CryptoBufferedFileStream类，这个类去继承FileStream, 或是去继承CryptoFileStream和BufferedFileStream中的一种来完成这个需求。这里我们采用继承FileStream的方式，代码可能是这样子的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> CryptoBufferedFileStream extends FileStream &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读文件流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位文件流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="问题及优化"><a href="#问题及优化" class="headerlink" title="问题及优化"></a>问题及优化</h4><p>那么到这里了，我们来看一下，以上的这些设计有没有什么问题呢？既然这么说了，它当然是有问题的，我们来分析一下它有什么毛病。</p>
-<p>首先，我们来看一下目前类的结构<br><img src="1.png" alt=""><br>类图的最上方是我们刚开始定义的Stream基类，然后分别定义了文件流(FileStream)、网络流(NetWorkStream)、内存流(MemoryStream)这三个基本的流的类，下面是根据对流的各种拓展操作（加密、缓冲）定义的拓展类。</p>
-<p>那么这个类的规模有多大呢。我们可以来算一下</p>
-<ol>
-<li>首先类图第一层Stream类是$1$个类</li>
-<li>接下来我们假设像FileStream、NetWorkStream、MemoryStream等等流的种类共有$n$种；那么类图的第一层和第二层共有$1+n$个类</li>
-<li>接下来看第三层，我假设对流的操作（加密、缓冲等等）的种类共有$m$种。那么对于$n$种流中的每一种，我们都可以选择$1$至$m$种操作附加在上面，因此仅针对一种流的操作，就需要有<script type="math/tex; mode=display">
-C_m^1 + C_m^2 + C_m^3 + ... + C_m^m = 2^m-1</script>$2^m-1$个类，因此第三层总共有$n * (2^m - 1)$个类。</li>
-</ol>
-<p>因此三层加起来类的总数目为</p>
-<script type="math/tex; mode=display">1+n+n * (2^m - 1) = 1 + n*2^m</script><p>可以看出类的数目是随着$n, m$的增加呈指数级增长的，可以说这个规模是相当庞大了。在我们这个例子里, $n=3, m=2$, 因此总共有$1+3*2^2=13$个类，这还不算太多。但如果稍微增加一下，让$n=5, m=5$，这个时候类的数目就达到了惊人的161个。</p>
-<p>除了类的数量问题，还有一个比较严重的问题，我们来看一下代码。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加密文件流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoFileStream</span> <span class="keyword">extends</span> <span class="title">FileStream</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读文件流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位文件流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加密网络流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoNetworkStream</span> <span class="keyword">extends</span> <span class="title">NetworkStream</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读网络流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位网络流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加密内存流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoMemoryStream</span> <span class="keyword">extends</span> <span class="title">MemoryStream</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>这里我们再次展示了加密文件流、加密网络流以及加密内存流这三个类的代码。从这三个类的代码里，我们可以发现，这三个类的read()方法、seek()方法以及write()方法的代码相互之间都是完全一样的（<strong>注意</strong>：这里的加密操作不会因为流的不同而不同，对所有流都是一样的），因此这里面有代码重复问题。</p>
-<p>既然重复了，我们就要想办法消除重复。首先，我们作一个变换，我们把继承去掉，换成相应类的实例变量，如下所示<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加密文件流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoFileStream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> FileStream stream;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        stream.read(number); <span class="comment">// 读文件流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        stream.seek(position); <span class="comment">// 定位文件流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        stream.write(data); <span class="comment">// 写文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加密网络流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoNetworkStream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> NetWorkStream stream;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        stream.read(number); <span class="comment">// 读网络流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        stream.seek(position); <span class="comment">// 定位网络流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        stream.write(data); <span class="comment">// 写网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加密内存流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoMemoryStream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> MemoryStream stream;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这时候，每个类只有第一行代码是不一样的，我们把它们拿出来看一下。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> FileStream stream;</span><br><span class="line"><span class="keyword">private</span> NetworkStream stream;</span><br><span class="line"><span class="keyword">private</span> MemoryStream stream;</span><br></pre></td></tr></table></figure><br>这三行的唯一的区别就是变量的声明类型不同。在《重构》那本书里有一句话：当一个变量的声明类型都是某个类型A的子类的时候，你就应该把它声明成类型A。<br>在这里，FileStream、NetWorkStream、MemoryStream都是Stream的子类。因此，我们将这三行代码的声明类型都改为Stream类型。然后，我们就可以利用到多态的性质，在将来给它传入相应的子类型。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加密文件流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoFileStream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Stream stream; <span class="comment">// 将来让它 = FileStream类型</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        stream.read(number); <span class="comment">// 读文件流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        stream.seek(position); <span class="comment">// 定位文件流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        stream.write(data); <span class="comment">// 写文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加密网络流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoNetworkStream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Stream stream; <span class="comment">// 将来让它 = NetworkStream类型</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        stream.read(number); <span class="comment">// 读网络流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        stream.seek(position); <span class="comment">// 定位网络流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        stream.write(data); <span class="comment">// 写网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加密内存流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoMemoryStream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Stream stream; <span class="comment">// 将来让它 = MemoryStream类型</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这样改造之后呢，我们又发现，现在上面这三个类的代码完全一样了（除了类名）。既然完全一样，那干嘛还要三个类，我们就只需要保留一个就可以了。我们将保留的那一个类的类名改为CryptoStream。类里的Stream成员，将来可以根据需要，灵活地赋值成FileStream、MemoryStream或NetworkStream。我们把构造函数也加上</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加密流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoStream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将来让它 = MemoryStream类型 </span></span><br><span class="line">    <span class="comment">// 或        MemoryStream类型 </span></span><br><span class="line">    <span class="comment">// 或        MemoryStream类型</span></span><br><span class="line">    <span class="keyword">private</span> Stream stream;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stream</span><span class="params">(Stream stream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stream = stream;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样修改之后，其实还有一个注意事项。类里的read()、seek()、write()方法原先是怎么来的？是因为我们要去拓展Stream类的这三个方法的功能，也就是说这三个方法是CryptoStream类的必须要有的。为了确保我们一定会去覆写Stream抽象类的这三个方法，我们让CryptoStream再去继承Stream抽象类。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加密流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoStream</span> <span class="keyword">extends</span> <span class="title">Stream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将来让它 = FileStream类型 </span></span><br><span class="line">    <span class="comment">// 或        MemoryStream类型 </span></span><br><span class="line">    <span class="comment">// 或        NetworkStream类型</span></span><br><span class="line">    <span class="keyword">private</span> Stream stream;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stream</span><span class="params">(Stream stream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stream = stream;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>注意这是个很奇怪的地方，在这里我们既继承了Stream类，又组合（包含）了一个Stream类型的实例。但是这两者的作用是不一样的。这里的继承是为了完善Stream接口（抽象类）的规范，这里的组合是为了将来通过多态可以支持调用FileStream、NetworkStream以及MemoryStream。</p>
-<p>同样，我们对缓冲流也进行相应的修改。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 缓冲流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BufferedStream</span> <span class="keyword">extends</span> <span class="title">Stream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将来让它 = FileStream类型 </span></span><br><span class="line">    <span class="comment">// 或        NetworkStream类型 </span></span><br><span class="line">    <span class="comment">// 或        MemoryStream类型</span></span><br><span class="line">    <span class="keyword">private</span> Stream stream;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stream</span><span class="params">(Stream stream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stream = stream;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>到这里，问题已经解决的差不多了。我们现在来测试一下。</p>
-<p>我们先建立一个文件流，然后对其进行操作<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FileStream s1 = <span class="keyword">new</span> FileStream();</span><br></pre></td></tr></table></figure></p>
-<p>我们现在想对文件流加密，怎么做呢？在最初的实现中，我们建立了一个CryptoFileStream类来完成这个功能，这其实是将文件流和对文件的加密这两个功能在编译时装配起来。而现在，我们不需要这么做，我们在运行阶段向CryptoStream中传入一个FileStream对象，这个叫做运行时装配。也就是说，在编译时，我们并没有诸如“加密文件流、缓冲文件流、加密缓冲文件流”这些类，但是我们可以在运行时通过组合的方式把它们装配出来，以满足需求。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FileStream s1 = <span class="keyword">new</span> FileStream();</span><br><span class="line"><span class="comment">// 运行时装配</span></span><br><span class="line">CryotoStream s2 = <span class="keyword">new</span> CryStream(s1);</span><br></pre></td></tr></table></figure><br>接下来对流s1进行缓存操作<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BufferedStream s3 = <span class="keyword">new</span> BufferedStream(s1);</span><br></pre></td></tr></table></figure><br>我们还可以对流s1既进行加密又进行缓存<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BufferedStream s4 = <span class="keyword">new</span> BufferedStream(s2);</span><br></pre></td></tr></table></figure><br>目前我们类的结构如下<br><img src="2.png" alt=""></p>
-<p>还可以做得更好一点，我们看加密流和缓冲流的这两个子类的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加密流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoStream</span> <span class="keyword">extends</span> <span class="title">Stream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将来让它 = FileStream类型 </span></span><br><span class="line">    <span class="comment">// 或        MemoryStream类型 </span></span><br><span class="line">    <span class="comment">// 或        NetworkStream类型</span></span><br><span class="line">    <span class="keyword">private</span> Stream stream;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stream</span><span class="params">(Stream stream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stream = stream;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 缓冲流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BufferedStream</span> <span class="keyword">extends</span> <span class="title">Stream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将来让它 = FileStream类型 </span></span><br><span class="line">    <span class="comment">// 或        NetworkStream类型 </span></span><br><span class="line">    <span class="comment">// 或        MemoryStream类型</span></span><br><span class="line">    <span class="keyword">private</span> Stream stream;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stream</span><span class="params">(Stream stream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stream = stream;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>这两个类都有一个Stream实例。按照《重构》中的理论，如果一个父类（Stream）的两个或多个子类(BufferedStream、CrytpoStream)中都有同样的字段(Stream stream)时，应该把这个字段往上提。</p>
-<p>那么提到哪里呢，提到Stream中肯定是不行的。因为FileStream类也是Stream的子类，而FileStream是不需要stream实例的。因此，这里就只能设置一个中间类了，这个中间类作为BufferedStream和CrytpoStream的父类，同时去继承Stream类。这个中间类也就是装饰者模式中抽象装饰者类，作为所有装饰者类的基类。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> Decorator extends Stream &#123;</span><br><span class="line">    <span class="keyword">protected</span> Stream stream;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Decorator</span><span class="params">(Stream stream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stream = stream;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>改造之后，两个子类的代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加密流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoStream</span> <span class="keyword">extends</span> <span class="title">DecoratorStream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stream</span><span class="params">(Stream stream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(stream);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 缓冲流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BufferedStream</span> <span class="keyword">extends</span> <span class="title">DecoratorStream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stream</span><span class="params">(Stream stream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(stream);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h4><p>好嘞，现在装饰者就算大功告成了。我们重新捋一遍代码</p>
-<p>首先，我们定义了一个Stream基类(抽象类），包含一些通用的需求<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Stream</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 读</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span></span>;</span><br><span class="line">    <span class="comment">// 定位</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>;</span><br><span class="line">    <span class="comment">// 写</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>然后，分别实现了文件流、网络流、内存流三个具体的流。这三个类在装饰者模式中被称作“被装饰者”<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileStream</span> <span class="keyword">extends</span> <span class="title">Stream</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 读文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定位文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 写文件流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 网络流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NetworkStream</span> <span class="keyword">extends</span> <span class="title">Stream</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 读网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定位网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 写网络流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 内存流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MemoryStream</span> <span class="keyword">extends</span> <span class="title">Stream</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 读内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定位内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>定义了一个抽象的装饰者类，继承自Stream类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> Decorator extends Stream &#123;</span><br><span class="line">    <span class="keyword">protected</span> Stream stream;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Decorator</span><span class="params">(Stream stream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stream = stream;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>最后是”加密流、缓冲流”两个类，这两个类在装饰者模式中被称为“装饰者”<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加密流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CryptoStream</span> <span class="keyword">extends</span> <span class="title">DecoratorStream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stream</span><span class="params">(Stream stream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(stream);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的加密操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 缓冲流</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BufferedStream</span> <span class="keyword">extends</span> <span class="title">DecoratorStream</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stream</span><span class="params">(Stream stream)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(stream);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.read(number); <span class="comment">// 读内存流</span></span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seek</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">        <span class="keyword">super</span>.seek(position); <span class="comment">// 定位内存流</span></span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 额外的缓冲操作</span></span><br><span class="line">        <span class="keyword">super</span>.write(data); <span class="comment">// 写内存流</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><img src="3.png" alt=""></p>
-<h3 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式"></a>装饰者模式</h3><h4 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h4><p>在某些情况下我们可能会“过度地使用继承来扩展对象的功能”，由于继承为类型引入的<strong>静态特质</strong>，使得这种扩展方式缺乏灵活性；并且随着子类的增多（扩展功能的增多），各种子类的组合（扩展功能的组合）会导致更多子类的膨胀。</p>
-<p>如何使“对象功能的扩展”能够根据需要来动态地实现？同时避免“扩展功能的增多”带来的子类膨胀问题？从而使得任何“功能扩展变化”所导致的影响将为最低？</p>
-<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>来看一下GoF中的定义</p>
-<blockquote>
-<p>动态（组合）地给一个对象增加一些额外的职责。就增加功能而言，Decorator模式比生成子类（继承）更为灵活（消除重复代码 &amp; 减少子类个数）。</p>
-</blockquote>
-<h4 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h4><p><img src="4.png" alt=""><br>这里的Component是实例中的Stream类；Decorator是实例中的DecoratorStream类。</p>
-<h3 id="要点总结"><a href="#要点总结" class="headerlink" title="要点总结"></a>要点总结</h3><ol>
-<li>通过采用组合而非继承的手法， Decorator模式实现了在运行时动态扩展对象功能的能力，而且可以根据需要扩展多个功能。避免了使用继承带来的“灵活性差”和“多子类衍生问题”。</li>
-<li>Decorator类在接口上表现为is-a Component的继承关系，即Decorator类继承了Component类所具有的接口。但在实现上又表现为has-a Component的组合关系，即Decorator类又使用了另外一个Component类。</li>
-<li>Decorator模式的目的并非解决“多子类衍生的多继承”问题，Decorator模式应用的要点在于解决“主体类在多个方向上的扩展功能”——是为“装饰”的含义。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
  <nav class="pagination">
-   <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
+   <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
  </nav>
 
 
@@ -912,7 +918,7 @@ C_m^1 + C_m^2 + C_m^3 + ... + C_m^m = 2^m-1</script>$2^m-1$个类，因此第三
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -923,7 +929,7 @@ C_m^1 + C_m^2 + C_m^3 + ... + C_m^m = 2^m-1</script>$2^m-1$个类，因此第三
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -934,7 +940,7 @@ C_m^1 + C_m^2 + C_m^3 + ... + C_m^m = 2^m-1</script>$2^m-1$个类，因此第三
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -978,7 +984,7 @@ C_m^1 + C_m^2 + C_m^3 + ... + C_m^m = 2^m-1</script>$2^m-1$个类，因此第三
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
