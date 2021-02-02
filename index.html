@@ -262,6 +262,218 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2021/02/02/LeetCode-440-%E5%AD%97%E5%85%B8%E5%BA%8F%E7%9A%84%E7%AC%ACK%E5%B0%8F%E6%95%B0%E5%AD%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/02/02/LeetCode-440-%E5%AD%97%E5%85%B8%E5%BA%8F%E7%9A%84%E7%AC%ACK%E5%B0%8F%E6%95%B0%E5%AD%97/" itemprop="url">LeetCode 440 字典序的第K小数字</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-02T09:28:52+08:00">
+                2021-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定整数 <code>n</code> 和 <code>k</code>，找到 <code>1</code> 到 <code>n</code> 中字典序第 <code>k</code> 小的数字。</p>
+<p>注意：$1 ≤ k ≤ n ≤ 10^9$。</p>
+<p><strong>示例 :</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">n: 13   k: 2</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">10</span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line">字典序的排列是 [1, 10, 11, 12, 13, 2, 3, 4, 5, 6, 7, 8, 9]，所以第二小的数字是 10。</span><br></pre></td></tr></table></figure>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>所谓字典序其实就是按照数字的前缀进行排序。如果我们将 $1-n$ 这 $n$ 个数字组成一棵前缀树（或者叫“字典树”，其根节点为空节点）Trie，那么对这棵树进行先序遍历时，第 $k$ （不包括根节点）个节点即对应了字典序的第 $k$ 小的数字。然而，构造字典树并进行先序遍历需要花费 $O(n)$ 的时间以及 $O(n)$ 的空间，这对于本题来说是不允许的。因此，我们需要针对这两个过程进行优化。</p>
+<p>首先，我们在先序遍历时，首先会遍历以 $1$ 为前缀的数字。如果以 $1$ 为前缀的数字个数小于 $k$ ，就说明第 $k$ 个的数字的前缀肯定大于1。然后，我们继续遍历以 $2$ 为前缀的数字，若 <code>前缀为1的数字个数 + 前缀为2的数字个数 &gt;= k</code>，就说明第 $k$ 个的数字的前缀肯定为 $2$，否则继续去遍历前缀为3的数字，以此类推。</p>
+<p>在上面的过程中，我们能够推断出第 $k$ 个数字的前缀是多少，而推断的关键在于<strong>如何计算指定前缀下的数字的个数</strong>。按照上面的计算方式，这个时间复杂度是 $O(n)$，肯定不符合要求，因此，这一步计算是我们优化的关键。</p>
+<h2 id="计算指定前缀下的数字的个数"><a href="#计算指定前缀下的数字的个数" class="headerlink" title="计算指定前缀下的数字的个数"></a>计算指定前缀下的数字的个数</h2><p>假设 $n = 1248$，我们要计算以 $1$ 为前缀的数字的个数。</p>
+<p>我们可以用数学的方法来一步步算一下：</p>
+<ul>
+<li>长度为 1 的数字有 1 个：1。写成区间为 $[1, 2)$。</li>
+<li>长度为 2 的数字有 10 个：$10 \sim 19$。写成区间为 $[10, 20)$。</li>
+<li>长度为 3 的数字有 100 个：$100 \sim 199$。写成区间为 $[100, 200)$。</li>
+<li>长度为 4 的数字有 249 个：$1000 \sim 1248$。写成区间为 $[1000, 1248]$。</li>
+</ul>
+<p>可以看到，除了第 4 个外，前三个都是有规律的，其数字个数等于 $10^{l-1}$（其中 $l$ 指的是数字的长度）。到了最后的第四层，因为 $1999 &gt; 1248$，所以最后一层数字的个数要用 $n - 1000 + 1 = 249$ 来计算。</p>
+<p>把上面的步骤翻译成代码，就可以在 $O(log_{10}n)$ 的复杂度内算出指定前缀下的数字个数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以prefix为前缀（包括prefix本身）并且小于等于n的数字的个数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> prefix</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> n</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">long</span> <span class="title">getCount</span><span class="params">(<span class="keyword">long</span> prefix, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 最终的答案</span></span><br><span class="line">    <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 每一层数字的最大个数。其值为10的幂次：1、10、100、1000...</span></span><br><span class="line">    level = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (prefix &lt;= n) &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 分别计算每一层，以prefix为前缀并且小于等于n的数字的个数。</span></span><br><span class="line"><span class="comment">         * 下面一层的数字一定大于上面一层的所有数字（越往下位数越大）；因此，若某一层的数字已经超过n了，就不需要往下找了</span></span><br><span class="line"><span class="comment">         [1, 2) -&gt; [10, 20) -&gt; [100, 200) -&gt; [1000, 1248]</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        ans += Math.min(level, n - prefix + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 往下面走一层，数字个数为1、10、100、1000...。</span></span><br><span class="line"><span class="comment">         * 例如：[1, 2) -&gt; [10, 20) -&gt; [100, 200)</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        prefix *= <span class="number">10</span>;</span><br><span class="line">        level *= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="如何定位-k-的位置"><a href="#如何定位-k-的位置" class="headerlink" title="如何定位 k 的位置"></a>如何定位 k 的位置</h2><p>计算出指定前缀下的数字的个数，我们可以逐步地确定出 $k$ 的具体位置。</p>
+<p>我们首先计算以数字 $1$ 为前缀的数字的个数，这里有两种情况</p>
+<ul>
+<li>如果个数大于等于 $k$，说明以数字 $1$ 开头的数字串太多了，并且第 $k$ 个数字一定是以数字 $1$ 开头。此时，我们可以缩小范围，向下走一层，将前缀乘10，计算以数字 $10$ 为前缀的数字的个数。</li>
+<li>如果个数小于 $k$ ，说明以数字 $1$ 开头的数字串都算进去，也不够。此时我们应该向右走一步，将前缀 + 1，计算以数字 $2$ 为前缀的数字的个数。</li>
+</ul>
+<p>在向下或向右走的过程中，继续按照上面的两种情况进行处理，直到找到第 $k$ 个位置为止。</p>
+<p>实现的代码如下所示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findKthNumber</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> prefix = <span class="number">1L</span>;</span><br><span class="line">    <span class="keyword">long</span> p = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (p &lt; k) &#123;</span><br><span class="line">        <span class="comment">// 以prefix为前缀的数字的个数</span></span><br><span class="line">        <span class="keyword">long</span> cnt = getCount(prefix, n);</span><br><span class="line">        <span class="keyword">if</span> (p + cnt - <span class="number">1</span> &gt;= k) &#123; <span class="comment">// 这里的p已经包含了prefix自身，为了避免重复计算，最后要减1</span></span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 进到if里说明以prefix为前缀的数太多了。</span></span><br><span class="line"><span class="comment">             * 因此第k小的数一定以prefix为前缀。</span></span><br><span class="line"><span class="comment">             * 因此只向下寻找prefix前缀的数即可。</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            p++; <span class="comment">// 往下走一步；p加1是因为要加下一个节点</span></span><br><span class="line">            prefix *= <span class="number">10</span>; <span class="comment">// 下一层的前缀</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 以prefix为前缀的数都算进去，也不够。</span></span><br><span class="line"><span class="comment">             * 说明第k小的数不是以prefix为前缀。</span></span><br><span class="line"><span class="comment">             * 所以需要从下一个前缀开始找</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            p += cnt; <span class="comment">// 往右走一步；p加上当前prefix的数字个数cnt-1，以及下一个节点（右边节点），一共是cnt个节点</span></span><br><span class="line">            prefix++; <span class="comment">// 找下一个前缀</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>) prefix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>最终的代码如下所示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以prefix为前缀（包括prefix本身）并且小于等于n的数字的个数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> prefix</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> n</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">long</span> <span class="title">getCount</span><span class="params">(<span class="keyword">long</span> prefix, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 最终的答案</span></span><br><span class="line">    <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 每一层数字的最大个数。其值为10的幂次：1、10、100、1000...</span></span><br><span class="line">    level = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (prefix &lt;= n) &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 分别计算每一层，以prefix为前缀并且小于等于n的数字的个数。</span></span><br><span class="line"><span class="comment">         * 下面一层的数字一定大于上面一层的所有数字（越往下位数越大）；因此，若某一层的数字已经超过n了，就不需要往下找了</span></span><br><span class="line"><span class="comment">         [1, 2) -&gt; [10, 20) -&gt; [100, 200) -&gt; [1000, 1248]</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        ans += Math.min(level, n - prefix + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 往下面走一层，数字个数为1、10、100、1000...。</span></span><br><span class="line"><span class="comment">         * 例如：[1, 2) -&gt; [10, 20) -&gt; [100, 200)</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        prefix *= <span class="number">10</span>;</span><br><span class="line">        level *= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findKthNumber</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> prefix = <span class="number">1L</span>;</span><br><span class="line">    <span class="keyword">long</span> p = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (p &lt; k) &#123;</span><br><span class="line">        <span class="comment">// 以prefix为前缀的数字的个数</span></span><br><span class="line">        <span class="keyword">long</span> cnt = getCount(prefix, n);</span><br><span class="line">        <span class="keyword">if</span> (p + cnt - <span class="number">1</span> &gt;= k) &#123; <span class="comment">// 这里的p已经包含了prefix自身，为了避免重复计算，最后要减1</span></span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 进到if里说明以prefix为前缀的数太多了。</span></span><br><span class="line"><span class="comment">             * 因此第k小的数一定以prefix为前缀。</span></span><br><span class="line"><span class="comment">             * 因此只向下寻找prefix前缀的数即可。</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            p++; <span class="comment">// 往下走一步；p加1是因为要加下一个节点</span></span><br><span class="line">            prefix *= <span class="number">10</span>; <span class="comment">// 下一层的前缀</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 以prefix为前缀的数都算进去，也不够。</span></span><br><span class="line"><span class="comment">             * 说明第k小的数不是以prefix为前缀。</span></span><br><span class="line"><span class="comment">             * 所以需要从下一个前缀开始找</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            p += cnt; <span class="comment">// 往右走一步；p加上当前prefix的数字个数cnt-1，以及下一个节点（右边节点），一共是cnt个节点</span></span><br><span class="line">            prefix++; <span class="comment">// 找下一个前缀</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>) prefix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="965087276.github.io/2021/02/01/LeetCode-37-%E8%A7%A3%E6%95%B0%E7%8B%AC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -679,205 +891,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/07/18/LeetCode-802-%E6%89%BE%E5%88%B0%E6%9C%80%E7%BB%88%E7%9A%84%E5%AE%89%E5%85%A8%E7%8A%B6%E6%80%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/18/LeetCode-802-%E6%89%BE%E5%88%B0%E6%9C%80%E7%BB%88%E7%9A%84%E5%AE%89%E5%85%A8%E7%8A%B6%E6%80%81/" itemprop="url">LeetCode 802 找到最终的安全状态</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-18T19:11:45+08:00">
-                2020-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
-                    <span itemprop="name">刷题</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  985
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>在有向图中, 我们从某个节点和每个转向处开始, 沿着图的有向边走。 如果我们到达的节点是终点 (即它没有连出的有向边), 我们停止。现在, 如果我们最后能走到终点，那么我们的起始节点是<em>最终安全</em>的。 更具体地说, 存在一个自然数 <code>K</code>, 无论选择从哪里开始行走, 我们走了不到 <code>K</code> 步后必能停止在一个终点。</p>
-<p>哪些节点最终是安全的？ 结果返回一个有序的数组。</p>
-<p>该有向图有 <code>N</code> 个节点，标签为 <code>0, 1, ..., N-1</code>, 其中 <code>N</code> 是 <code>graph</code> 的节点数. 图以以下的形式给出: <code>graph[i]</code>是节点 <code>j</code> 的一个列表，满足 <code>(i, j)</code> 是图的一条有向边。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">输入：graph &#x3D; [[1,2],[2,3],[5],[0],[5],[],[]]</span><br><span class="line">输出：[2,4,5,6]</span><br></pre></td></tr></table></figure>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>这道题的意思是判断有向图中的每个节点能否走到<strong>环</strong>中，输出所有不能走到<strong>环</strong>中的点。</p>
-<h2 id="解法一：拓扑排序"><a href="#解法一：拓扑排序" class="headerlink" title="解法一：拓扑排序"></a>解法一：拓扑排序</h2><p>我们可以首先考虑所有出度为0的节点，它们一定都是安全的节点。 其次，仅与这些点直接相连的节点也一定都是安全的。依次类推，仅与这些安全的节点相连的节点也一定都是安全的。</p>
-<p>那么，我们可以将所有的边全部反向。反向之后，所有入度为0的点都是安全的，我们把这些点以及与这些点相连的边全部删除，随后新的图中所有入度为0的点也都是安全的。以此类推即可。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; eventualSafeNodes(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph) &#123;</span><br><span class="line">    <span class="keyword">int</span> n = graph.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> *degree = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">    <span class="keyword">bool</span> *<span class="built_in">end</span> = <span class="keyword">new</span> <span class="keyword">bool</span>[n];</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[n];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) degree[i] = <span class="built_in">end</span>[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="keyword">for</span> (<span class="keyword">int</span> v : graph[i]) &#123;</span><br><span class="line">        G[v].push_back(i);</span><br><span class="line">        ++degree[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="keyword">if</span> (!degree[i])</span><br><span class="line">        q.push(i);</span><br><span class="line">    <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">        <span class="keyword">int</span> u = q.front(); q.pop();</span><br><span class="line">        <span class="built_in">end</span>[u] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> v : G[u]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (--degree[v] == <span class="number">0</span>) &#123;</span><br><span class="line">                q.push(v);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="keyword">if</span> (<span class="built_in">end</span>[i])</span><br><span class="line">        res.push_back(i);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="解法二：DFS"><a href="#解法二：DFS" class="headerlink" title="解法二：DFS"></a>解法二：DFS</h2><p>还可以用深度优先搜索的方法来判断每个节点是否能够走到环中。在遍历的过程中，对于每个节点 u，我们设置三个状态：</p>
-<ul>
-<li><code>vis[u] = 0</code>：该节点还未被访问</li>
-<li><code>vis[u] = 1</code>：该节点在这一轮遍历中已经被访问过或者该节点在环中</li>
-<li><code>vis[u] = 2</code>：该节点遍历完毕且该节点是安全节点（不能走到环中）</li>
-</ul>
-<p>当我们第一次访问一个节点 u 时，我们将其设置为 vis = 1，并继续搜索与该节点相连的节点。如果在搜索过程中我们遇到一个 vis = 1 的节点，那么说明找到了一个环，那么在本轮搜索中 u 以及与 u 连通的点都可以到达这个环，因此这些点都不是安全的节点，此时退出本轮搜索，保持这些点 vis = 1 的状态不变。如果搜索过程中，没有遇到 vis = 1 的节点，则说明它是一个安全的节点，此时将其设置为 vis = 2。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dfs返回true表示节点u是一个安全的节点</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph, <span class="keyword">int</span> *vis, <span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (vis[u]) <span class="keyword">return</span> vis[u] == <span class="number">2</span>;</span><br><span class="line">    vis[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> v : graph[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (vis[v] == <span class="number">1</span> || !dfs(graph, vis, v)) &#123;</span><br><span class="line">            vis[u] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 已遍历过且为安全的节点, vis=2</span></span><br><span class="line">    vis[u] = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; eventualSafeNodes(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph) &#123;</span><br><span class="line">    <span class="keyword">int</span> *vis = <span class="keyword">new</span> <span class="keyword">int</span>[graph.<span class="built_in">size</span>()];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph.<span class="built_in">size</span>(); i++) vis[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dfs(graph, vis, i)) &#123;</span><br><span class="line">            res.push_back(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -927,7 +940,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -949,7 +962,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

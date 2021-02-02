@@ -91,7 +91,7 @@
 <meta property="og:description" content="题目给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。  上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 感谢 Marcos 贡献此图。 示例: 12输入: [0,1,0,2,1,0,1,3,2,1,2,1]输出: 6 思路根据木桶原理，每根柱子能够承接雨水">
 <meta property="og:image" content="965087276.github.io/2020/04/04/LeetCode-42-%E6%8E%A5%E9%9B%A8%E6%B0%B4/1.png">
 <meta property="article:published_time" content="2020-04-04T09:16:38.000Z">
-<meta property="article:modified_time" content="2020-05-03T06:01:41.681Z">
+<meta property="article:modified_time" content="2021-02-02T01:25:24.494Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
@@ -399,12 +399,9 @@
 <p>柱子 1 所能承接雨水的数量为 3。计算方法是：分别寻找柱子 1 左右两边高度最高的柱子——柱子 4 和 柱子 5；取两个柱子中高度较小者——柱子 4；柱子 4 的高度减去柱子 1 的高度 得到结果为3。</p>
 <p>因此，问题求解的核心在于，对于数组中的每个元素，如何找到其左右两边元素的最大值。</p>
 <h2 id="思路1-动态规划"><a href="#思路1-动态规划" class="headerlink" title="思路1  动态规划"></a>思路1  动态规划</h2><ul>
-<li><p>令 $left_max[i]$ 表示数组 $height$ 中从最左端到下标 i 最高的柱子高度，则 $left_max[i] = max(left_max[i-1], height[i])$</p>
-</li>
-<li><p>令 $right_max[i]$ 表示数组 $height$ 中从下标 i 到最右端最高的柱子高度，则  $right_max[i] = max(right_max[i+1], height[i])$</p>
-</li>
-<li><p>遍历数组 $height$，将 $min(left_max[i], right_max[i]) - height[i]$ 更新到答案中</p>
-</li>
+<li>令 <code>left_max[i]​</code>  表示数组 <code>height</code> 中从最左端到下标 i 最高的柱子高度，则 <code>left_max[i]  = max(left_max[i-1], height[i])​</code></li>
+<li>令 <code>right_max[i]​</code> 表示数组 <code>height</code> 中从下标 i 到最右端最高的柱子高度，则  <code>right_max[i] = max(right_max[i+1], height[i])</code></li>
+<li>遍历数组 $height$，将 <code>min(left_max[i], right_max[i]) - height[i]</code> 更新到答案中</li>
 </ul>
 <p>算法时间复杂度为 $O(n)$，空间复杂度为 $O(n)$</p>
 <p><strong>代码如下</strong></p>
@@ -562,7 +559,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -584,7 +581,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

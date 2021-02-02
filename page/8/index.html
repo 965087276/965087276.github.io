@@ -262,6 +262,218 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/02/13/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/13/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" itemprop="url">23种设计模式-模板方法模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-13T00:10:10+08:00">
+                2020-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><hr>
+<p>在软件构建过程中，对于某一项任务，它常常有稳定的整体操作结构，但各个子步骤却有很多改变的需求，或者由于固有的原因（比如框架与应用之间的关系）而无法和任务的整体结构同时实现。</p>
+<p>如何在确定稳定操作结构的前提下，来灵活应对各个子步骤的变化或者晚期实现需求？</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><hr>
+<p>小明希望学炒菜：手撕包菜 &amp; 蒜蓉炒菜心。炒菜的流程分为5步，对每种菜来说，炒菜的流程都是一样的。</p>
+<ol>
+<li>倒油</li>
+<li>热油</li>
+<li>倒蔬菜</li>
+<li>倒调味料</li>
+<li>翻炒</li>
+</ol>
+<p>其中，<strong>倒油</strong>、<strong>热油</strong>、<strong>翻炒</strong>三步操作对各个菜都是一样的，而<strong>倒蔬菜</strong>、<strong>倒调味料</strong>两步对各种菜之间是有差异的。</p>
+<p>对于这个问题，最直接的想法是分别建立“手撕包菜”、“蒜蓉炒菜心”两个类，在两个类里实现这5个方法，代码如下所示<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VegetableBaocai</span>  </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cookingVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pourOil();</span><br><span class="line">        <span class="keyword">this</span>.heatOil();</span><br><span class="line">        <span class="keyword">this</span>.pourVegetable();</span><br><span class="line">        <span class="keyword">this</span>.pourSauce();</span><br><span class="line">        <span class="keyword">this</span>.fry();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourOil</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        System.out.println(<span class="string">"倒油"</span>); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">heatOil</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        System.out.println(<span class="string">"热油"</span>); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fry</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        System.out.println(<span class="string">"翻炒"</span>); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的蔬菜是包菜"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的酱料是辣椒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VegetableCaixin</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cookingVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pourOil();</span><br><span class="line">        <span class="keyword">this</span>.heatOil();</span><br><span class="line">        <span class="keyword">this</span>.pourVegetable();</span><br><span class="line">        <span class="keyword">this</span>.pourSauce();</span><br><span class="line">        <span class="keyword">this</span>.fry();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourOil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"倒油"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">heatOil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"热油"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fry</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"翻炒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的蔬菜是菜心"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的酱料是蒜蓉"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样做的缺点也很明显：代码中存在大量重复的部分，两个类除了pourVegetable()方法和pourSauce()方法外都相同。</p>
+<p>既然有重复部分，那么我们可以将重复部分抽离出来，放进一个基类(CookingVegetable)中。</p>
+<p>一种直观的想法是，将<strong>倒油</strong>、<strong>热油</strong>、<strong>翻炒</strong>这三个方法放到基类中。代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CookingVegetable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">pourOil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"倒油"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">heatOil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"热油"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">fry</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"翻炒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VegetableBaocai</span> <span class="keyword">extends</span> <span class="title">CookingVegetable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cookingVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.pourOil();</span><br><span class="line">        <span class="keyword">super</span>.heatOil();</span><br><span class="line">        <span class="keyword">this</span>.pourVegetable();</span><br><span class="line">        <span class="keyword">this</span>.pourSauce();</span><br><span class="line">        <span class="keyword">super</span>.fry();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的蔬菜是包菜"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的酱料是辣椒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VegetableCaixin</span> <span class="keyword">extends</span> <span class="title">CookingVegetable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cookingVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.pourOil();</span><br><span class="line">        <span class="keyword">super</span>.heatOil();</span><br><span class="line">        <span class="keyword">this</span>.pourVegetable();</span><br><span class="line">        <span class="keyword">this</span>.pourSauce();</span><br><span class="line">        <span class="keyword">super</span>.fry();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的蔬菜是菜心"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的酱料是蒜蓉"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种实现方式的类图如下所示<br><img src="foolish1.png" alt=""></p>
+<p>这种实现比上一种好了很多，但是还是有重复，重复的地方在于两个子类有完全一样的<em>cookingVegetable()</em>方法，这就会出现两个问题。</p>
+<ol>
+<li>假设现在又增加了两种菜：番茄炒蛋、红烧茄子，那么这两个类也都要包含<em>cookingVegetable()</em>方法。</li>
+<li>假设<em>cookingVegetable()</em>方法有变动，在<em>fry()</em>步骤之后新增一个<em>清洗(clean)</em>步骤，那么每个炒菜类的<em>cookingVegetable()</em>方法都要加上<em>clean()</em>方法。</li>
+</ol>
+<p>既然各子类的<em>cookingVegetable()</em>方法，那么有办法将这个方法也抽象化吗？这就引出了模板方法模式。</p>
+<p>我们将<em>cookingVegetable()</em>方法提取出来放到基类中，由于该方法中，<em>pourOil(), heatOil(), fry()</em>三个子方法对不同子类都是一样的，那么我们直接在基类中实现它们，让子类去调用基类的方法；<em>pourVegetable(), pourSauce()</em>这两个方法是各不相同的，我们可以在基类中声明它们，让各个子类去单独实现，也就是抽象方法。其类图如下<br><img src="class2.png" alt=""></p>
+<p>基类的代码如下所示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">CookingVegetable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 声明成final方法，不允许子类覆盖</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">cookingVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pourOil();</span><br><span class="line">        <span class="keyword">this</span>.heatOil();</span><br><span class="line">        <span class="keyword">this</span>.pourVegetable();</span><br><span class="line">        <span class="keyword">this</span>.pourSauce();</span><br><span class="line">        <span class="keyword">this</span>.fry();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourOil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"倒油"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">heatOil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"热油"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fry</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"翻炒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这些方法由子类单独实现</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>各个子类去实现上面两个抽象方法，代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VegetableBaocai</span> <span class="keyword">extends</span> <span class="title">CookingVegetable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的蔬菜是包菜"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的酱料是辣椒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VegetableCaixin</span> <span class="keyword">extends</span> <span class="title">CookingVegetable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的蔬菜是菜心"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的酱料是蒜蓉"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>下面测试一下，分别建立包菜、菜心两个类进行测试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 手撕包菜</span></span><br><span class="line">        VegetableBaocai baocai = <span class="keyword">new</span> VegetableBaocai();</span><br><span class="line">        <span class="comment">// 蒜蓉菜心</span></span><br><span class="line">        VegetableCaixin caixin = <span class="keyword">new</span> VegetableCaixin();</span><br><span class="line">        baocai.cookingVegetable();</span><br><span class="line">        System.out.println(<span class="string">"================"</span>);</span><br><span class="line">        caixin.cookingVegetable();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">倒油</span><br><span class="line">热油</span><br><span class="line">下锅的蔬菜是包菜</span><br><span class="line">下锅的酱料是辣椒</span><br><span class="line">翻炒</span><br><span class="line">================</span><br><span class="line">倒油</span><br><span class="line">热油</span><br><span class="line">下锅的蔬菜是菜心</span><br><span class="line">下锅的酱料是蒜蓉</span><br><span class="line">翻炒</span><br></pre></td></tr></table></figure>
+<p>以上便是模板方法模式的一个实例</p>
+<h3 id="模式定义"><a href="#模式定义" class="headerlink" title="模式定义"></a>模式定义</h3><p>模板方法模式定义了一个操作中的算法的骨架（稳定），而将一些步骤（会变化的步骤）延迟到子类中。模板方法模式使得子类可以不改变一个算法的骨架即可重定义（override重写）该算法的某些特定步骤。</p>
+<p>在上面的例子中，<strong>cookingVegetable()</strong>方法可以看作一个算法，该算法的骨架包含5个步骤：倒油、热油、倒蔬菜、倒调味料、翻炒。有两个步骤（倒蔬菜、倒调味料）根据子类的不同实现起来也不同，因此这两个方法的实现<strong>延迟</strong>到子类中。<br><img src="class.png" alt=""></p>
+<h3 id="要点总结"><a href="#要点总结" class="headerlink" title="要点总结"></a>要点总结</h3><ol>
+<li>模板方法模式是一种非常基础性的设计模式，在面向对象系统中有着大量的应用，它用最简洁的机制（虚函数的多态性）为很多应用程序框架提供了灵活的扩展点，是代码复用的基本实现结构。</li>
+<li>除了可以灵活应对子步骤的变化外，“不要调用我，让我来调用你”的<strong>反向控制结构</strong>是模板方法模式的典型应用。</li>
+<li>在具体实现方面，被模板方法模式调用的虚方法可以具有实现，也可以没有任何实现（抽象方法），但一般推荐将它们设置为<strong>protected</strong>方法。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/01/17/%E7%94%A8%E4%B8%80%E4%B8%AA%E6%A0%88%E5%AE%9E%E7%8E%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%88%E7%9A%84%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -702,7 +914,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -724,7 +936,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
