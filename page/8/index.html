@@ -262,6 +262,498 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/02/17/spark%E5%AD%A6%E4%B9%A0-RDD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/17/spark%E5%AD%A6%E4%B9%A0-RDD/" itemprop="url">spark学习-RDD</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-17T13:08:09+08:00">
+                2020-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- 
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script> -->
+<h1 id="Spark-RDD"><a href="#Spark-RDD" class="headerlink" title="Spark-RDD"></a>Spark-RDD</h1><p>摘自spark中文文档及官方英文文档</p>
+<blockquote>
+<p><a href="https://spark-reference-doc-cn.readthedocs.io/zh_CN/latest/programming-guide/rdd-guide.html" target="_blank" rel="noopener">https://spark-reference-doc-cn.readthedocs.io/zh_CN/latest/programming-guide/rdd-guide.html</a><br><a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-persistence" target="_blank" rel="noopener">https://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-persistence</a></p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>使用spark时要先创建一个<strong>JavaSparkContext</strong>对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// appName为应用名称，这个名称会显示在cluster UI界面上</span></span><br><span class="line"><span class="comment">// 关于master参数可参考https://spark.apache.org/docs/latest/submitting-applications.html#master-urls</span></span><br><span class="line">SparkConf conf = <span class="keyword">new</span> SparkConf().setAppName(appName).setMaster(master);</span><br><span class="line">JavaSparkContext sc = <span class="keyword">new</span> JavaSparkContext(conf);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="Resilient-Distributed-Datasets-RDDs"><a href="#Resilient-Distributed-Datasets-RDDs" class="headerlink" title="Resilient Distributed Datasets (RDDs)"></a>Resilient Distributed Datasets (RDDs)</h2><p>RDD是一个可容错、可并行操作的分布式元素集合。总体上有两种方法可以创建 RDD 对象：由驱动程序中的集合对象通过并行化操作创建，或者从外部存储系统中数据集加载（如：共享文件系统、HDFS、HBase或者其他Hadoop支持的数据源）。</p>
+<h3 id="并行集合"><a href="#并行集合" class="headerlink" title="并行集合"></a>并行集合</h3><p>并行集合的创建：调用<strong>JavaSparkContext的parallelize</strong>方法来创建，传入一个已有的集合对象作为参数。集合对象中所有的元素都将被复制到一个可并行操作的分布式数据集中<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; data = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>);</span><br><span class="line">JavaRDD&lt;Integer&gt; distData = sc.parallelize(data);</span><br></pre></td></tr></table></figure><br>并行集合一个重要参数是<strong>partitions</strong>分区数，spark的每个任务（task）都是基于partition的，每个分区一个对应的任务（task）。典型场景下，一般每个CPU对应2~4个分区。并且一般而言，Spark会基于集群的情况，自动设置这个分区数。当然，你还是可以手动控制这个分区数，只需给parallelize方法再传一个参数即可（如：sc.parallelize(data, 10) ）</p>
+<h3 id="外部数据集"><a href="#外部数据集" class="headerlink" title="外部数据集"></a>外部数据集</h3><p>例如读取文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; distFile = sc.textFile(<span class="string">"data.txt"</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="RDD-Operation"><a href="#RDD-Operation" class="headerlink" title="RDD Operation"></a>RDD Operation</h3><p>RDD支持两种类型的算子</p>
+<ol>
+<li><strong>transformations</strong>: 将一个已有的RDD转换成一个新的RDD,例如<strong>map</strong>操作</li>
+<li><strong>action</strong>: 基于RDD的计算，并将结果返回给驱动器(driver), 例如<strong>reduce</strong>操作 </li>
+</ol>
+<p>所有的<strong>transformations</strong>算子都是懒惰(lazy)运算。只有当action算子需要结果时才计算。</p>
+<blockquote>
+<p>All transformations in Spark are lazy, in that they do not compute their results right away. Instead, they just remember the transformations applied to some base dataset (e.g. a file). The transformations are only computed when an action requires a result to be returned to the driver program. This design enables Spark to run more efficiently. For example, we can realize that a dataset created through map will be used in a reduce and return only the result of the reduce to the driver, rather than the larger mapped dataset.</p>
+</blockquote>
+<p>默认情况下，在执行<strong>action</strong>算子时，每个<strong>transformed RDD</strong>都会被重新计算，这可能比较耗费时间。因此，可以将这些RDD持久化(persist)到内存中来节省下一次的时间。</p>
+<h3 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h3><p>考虑下面的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"data.txt"</span>);</span><br><span class="line">JavaRDD&lt;Integer&gt; lineLengths = lines.map(s -&gt; s.length());</span><br><span class="line"><span class="keyword">int</span> totalLength = lineLengths.reduce((a, b) -&gt; a + b);</span><br></pre></td></tr></table></figure><br>其中，第一行是从外部文件加载数据，并创建一个基础RDD。这时候，数据集并没有加载进内存除非有其他操作施加于lines，这时候的lines RDD其实可以说只是一个指向 data.txt 文件的指针。第二行，用lines通过map转换得到一个lineLengths RDD，同样，lineLengths也是懒惰计算的。最后，我们使用 reduce算子计算长度之和，reduce是一个action算子。此时，Spark将会把计算分割为一些小的任务，分别在不同的机器上运行，每台机器上都运行相关的一部分map任务，并在本地进行reduce，并将这些reduce结果都返回给驱动器。</p>
+<p>如果后续我们想复用lineLengths, 可以在第三行前加一句<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lineLengths.persist(StorageLevel.MEMORY_ONLY());</span><br></pre></td></tr></table></figure><br>这样的话lineLengths在第一次计算完成后，spark会将它保存在内存中。</p>
+<h3 id="Passing-Functions-to-Spark"><a href="#Passing-Functions-to-Spark" class="headerlink" title="Passing Functions to Spark"></a>Passing Functions to Spark</h3><p>一些较复杂的操作，可以定义成函数（Function）传递给spark。这里需要实现spark的Function接口。<br><a href="https://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/api/java/function/package-summary.html" target="_blank" rel="noopener">https://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/api/java/function/package-summary.html</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"data.txt"</span>);</span><br><span class="line">JavaRDD&lt;Integer&gt; lineLengths = lines.map(<span class="keyword">new</span> Function&lt;String, Integer&gt;() &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(String s)</span> </span>&#123; <span class="keyword">return</span> s.length(); &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">int</span> totalLength = lineLengths.reduce(<span class="keyword">new</span> Function2&lt;Integer, Integer, Integer&gt;() &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer a, Integer b)</span> </span>&#123; <span class="keyword">return</span> a + b; &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>也可以写在外边<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GetLength</span> <span class="keyword">implements</span> <span class="title">Function</span>&lt;<span class="title">String</span>, <span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(String s)</span> </span>&#123; <span class="keyword">return</span> s.length(); &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sum</span> <span class="keyword">implements</span> <span class="title">Function2</span>&lt;<span class="title">Integer</span>, <span class="title">Integer</span>, <span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer a, Integer b)</span> </span>&#123; <span class="keyword">return</span> a + b; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"data.txt"</span>);</span><br><span class="line">JavaRDD&lt;Integer&gt; lineLengths = lines.map(<span class="keyword">new</span> GetLength());</span><br><span class="line"><span class="keyword">int</span> totalLength = lineLengths.reduce(<span class="keyword">new</span> Sum());</span><br></pre></td></tr></table></figure></p>
+<h3 id="Understanding-closures-闭包"><a href="#Understanding-closures-闭包" class="headerlink" title="Understanding closures(闭包)"></a>Understanding closures(闭包)</h3><p>Spark里一个比较难的事情就是，理解在整个集群上跨节点执行的变量和方法的作用域以及生命周期。Spark里一个频繁出现的问题就是RDD算子在变量作用域之外修改了其值。下面的例子，我们将会以foreach() 算子为例，来递增一个计数器counter，不过类似的问题在其他算子上也会出现。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">JavaRDD&lt;Integer&gt; rdd = sc.parallelize(data);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Wrong: Don't do this!!</span></span><br><span class="line">rdd.foreach(x -&gt; counter += x);</span><br><span class="line"></span><br><span class="line">println(<span class="string">"Counter value: "</span> + counter);</span><br></pre></td></tr></table></figure>
+<p>在集群模式下，为了执行这个作业，Spark会将 RDD 算子的计算过程分割成多个独立的<strong>task</strong>, 每个task分发给一个<strong>executor</strong>去执行。而执行之前，Spark需要计算<strong>闭包</strong>。闭包是由执行器执行RDD算子（本例中的foreach()）时所需要的变量和方法组成的。闭包将会被<strong>序列化</strong>，并发送给每个executor。</p>
+<p>在上面的例子中，闭包中的变量会跟随不同的闭包副本，发送到不同的executor上，所以等到foreach真正在executor上运行时，其引用的counter已经不再是驱动器上所定义的那个counter副本了，驱动器内存中仍然会有一个counter变量副本，但是这个副本对executor是不可见的！executor只能看到其所收到的序列化闭包中包含的counter副本。因此，最终驱动器上得到的counter将会是0。</p>
+<p>为了确保类似这样的场景下，代码能有确定的行为，这里应该使用<strong>累加器（Accumulator）</strong>。累加器是Spark中专门用于集群跨节点分布式执行计算中，安全地更新同一变量的机制。</p>
+<h4 id="打印RDD中的元素"><a href="#打印RDD中的元素" class="headerlink" title="打印RDD中的元素"></a>打印RDD中的元素</h4><p>另一种常见习惯是，试图用 rdd.foreach(println) 或者 rdd.map(println) 来打印RDD中所有的元素。如果是在单机上，这种写法能够如预期一样，打印出RDD所有元素。然后，在集群模式下，这些输出将会被打印到执行器的标准输出（stdout）上，因此驱动器的标准输出（stdout）上神马也看不到！如果真要在驱动器上把所有RDD元素都打印出来，你可以先调用collect算子，把RDD元素先拉到驱动器上来，代码可能是这样：rdd.collect().foreach(println)。不过如果RDD很大的话，有可能导致驱动器内存溢出，因为collect会把整个RDD都弄到驱动器所在单机上来；如果你只是需要打印一部分元素，那么take是更安全的选择：rdd.take(100).foreach(println)</p>
+<h3 id="使用键值对"><a href="#使用键值对" class="headerlink" title="使用键值对"></a>使用键值对</h3><p>通过<strong>scala.Tuple2</strong>类来使用键值对。下面的代码统计了data.txt中每行文本出现的次数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"data.txt"</span>);</span><br><span class="line">JavaPairRDD&lt;String, Integer&gt; pairs = lines.mapToPair(s -&gt; <span class="keyword">new</span> Tuple2(s, <span class="number">1</span>));</span><br><span class="line">JavaPairRDD&lt;String, Integer&gt; counts = pairs.reduceByKey((a, b) -&gt; a + b);</span><br></pre></td></tr></table></figure></p>
+<h3 id="Transformation算子"><a href="#Transformation算子" class="headerlink" title="Transformation算子"></a>Transformation算子</h3><p>spark所支持的的转换算子列表参见<br><a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#transformations" target="_blank" rel="noopener">https://spark.apache.org/docs/latest/rdd-programming-guide.html#transformations</a></p>
+<h3 id="action算子"><a href="#action算子" class="headerlink" title="action算子"></a>action算子</h3><p>spark所支持的action算子参见<br><a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#actions" target="_blank" rel="noopener">https://spark.apache.org/docs/latest/rdd-programming-guide.html#actions</a></p>
+<h3 id="混洗（Shuffle）算子"><a href="#混洗（Shuffle）算子" class="headerlink" title="混洗（Shuffle）算子"></a>混洗（Shuffle）算子</h3><p>有一些Spark算子会触发众所周知的混洗（Shuffle）事件。Spark中的混洗机制是用于将数据重新分布，其结果是所有数据将在各个分区间重新分组。一般情况下，混洗需要跨执行器（Executor）或跨机器复制数据，这也是混洗操作一般都比较复杂而且开销大的原因。</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>以 reduceByKey 算子为例来看一下。reduceByKey算子会生成一个新的RDD，将源RDD中一个key对应的多个value组合进一个tuple - 然后将这些values输入给reduce函数，得到的result再和key关联放入新的RDD中。这个算子的难点在于对于某一个key来说，并非其对应的所有values都在同一个分区（partition）中，甚至有可能都不在同一台机器上，但是这些values又必须放到一起计算reduce结果。</p>
+<p>在Spark中，通常是由于为了进行某种计算操作，而将数据分布到所需要的各个分区当中。而在计算阶段，单个任务（task）只会操作单个分区中的数据 – 因此，为了组织好每个 reduceByKey 中 reduce 任务执行时所需的数据，Spark需要执行一个多对多操作。即，Spark需要读取RDD的所有分区，并找到所有key对应的所有values，然后跨分区传输这些values，并将每个key对应的所有values放到同一分区，以便后续计算各个key对应values的reduce结果 – 这个过程就叫做混洗（Shuffle）。</p>
+<p>虽然混洗好后，各个分区中的元素和分区自身的顺序都是确定的，但是分区中元素的顺序并非确定的。如果需要混洗后分区内的元素有序，可以参考使用以下混洗操作：</p>
+<ol>
+<li>mapPartitions 使用 .sorted 对每个分区排序</li>
+<li>repartitionAndSortWithinPartitions 重分区的同时，对分区进行排序，比自行组合repartition和sort更高效</li>
+<li>sortBy 创建一个全局有序的RDD</li>
+</ol>
+<h4 id="性能影响"><a href="#性能影响" class="headerlink" title="性能影响"></a>性能影响</h4><p>混洗（Shuffle）之所以开销大，是因为混洗操作需要引入磁盘I/O，数据序列化以及网络I/O等操作。为了组织好混洗数据，Spark需要生成对应的任务集 – 一系列map任务用于组织数据，再用一系列reduce任务来聚合数据。注意这里的map、reduce是来自MapReduce的术语，和Spark的map、reduce算子并没有直接关系。</p>
+<p>在Spark内部，单个map任务的输出会尽量保存在内存中，直至放不下为止。然后，这些输出会基于目标分区重新排序，并写到一个文件里。在reduce端，reduce任务只读取与之相关的并已经排序好的blocks。</p>
+<p>某些混洗算子会导致非常明显的内存开销增长，因为这些算子需要在数据传输前后，在内存中维护组织数据记录的各种数据结构。特别地，reduceByKey和aggregateByKey都会在map端创建这些数据结构，而ByKey系列算子都会在reduce端创建这些数据结构。如果数据在内存中存不下，Spark会把数据吐到磁盘上，当然这回导致额外的磁盘I/O以及垃圾回收的开销。</p>
+<p>混洗还会再磁盘上生成很多临时文件。以Spark-1.3来说，这些临时文件会一直保留到其对应的RDD被垃圾回收才删除。之所以这样做，是因为如果这些信息需要重新计算的时候，这些混洗文件可以不必重新生成。如果程序持续引用这些RDD或者垃圾回收启动频率较低，那么这些垃圾回收可能需要等较长的一段时间。这就意味着，长时间运行的Spark作业可能会消耗大量的磁盘。Spark的临时存储目录，是由spark.local.dir 配置参数指定的。</p>
+<p>spark混洗操作的相关配置可以参考</p>
+<blockquote>
+<p><a href="https://spark.apache.org/docs/latest/configuration.html#shuffle-behavior" target="_blank" rel="noopener">https://spark.apache.org/docs/latest/configuration.html#shuffle-behavior</a></p>
+</blockquote>
+<h3 id="RDD持久化"><a href="#RDD持久化" class="headerlink" title="RDD持久化"></a>RDD持久化</h3><p>spark的一项关键能力就是它可以持久化（或者缓存）数据集在内存中，从而跨操作复用这些数据集。如果你持久化了一个RDD，那么每个节点上都会存储该RDD的一些分区，这些分区是由对应的节点计算出来并保持在内存中，后续可以在其他施加在该RDD上的action算子中复用（或者从这些数据集派生新的RDD）。这使得后续动作的速度提高很多（通常高于10倍）。</p>
+<h4 id="持久化数据"><a href="#持久化数据" class="headerlink" title="持久化数据"></a>持久化数据</h4><p>你可以用persist() 或者 cache() 来标记一下需要持久化的RDD。等到该RDD首次被施加action算子的时候，其对应的数据分区就会被保留在内存里。同时，Spark的缓存具备一定的容错性 – 如果RDD的任何一个分区丢失了，Spark将自动根据其原来的混洗信息重新计算这个分区。</p>
+<p>另外，每个持久化的RDD可以使用不同的存储级别，比如，你可以把RDD保存在磁盘上，或者以java序列化对象保存到内存里（为了省空间），或者跨节点多副本，或者使用 Tachyon 存到虚拟机以外的内存里。这些存储级别都可以由persist()的参数StorageLevel对象来控制。cache() 方法本身就是一个使用默认存储级别做持久化的快捷方式，默认存储级别是 StorageLevel.MEMORY_ONLY（以Java序列化方式存到内存里）。</p>
+<p>完整的存储级别列表参见</p>
+<blockquote>
+<p><a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-persistence" target="_blank" rel="noopener">https://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-persistence</a></p>
+</blockquote>
+<h4 id="删除持久化的数据"><a href="#删除持久化的数据" class="headerlink" title="删除持久化的数据"></a>删除持久化的数据</h4><p>Spark会自动监控各个节点上的缓存使用率，并通过LRU（最近最少使用）算法将老数据逐出内存。也可以通过RDD.unpersist()方法来手动删除删除无用的缓存</p>
+<h2 id="共享变量"><a href="#共享变量" class="headerlink" title="共享变量"></a>共享变量</h2><p>一般而言，当我们给Spark算子（如 map 或 reduce）传递一个函数时，这些函数将会在远程的集群节点上运行，并且这些函数所引用的变量都是各个节点上的独立副本。这些变量都会以副本的形式复制到各个机器节点上，如果更新这些变量副本的话，这些更新并不会传回到驱动器（driver）程序。通常来说，支持跨任务的可读写共享变量是比较低效的。不过，Spark还是提供了两种比较通用的共享变量：广播变量（Broadcast Variables）和累加器（Accumulators）。</p>
+<h3 id="广播变量"><a href="#广播变量" class="headerlink" title="广播变量"></a>广播变量</h3><p>广播变量提供了一种只读的共享变量，它是在每个机器节点上保存一个缓存，而不是每个任务保存一份副本。通常可以用来在每个节点上保存一个较大的输入数据集，这要比常规的变量副本更高效（一般的变量是每个任务一个副本，一个节点上可能有多个任务）。Spark还会尝试使用高效的广播算法来分发广播变量，以减少通信开销。</p>
+<p>Spark的操作有时会有多个阶段（stage），不同阶段之间的分割线就是混洗（shuffle）操作。Spark会自动广播各个阶段用到的公共数据。这些方式广播的数据都是序列化过的，并且在运行各个任务前需要反序列化。这也意味着，显示地创建广播变量，只有在跨多个阶段（stage）的任务需要同样的数据 或者 缓存数据的序列化和反序列化格式很重要的情况下 才是必须的。</p>
+<p>广播变量可以通过一个变量v来创建，只需调用 SparkContext.broadcast(v)即可。这个广播变量是对变量v的一个包装，要访问其值，可以调用广播变量的 value 方法。代码示例如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Broadcast&lt;<span class="keyword">int</span>[]&gt; broadcastVar = sc.broadcast(<span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;);</span><br><span class="line"></span><br><span class="line">broadcastVar.value();</span><br><span class="line"><span class="comment">// returns [1, 2, 3]</span></span><br></pre></td></tr></table></figure><br>广播变量创建之后，集群中任何函数都不应该再使用原始变量v，这样才能保证v不会被多次复制到同一个节点上。另外，对象v在广播后不应该再被更新，这样才能保证所有节点上拿到同样的值（例如，更新后，广播变量又被同步到另一新节点，新节点有可能得到的值和其他节点不一样）。</p>
+<h3 id="累加器"><a href="#累加器" class="headerlink" title="累加器"></a>累加器</h3><p>累加器是一种只支持满足结合律的“累加”操作的变量，因此它可以很高效地支持并行计算。利用累加器可以实现计数（类似MapReduce中的计数器）或者求和。Spark原生支持了数字类型的累加器，开发者也可以自定义新的累加器。如果创建累加器的时候给了一个名字，那么这个名字会展示在Spark UI上，这对于了解程序运行处于哪个阶段非常有帮助（注意：Python尚不支持该功能）。</p>
+<p>创捷累加器时需要赋一个初始值v，调用 SparkContext.accumulator(v) 可以创建一个累加器。后续集群中运行的任务可以使用 add 方法 或者 += 操作符 （仅Scala和Python支持）来进行累加操作。不过，任务本身并不能读取累加器的值，只有驱动器程序可以用 value 方法访问累加器的值。代码示例如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LongAccumulator accum = jsc.sc().longAccumulator();</span><br><span class="line"></span><br><span class="line">sc.parallelize(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)).foreach(x -&gt; accum.add(x));</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="comment">// 10/09/29 18:41:08 INFO SparkContext: Tasks finished in 0.317106 s</span></span><br><span class="line"></span><br><span class="line">accum.value();</span><br><span class="line"><span class="comment">// returns 10</span></span><br></pre></td></tr></table></figure></p>
+<p>也可以通过实现AccumulatorV2来自定义自己的累加器<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VectorAccumulatorV2</span> <span class="keyword">implements</span> <span class="title">AccumulatorV2</span>&lt;<span class="title">MyVector</span>, <span class="title">MyVector</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> MyVector myVector = MyVector.createZeroVector();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    myVector.reset();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(MyVector v)</span> </span>&#123;</span><br><span class="line">    myVector.add(v);</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Then, create an Accumulator of this type:</span></span><br><span class="line">VectorAccumulatorV2 myVectorAcc = <span class="keyword">new</span> VectorAccumulatorV2();</span><br><span class="line"><span class="comment">// Then, register it into spark context:</span></span><br><span class="line">jsc.sc().register(myVectorAcc, <span class="string">"MyVectorAcc1"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>若某个task任务失败，在进行累加时，spark会忽视这个任务。因此，累加时若出现失败任务可能会导致运算不正确</p>
+<blockquote>
+<p> When a Spark task finishes, Spark will try to merge the accumulated updates in this task to an accumulator. If it fails, Spark will ignore the failure and still mark the task successful and continue to run other tasks. Hence, a buggy accumulator will not impact a Spark job, but it may not get updated correctly although a Spark job is successful.</p>
+</blockquote>
+<p>对于在action算子中更新的累加器，Spark保证每个任务对累加器的更新只会被应用一次，例如，某些任务如果重启过，则不会再次更新累加器。而如果在transformation算子中更新累加器，那么用户需要注意，一旦某个任务因为失败被重新执行，那么其对累加器的更新可能会实施多次。</p>
+<p>累加器并不会改变Spark懒惰求值的运算模型。如果在RDD算子中更新累加器，那么其值只会在RDD做action算子计算的时候被更新一次。因此，在transformation算子（如：map）中更新累加器，其值并不能保证一定被更新。以下代码片段说明了这一特性：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LongAccumulator accum = jsc.sc().longAccumulator();</span><br><span class="line">data.map(x -&gt; &#123; accum.add(x); <span class="keyword">return</span> f(x); &#125;);</span><br><span class="line"><span class="comment">// Here, accum is still 0 because no actions have caused the `map` to be computed.</span></span><br></pre></td></tr></table></figure></p>
+<!-- <style type="text/css">
+    h1 { counter-reset: h2counter; }
+    h2 { counter-reset: h3counter; }
+    h3 { counter-reset: h4counter; }
+    h4 { counter-reset: h5counter; }
+    h5 { counter-reset: h6counter; }
+    h6 { }
+    h2:before {
+      counter-increment: h2counter;
+      content: counter(h2counter) ".\0000a0\0000a0";
+    }
+    h3:before {
+      counter-increment: h3counter;
+      content: counter(h2counter) "."
+                counter(h3counter) ".\0000a0\0000a0";
+    }
+    h4:before {
+      counter-increment: h4counter;
+      content: counter(h2counter) "."
+                counter(h3counter) "."
+                counter(h4counter) ".\0000a0\0000a0";
+    }
+    h5:before {
+      counter-increment: h5counter;
+      content: counter(h2counter) "."
+                counter(h3counter) "."
+                counter(h4counter) "."
+                counter(h5counter) ".\0000a0\0000a0";
+    }
+    h6:before {
+      counter-increment: h6counter;
+      content: counter(h2counter) "."
+                counter(h3counter) "."
+                counter(h4counter) "."
+                counter(h5counter) "."
+                counter(h6counter) ".\0000a0\0000a0";
+    }
+</style> -->
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/16/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" itemprop="url">23种设计模式-装饰模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-16T11:55:12+08:00">
+                2020-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><p>在某些情况下我们可能会“过度地使用继承来扩展对象的功能”，由于继承为类型引入的静态特质，使得这种扩展方式缺乏灵活性；并且随着子类的增多（扩展功能的增多），各种子类的组合（扩展功能的组合）会导致更多子类的膨胀。</p>
+<p>如何使“对象功能的扩展”能够根据需要来动态地实现？同时避免“扩展功能的增多”带来的子类膨胀问题？从而使得任何“功能扩展变化”所导致的影响将为最低？</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>这里我们引用《HeadFirst设计模式》中的例子。</p>
+<p>星巴兹是一家咖啡连锁店，由于扩张速度太快，他们准备更新他们的订单系统以合乎饮料的供应要求。他们原先的类设计如下。<br><img src="1.png" alt=""><br>系统中包含一个Beverage(饮料)抽象类，所有的饮料都必须继承这个抽象类;Beverage类中包含一个描述饮料信息的description实例变量以及计算饮料价格的cost()抽象方法。每种饮料子类，如HouseBlend(混合咖啡)、DarkToast(深焙咖啡)都必须实现cost()方法来计算自己的价格。</p>
+<p>购买咖啡时，还可以向其中加入各种调料，如豆浆(Soy)、摩卡(Mocha)等，咖啡店会根据加入的调料收取不同的费用。在初始设计中，他们枚举了顾客所有可能的购买组合（如混合豆浆咖啡、混合摩卡咖啡、深焙豆浆咖啡、深焙摩卡咖啡），每种组合都建立了一个类。<br><img src="2.png" alt=""></p>
+<p>这种实现方式有明显的弊端。例如，假设某种调料的价格改变，那么所有包含该调料的类都要修改cost()方法；如果新增加了一种咖啡或调料，那么又需要增加很多的类。假如有$n$种咖啡、$m$种调料，仅调料的组合就有$2^m$种，再乘以咖啡的数量，可以算出类的总数目为$1 + n*2^m$种（+1是因为还有个Beverage抽象类），数量相当之大了，这对后期的维护来说简直是噩梦。</p>
+<h4 id="改进1"><a href="#改进1" class="headerlink" title="改进1"></a>改进1</h4><p>上面的实现最大的问题是类是呈指数级增长的，那么我们可以先从减少类的数量为切入点进行改进。</p>
+<p>首先对Beverage基类进行修改，对每种调料都设置一个boolean类型的变量，表示饮料中是否加入该调料，将这些变量都放到Beverage基类中，通过set方法设置变量的值。<br><img src="3.png" alt=""><br><img src="4.png" alt=""><br>Beverage根据各boolean变量的值，计算所有调料的价钱<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (hasMilk()) sum += <span class="number">1.0</span>;</span><br><span class="line">        <span class="keyword">if</span> (hasSoy()) sum += <span class="number">1.5</span>;</span><br><span class="line">        <span class="keyword">if</span> (hasMocha())  sum += <span class="number">0.6</span>;</span><br><span class="line">        <span class="keyword">if</span> (hasWhip())  sum += <span class="number">0.8</span>;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>子类（每种咖啡类）调用自己的cost()方法计算自己咖啡的价钱，同时调用超类的cost()方法加入调料的价钱<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DarkRoast</span> <span class="keyword">extends</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DarkRoast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        description = <span class="string">"Most Excellent Dark Roast"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span> + <span class="keyword">super</span>.cost();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>现在假设要购买一杯加豆浆（Joy）和摩卡（Mocha）的深焙咖啡，只需要在原有DarkRoast的基础上，设置相应的调料变量即可，而不需要专门创建一个新的类。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DarkRoast darkRoast = <span class="keyword">new</span> DarkRoast();</span><br><span class="line">darkRoast.setJoy(<span class="keyword">true</span>);</span><br><span class="line">darkRoast.setMocha(<span class="keyword">true</span>);</span><br><span class="line">System.out.println(<span class="string">"咖啡的价格为 “ + darkRoast.cost());</span></span><br></pre></td></tr></table></figure><br>这种实现方式相比第一种，类的数目大大减小，只需要$1+m$个类（$m$为咖啡的数量）。但是，这种实现方式还是有欠缺的。</p>
+<ol>
+<li>若调料价钱改变，则需要修改Beverage类的cost()方法</li>
+<li>若出现新的调料，则要在Beverage类中添加新的boolean变量，并修改cost()方法</li>
+<li>对某些饮料而言，一些调料并不适合，如在茶水(Tea类)中加奶泡(whip)。但是，Tea类仍然会继承这些不合适的方法(hasWhip())</li>
+<li>若顾客想要双倍摩卡咖啡，这种实现方式就不适用了</li>
+</ol>
+<h4 id="改进2-装饰者模式"><a href="#改进2-装饰者模式" class="headerlink" title="改进2 装饰者模式"></a>改进2 装饰者模式</h4><p>装饰者模式是以饮料为主体，在运行时以饮料来“装饰对象”。比如说，顾客要买一杯加摩卡和奶泡的深焙咖啡，那么要做的是</p>
+<ol>
+<li>构造一个深焙咖啡（DarkRoast）对象</li>
+<li>用摩卡（Mocha）对象装饰它</li>
+<li>用奶泡（Whip）对象装饰它</li>
+<li>调用cost()方法</li>
+</ol>
+<p>可以参考下面的图片解释<br><img src="5-1.png" alt=""><br><img src="5-2.png" alt=""><br><img src="5-3.png" alt=""></p>
+<p>接下来用代码来实现一下。<br>首先还是一个Beverage（饮料）的抽象类，里面包含一个抽象的cost()方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> description;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来，建立各种饮料类。每种饮料类都要实现自己的cost()方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 深焙咖啡</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DarkRoast</span> <span class="keyword">extends</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DarkRoast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        description = <span class="string">"DarkRoast"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.99</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 混合咖啡</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HouseBlend</span> <span class="keyword">extends</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HouseBlend</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        description = <span class="string">"HouseBlend"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.89</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来建立调料类。因为调料类是用来装饰饮料类的，所以调料类中包含了一个饮料类的实例对象,如摩卡类的代码如下。计算价格时，只需将摩卡的价格(0.2)与被包装的饮料的价格相加即可。因为多态的缘故，被包装的是谁，并不需要关心，这就大大增加了代码的灵活性。饮料的description字段的设置同理，为被包装的饮料的description与调料的description相加。</p>
+<p>同时，作为装饰者，调料类中的方法还要与饮料类中的方法保持一致。为了满足这个约束，各调料类还要继承饮料类以确保包含饮料类的所有方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 摩卡</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mocha</span> <span class="keyword">extends</span> <span class="title">Beverage</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Beverage beverage;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Mocha</span><span class="params">(Beverage beverage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.beverage = beverage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.cost() + <span class="number">0.1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.getDescription() + <span class="string">", Mocha"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意，摩卡类中既继承了Beverage类，还拥有一个Beverage实例，这两个所起的作用是不一样的。</p>
+<ol>
+<li>拥有Beverage实例是因为调料类需要装饰饮料类，这里的Beverage实例是被Mocha类装饰的对象</li>
+<li>继承是因为饮料类中的方法要与调料类中的方法保持一致，即装饰者类的方法要与被装饰者类的方法保持一致，这里的继承是个约束作用，确保装饰者拥有了被装饰者的所有方法。</li>
+</ol>
+<p>同理，建立其它两种饮料的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 豆浆</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Soy</span> <span class="keyword">extends</span> <span class="title">Beverage</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Beverage beverage;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Soy</span><span class="params">(Beverage beverage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.beverage = beverage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.cost() + <span class="number">0.2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.getDescription() + <span class="string">", Soy"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 奶泡</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Whip</span> <span class="keyword">extends</span> <span class="title">Beverage</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Beverage beverage;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Whip</span><span class="params">(Beverage beverage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.beverage = beverage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.cost() + <span class="number">0.3</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.getDescription() + <span class="string">", Whip"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>再看这三个饮料类，它们有共同的实例参数(beverage)。因此，可以将抽离出来单独放到一个基类中，这个基类在装饰者模式中被称为组件(Component)类，即用来装饰别的类。同时，getDescription()方法在各种调料中都有不同的实现，在原先的Beverage类中，它不是一个抽象方法。在这里，也将它放到基类中，同时声明为一个抽象方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">CondimentDecorator</span> <span class="keyword">extends</span> <span class="title">Beverage</span></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> Beverage beverage;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title">getDescription</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>修改后的饮料类代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mocha</span> <span class="keyword">extends</span> <span class="title">CondimentDecorator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Mocha</span><span class="params">(Beverage beverage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.beverage = beverage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.cost() + <span class="number">0.1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.getDescription() + <span class="string">", Mocha"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Soy</span> <span class="keyword">extends</span> <span class="title">CondimentDecorator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Soy</span><span class="params">(Beverage beverage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.beverage = beverage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.cost() + <span class="number">0.2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.getDescription() + <span class="string">", Soy"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Whip</span> <span class="keyword">extends</span> <span class="title">CondimentDecorator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Whip</span><span class="params">(Beverage beverage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.beverage = beverage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.cost() + <span class="number">0.3</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beverage.getDescription() + <span class="string">", Whip"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试一下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先建立一个深焙咖啡 $0.99</span></span><br><span class="line">Beverage beverage = <span class="keyword">new</span> DarkRoast();</span><br><span class="line"><span class="comment">// 不加任何调料装饰，直接输出</span></span><br><span class="line"><span class="comment">// 输出结果：DarkRoast $0.99</span></span><br><span class="line">System.out.println(beverage.getDescription() + <span class="string">" $"</span> + beverage.cost());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 再建立一个深焙咖啡（被装饰者） $0.99</span></span><br><span class="line">Beverage beverage2 = <span class="keyword">new</span> DarkRoast();</span><br><span class="line"><span class="comment">// 加一点摩卡（装饰者） $0.1</span></span><br><span class="line">beverage2 = <span class="keyword">new</span> Mocha(beverage2);</span><br><span class="line"><span class="comment">// 再加一份摩卡（双倍的摩卡）（装饰者）$0.1</span></span><br><span class="line">beverage2 = <span class="keyword">new</span> Mocha(beverage2);</span><br><span class="line"><span class="comment">// 加点奶泡（装饰者）$0.3</span></span><br><span class="line">beverage2 = <span class="keyword">new</span> Whip(beverage2);</span><br><span class="line"><span class="comment">//输出结果：DarkRoast, Mocha, Mocha, Whip $1.49</span></span><br><span class="line">System.out.println(beverage2.getDescription() + <span class="string">" $"</span> + beverage2.cost());</span><br></pre></td></tr></table></figure></p>
+<p>本例的类图如下<br><img src="6.png" alt=""></p>
+<h3 id="装饰者模式定义"><a href="#装饰者模式定义" class="headerlink" title="装饰者模式定义"></a>装饰者模式定义</h3><p>装饰者模式动态地将责任附加到对象上。若要扩展功能，装饰者提供了比继承更有弹性的替代方案。<br><img src="7.png" alt=""></p>
+<h3 id="要点总结"><a href="#要点总结" class="headerlink" title="要点总结"></a>要点总结</h3><ol>
+<li>通过采用组合而非继承的手法， Decorator模式实现了在运行时动态扩展对象功能的能力，而且可以根据需要扩展多个功能。避免了使用继承带来的“灵活性差”和“多子类衍生问题”。</li>
+<li>Decorator类在接口上表现为is-a Component的继承关系，即Decorator类继承了Component类所具有的接口。但在实现上又表现为has-a Component的组合关系，即Decorator类又使用了另外一个Component类。</li>
+<li>Decorator模式的目的并非解决“多子类衍生的多继承”问题，Decorator模式应用的要点在于解决“主体类在多个方向上的扩展功能”——是为“装饰”的含义。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/02/14/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -430,409 +922,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/02/13/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/13/23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" itemprop="url">23种设计模式-模板方法模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-13T00:10:10+08:00">
-                2020-02-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.6k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><hr>
-<p>在软件构建过程中，对于某一项任务，它常常有稳定的整体操作结构，但各个子步骤却有很多改变的需求，或者由于固有的原因（比如框架与应用之间的关系）而无法和任务的整体结构同时实现。</p>
-<p>如何在确定稳定操作结构的前提下，来灵活应对各个子步骤的变化或者晚期实现需求？</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><hr>
-<p>小明希望学炒菜：手撕包菜 &amp; 蒜蓉炒菜心。炒菜的流程分为5步，对每种菜来说，炒菜的流程都是一样的。</p>
-<ol>
-<li>倒油</li>
-<li>热油</li>
-<li>倒蔬菜</li>
-<li>倒调味料</li>
-<li>翻炒</li>
-</ol>
-<p>其中，<strong>倒油</strong>、<strong>热油</strong>、<strong>翻炒</strong>三步操作对各个菜都是一样的，而<strong>倒蔬菜</strong>、<strong>倒调味料</strong>两步对各种菜之间是有差异的。</p>
-<p>对于这个问题，最直接的想法是分别建立“手撕包菜”、“蒜蓉炒菜心”两个类，在两个类里实现这5个方法，代码如下所示<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VegetableBaocai</span>  </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cookingVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pourOil();</span><br><span class="line">        <span class="keyword">this</span>.heatOil();</span><br><span class="line">        <span class="keyword">this</span>.pourVegetable();</span><br><span class="line">        <span class="keyword">this</span>.pourSauce();</span><br><span class="line">        <span class="keyword">this</span>.fry();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourOil</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        System.out.println(<span class="string">"倒油"</span>); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">heatOil</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        System.out.println(<span class="string">"热油"</span>); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fry</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        System.out.println(<span class="string">"翻炒"</span>); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的蔬菜是包菜"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的酱料是辣椒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VegetableCaixin</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cookingVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pourOil();</span><br><span class="line">        <span class="keyword">this</span>.heatOil();</span><br><span class="line">        <span class="keyword">this</span>.pourVegetable();</span><br><span class="line">        <span class="keyword">this</span>.pourSauce();</span><br><span class="line">        <span class="keyword">this</span>.fry();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourOil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"倒油"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">heatOil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"热油"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fry</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"翻炒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的蔬菜是菜心"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的酱料是蒜蓉"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这样做的缺点也很明显：代码中存在大量重复的部分，两个类除了pourVegetable()方法和pourSauce()方法外都相同。</p>
-<p>既然有重复部分，那么我们可以将重复部分抽离出来，放进一个基类(CookingVegetable)中。</p>
-<p>一种直观的想法是，将<strong>倒油</strong>、<strong>热油</strong>、<strong>翻炒</strong>这三个方法放到基类中。代码如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CookingVegetable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">pourOil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"倒油"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">heatOil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"热油"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">fry</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"翻炒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VegetableBaocai</span> <span class="keyword">extends</span> <span class="title">CookingVegetable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cookingVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.pourOil();</span><br><span class="line">        <span class="keyword">super</span>.heatOil();</span><br><span class="line">        <span class="keyword">this</span>.pourVegetable();</span><br><span class="line">        <span class="keyword">this</span>.pourSauce();</span><br><span class="line">        <span class="keyword">super</span>.fry();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的蔬菜是包菜"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的酱料是辣椒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VegetableCaixin</span> <span class="keyword">extends</span> <span class="title">CookingVegetable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cookingVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.pourOil();</span><br><span class="line">        <span class="keyword">super</span>.heatOil();</span><br><span class="line">        <span class="keyword">this</span>.pourVegetable();</span><br><span class="line">        <span class="keyword">this</span>.pourSauce();</span><br><span class="line">        <span class="keyword">super</span>.fry();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的蔬菜是菜心"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的酱料是蒜蓉"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种实现方式的类图如下所示<br><img src="foolish1.png" alt=""></p>
-<p>这种实现比上一种好了很多，但是还是有重复，重复的地方在于两个子类有完全一样的<em>cookingVegetable()</em>方法，这就会出现两个问题。</p>
-<ol>
-<li>假设现在又增加了两种菜：番茄炒蛋、红烧茄子，那么这两个类也都要包含<em>cookingVegetable()</em>方法。</li>
-<li>假设<em>cookingVegetable()</em>方法有变动，在<em>fry()</em>步骤之后新增一个<em>清洗(clean)</em>步骤，那么每个炒菜类的<em>cookingVegetable()</em>方法都要加上<em>clean()</em>方法。</li>
-</ol>
-<p>既然各子类的<em>cookingVegetable()</em>方法，那么有办法将这个方法也抽象化吗？这就引出了模板方法模式。</p>
-<p>我们将<em>cookingVegetable()</em>方法提取出来放到基类中，由于该方法中，<em>pourOil(), heatOil(), fry()</em>三个子方法对不同子类都是一样的，那么我们直接在基类中实现它们，让子类去调用基类的方法；<em>pourVegetable(), pourSauce()</em>这两个方法是各不相同的，我们可以在基类中声明它们，让各个子类去单独实现，也就是抽象方法。其类图如下<br><img src="class2.png" alt=""></p>
-<p>基类的代码如下所示</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">CookingVegetable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 声明成final方法，不允许子类覆盖</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">cookingVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pourOil();</span><br><span class="line">        <span class="keyword">this</span>.heatOil();</span><br><span class="line">        <span class="keyword">this</span>.pourVegetable();</span><br><span class="line">        <span class="keyword">this</span>.pourSauce();</span><br><span class="line">        <span class="keyword">this</span>.fry();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pourOil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"倒油"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">heatOil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"热油"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fry</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"翻炒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这些方法由子类单独实现</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>各个子类去实现上面两个抽象方法，代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VegetableBaocai</span> <span class="keyword">extends</span> <span class="title">CookingVegetable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的蔬菜是包菜"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的酱料是辣椒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VegetableCaixin</span> <span class="keyword">extends</span> <span class="title">CookingVegetable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pourVegetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的蔬菜是菜心"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pourSauce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"下锅的酱料是蒜蓉"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>下面测试一下，分别建立包菜、菜心两个类进行测试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 手撕包菜</span></span><br><span class="line">        VegetableBaocai baocai = <span class="keyword">new</span> VegetableBaocai();</span><br><span class="line">        <span class="comment">// 蒜蓉菜心</span></span><br><span class="line">        VegetableCaixin caixin = <span class="keyword">new</span> VegetableCaixin();</span><br><span class="line">        baocai.cookingVegetable();</span><br><span class="line">        System.out.println(<span class="string">"================"</span>);</span><br><span class="line">        caixin.cookingVegetable();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>输出如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">倒油</span><br><span class="line">热油</span><br><span class="line">下锅的蔬菜是包菜</span><br><span class="line">下锅的酱料是辣椒</span><br><span class="line">翻炒</span><br><span class="line">================</span><br><span class="line">倒油</span><br><span class="line">热油</span><br><span class="line">下锅的蔬菜是菜心</span><br><span class="line">下锅的酱料是蒜蓉</span><br><span class="line">翻炒</span><br></pre></td></tr></table></figure>
-<p>以上便是模板方法模式的一个实例</p>
-<h3 id="模式定义"><a href="#模式定义" class="headerlink" title="模式定义"></a>模式定义</h3><p>模板方法模式定义了一个操作中的算法的骨架（稳定），而将一些步骤（会变化的步骤）延迟到子类中。模板方法模式使得子类可以不改变一个算法的骨架即可重定义（override重写）该算法的某些特定步骤。</p>
-<p>在上面的例子中，<strong>cookingVegetable()</strong>方法可以看作一个算法，该算法的骨架包含5个步骤：倒油、热油、倒蔬菜、倒调味料、翻炒。有两个步骤（倒蔬菜、倒调味料）根据子类的不同实现起来也不同，因此这两个方法的实现<strong>延迟</strong>到子类中。<br><img src="class.png" alt=""></p>
-<h3 id="要点总结"><a href="#要点总结" class="headerlink" title="要点总结"></a>要点总结</h3><ol>
-<li>模板方法模式是一种非常基础性的设计模式，在面向对象系统中有着大量的应用，它用最简洁的机制（虚函数的多态性）为很多应用程序框架提供了灵活的扩展点，是代码复用的基本实现结构。</li>
-<li>除了可以灵活应对子步骤的变化外，“不要调用我，让我来调用你”的<strong>反向控制结构</strong>是模板方法模式的典型应用。</li>
-<li>在具体实现方面，被模板方法模式调用的虚方法可以具有实现，也可以没有任何实现（抽象方法），但一般推荐将它们设置为<strong>protected</strong>方法。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/01/17/%E7%94%A8%E4%B8%80%E4%B8%AA%E6%A0%88%E5%AE%9E%E7%8E%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%88%E7%9A%84%E6%8E%92%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/17/%E7%94%A8%E4%B8%80%E4%B8%AA%E6%A0%88%E5%AE%9E%E7%8E%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%88%E7%9A%84%E6%8E%92%E5%BA%8F/" itemprop="url">用一个栈实现另一个栈的排序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-17T17:06:37+08:00">
-                2020-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
-                    <span itemprop="name">刷题</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BB%A3%E7%A0%81%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97/" itemprop="url" rel="index">
-                    <span itemprop="name">程序员代码面试指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  265
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>一个栈中元素的类型为整型，现在想将栈从栈顶到栈底从大到小的顺序排序，只许申请一个栈以及新的变量，不能申请额外的数据结构。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>申请一个辅助栈<strong>help</strong>, 将原先的栈中的元素<strong>x</strong>一个个弹出放入<strong>help</strong>栈中，通过下面的操作使得这个栈的元素保持从栈顶到栈底从大到小的顺序排序。</p>
-<ul>
-<li>若<strong>help</strong>栈为空, 直接将<strong>x</strong>入<strong>help</strong>栈</li>
-<li>若<strong>help</strong>栈顶元素小于<strong>x</strong>，直接将<strong>x</strong>入<strong>help</strong>栈。因为<strong>help</strong>栈保持了从大到小的顺序，所以<strong>help</strong>栈顶就是当前<strong>help</strong>栈中最大的元素</li>
-<li>若<strong>help</strong>栈顶元素大于<strong>x</strong>，则将<strong>help</strong>栈顶元素弹出，放入原始栈中。重复这一步，直到<strong>help</strong>栈顶元素小于x为止</li>
-</ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; sortStackByStack(<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">stack</span>) &#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; help;</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">stack</span>.empty()) &#123;</span><br><span class="line">        <span class="keyword">int</span> s = <span class="built_in">stack</span>.top(); <span class="built_in">stack</span>.pop();</span><br><span class="line">        <span class="keyword">while</span> (!help.empty() &amp;&amp; help.top() &lt; x) &#123;</span><br><span class="line">            <span class="built_in">stack</span>.push(help.top());</span><br><span class="line">            help.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        help.push(s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> help;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -882,7 +971,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -904,7 +993,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -262,6 +262,478 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/04/01/%E5%89%91%E6%8C%87Offer-%E6%A0%91%E7%9A%84%E5%AD%90%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/01/%E5%89%91%E6%8C%87Offer-%E6%A0%91%E7%9A%84%E5%AD%90%E7%BB%93%E6%9E%84/" itemprop="url">剑指Offer 树的子结构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-01T09:28:14+08:00">
+                2020-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  548
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入两棵完全二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)</p>
+<p>B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
+<p>例如:<br>给定的树 A:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    3  </span><br><span class="line">   &#x2F; \  </span><br><span class="line">  4   5 </span><br><span class="line"> &#x2F; \ </span><br><span class="line">1   2</span><br></pre></td></tr></table></figure>
+<p>给定的树 B：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  4  </span><br><span class="line"> &#x2F; </span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。</p>
+<p>输入按照完全二叉树的 BFS 遍历顺序输入</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：A &#x3D; [1,2,3], B &#x3D; [3,1]</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：A &#x3D; [3,4,5,1,2], B &#x3D; [4,1]</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>回顾一下做字符串匹配时的思路。假设我们要判断字符串  <code>B = &quot;cde&quot;</code> 是否是字符串 <code>A = &quot;abcdef&quot;</code> 的子串，那么我们首先要找到 $A$ 中哪个位置的字符与 $B$ 的第一个字符 <code>c</code> 相等，经过这个步骤后，我们找到了子串 <code>A1 = &quot;cdef&quot;</code>；然后，我们需要判断 $B$ 是否是 $A1$ 的前缀，如果是，则说明 $B$ 是 $A$ 的字串，如果不是，那么我们需要最开始的步骤，在 $A$ 中再寻找下一个等于 <code>c</code> 的字符的位置进行判断。</p>
+<p>这道题也是类似，要判断 $B$ 是否是 $A$ 的子树，我们先找到 $A$ 中哪个节点与 $B$ 的根节点相等，然后再判断 $B$ 是否是以该节点为根的树的前缀，如果不是，则再去 $A$ 中找到下一个这样的节点再做判断，以此类推。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubStructure</span><span class="params">(TreeNode A, TreeNode B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (A == <span class="keyword">null</span> || B == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">// A.val与B.val相等，判断B是否是A的前缀树</span></span><br><span class="line">        <span class="keyword">if</span> (A.val == B.val &amp;&amp; isPrefix(A, B)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">// A.val与B.val不相等 或者 相等但不是前缀，则再去找下一个满足条件的A</span></span><br><span class="line">        <span class="keyword">if</span> (isSubStructure(A.left, B) || isSubStructure(A.right, B)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 判断B是否是A的前缀</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isPrefix</span><span class="params">(TreeNode A, TreeNode B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (B == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>; <span class="comment">// 空树是A的前缀</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (A == <span class="keyword">null</span> || A.val != B.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> isPrefix(A.left, B.left) &amp;&amp; isPrefix(A.right, B.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/03/31/MIT6-824-lab1%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/31/MIT6-824-lab1%E7%AC%94%E8%AE%B0/" itemprop="url">MIT6.824 lab1笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-31T09:04:25+08:00">
+                2020-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">课程学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/MIT-6-824/" itemprop="url" rel="index">
+                    <span itemprop="name">MIT 6.824</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  31
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>这次的 Lab1 是根据 MapReduce 的论文来实现一个简易的 MapReduce 框架，需要具备基本的任务分发和超时任务检测机制。</p>
+<p><img src="1.png" alt=""></p>
+<p>先来回顾一下 MapReduce 的执行过程，论文中将其大致为如下几步</p>
+<ol>
+<li><p><strong>论文：</strong>MapReduce将用户输入分成 M 部分，每部分通常在 16-64MB ，并将用户程序（Map 函数和 Reduce 函数）拷贝到每台机器中。</p>
+<p><strong>本实验：</strong> 在本实验中，有若干个待处理的 txt 文件（pg-*.txt），可以将每个 txt 文件作为一个 Map 任务。同时，Map 函数和 Reduce 函数的代码已经被编译到文件 wc.so 中，各个 Worker 需要读取这个文件将两个函数加载进来。</p>
+</li>
+<li><p><strong>论文：</strong> Master 将任务划分成 M 个 Map 任务和 R 个 Reduce 任务，每次寻找一个空闲的 Worker 将一个任务分配给它。</p>
+<p><strong>本实验</strong>：本实验中，Map 任务的数量和 Reduce 任务的数量都已经事先确定好了。Map 任务的数量就是输入的 txt 文件的数量，Reduce 任务的数量在 master 的入口程序中设定（后面会提到）。在任务分配方面，与论文有所不同，实验中采用的是 Worker 主动向 Master 拉取任务的方式。</p>
+</li>
+<li><p><strong>论文：</strong> 执行 Map 任务的 Worker 读取输入文件，将文件传给 Map 函数，Map 函数解析文件内容并生成 key/value pairs 中间结果。这些中间结果会通过分区函数分成 R 个区域并写入本地磁盘中。Map 任务执行完后，Worker 将 R 个中间文件的回传给 Master，master 会将这些文件的位置传送给 Reduce worker。</p>
+<p><strong>本实验：</strong> 与论文的步骤大致相同</p>
+</li>
+<li><p><strong>论文：</strong> 执行 Reduce 任务的 Worker 通过 RPC 从 Map Worker 所在主机的磁盘上读取这些中间文件，并通过 key 值进行排序，将具有相同 key 值的 key/value pair 传送到同一个 Reduce 任务中。Reduce 任务的输出同样输出到磁盘中。</p>
+<p><strong>本实验：</strong> 由于本实验是使用单机的多个进程来模拟多机的分布式环境，因此 Reduce 任务只需要从本地读取 Map 任务的中间结果即可。</p>
+</li>
+<li><p>任务完成。</p>
+</li>
+</ol>
+<p>下面根据代码详细介绍下这几个步骤</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>首先设定几个常量，来表示 master 当前所处的阶段（“Map阶段”、“Reduce阶段”或者“已完成”）和 每个任务的状态（未开始、进行中、完成）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// master.go</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Phase <span class="keyword">int8</span></span><br><span class="line"><span class="keyword">type</span> Status <span class="keyword">int8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	<span class="comment">// master所处的阶段</span></span><br><span class="line">	Phase_Map      = Phase(<span class="number">1</span>)</span><br><span class="line">	Phase_Reduce   = Phase(<span class="number">2</span>)</span><br><span class="line">	Phase_Complete = Phase(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 任务状态</span></span><br><span class="line">	Status_Idel      = Status(<span class="number">0</span>)</span><br><span class="line">	Status_Progess   = Status(<span class="number">1</span>)</span><br><span class="line">	Status_Completed = Status(<span class="number">2</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="程序入口"><a href="#程序入口" class="headerlink" title="程序入口"></a>程序入口</h2><p>master 程序和 worker 程序的入口分别为 main 目录下的 mrmaster.go 和 mrworker.go。</p>
+<h3 id="mrmaster-go"><a href="#mrmaster-go" class="headerlink" title="mrmaster.go"></a>mrmaster.go</h3><p>首先来看 mrmaster.go ，mrmaster.go 执行的命令为如下，可以看到 mrmaster.go会读取所有的输入文件作为参数。 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> run mrmaster.<span class="keyword">go</span> pg-*.txt</span><br></pre></td></tr></table></figure>
+<p>读取输入参数后，主函数调用 master.go 中的 MakeMaster 函数创建一个 Master 对象，MakeMaster传入的参数有两个，第一个参数为上面的输入文件 “pg-*.txt”，第二个参数为 reduce 任务的个数，这里固定为 10 个。</p>
+<p>创建 Master 对象后，主函数每隔一秒会调用 m.Done() 函数判断 Master的所有任务是否都已完成，如果完成，那么整个流程结束，主程序将退出。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mrmaster.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(os.Args) &lt; <span class="number">2</span> &#123;</span><br><span class="line">		fmt.Fprintf(os.Stderr, <span class="string">"Usage: mrmaster inputfiles...\n"</span>)</span><br><span class="line">		os.Exit(<span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">// os.Args[1:]为所有的输入文件， 10为reduce任务的个数</span></span><br><span class="line">	m := mr.MakeMaster(os.Args[<span class="number">1</span>:], <span class="number">10</span>)</span><br><span class="line">	<span class="keyword">for</span> m.Done() == <span class="literal">false</span> &#123;</span><br><span class="line">		time.Sleep(time.Second)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	time.Sleep(time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以先看一下 m.Done() 函数如何实现。前面说到，我们使用了 Phase_Map、Phase_Reduce、Phase_Complete 三个常量表示 Master 当前所处的状态。因此，只需要判断 Master 是否处于 Phase_Complete 状态即可，代码如下</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Master.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">Done</span><span class="params">()</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">// m.Phase表示Master当前的状态，若为Complete状态，则所有任务均已完成</span></span><br><span class="line">	<span class="keyword">return</span> m.Phase == Phase_Complete</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="mrworker-go"><a href="#mrworker-go" class="headerlink" title="mrworker.go"></a>mrworker.go</h3><p>再来看 mrworker.go，mrworker.go 的执行命令如下，其中 wc.so 文件中包含了具体的 Map 和 Reduce 函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> run mrworker.<span class="keyword">go</span> wc.so</span><br></pre></td></tr></table></figure>
+<p>mrworker.go 通过 loadPlugin 方法加载map函数和reduce函数，然后调用 mr.Worker 方法正式执行。当所有任务都执行完毕时，mrworker.go就会结束。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mrworker.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(os.Args) != <span class="number">2</span> &#123;</span><br><span class="line">		fmt.Fprintf(os.Stderr, <span class="string">"Usage: mrworker xxx.so\n"</span>)</span><br><span class="line">		os.Exit(<span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	mapf, reducef := loadPlugin(os.Args[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">	mr.Worker(mapf, reducef)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// load the application Map and Reduce functions</span></span><br><span class="line"><span class="comment">// from a plugin file, e.g. ../mrapps/wc.so</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadPlugin</span><span class="params">(filename <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">func</span>(<span class="keyword">string</span>, <span class="keyword">string</span>)</span> []<span class="title">mr</span>.<span class="title">KeyValue</span>, <span class="title">func</span><span class="params">(<span class="keyword">string</span>, []<span class="keyword">string</span>)</span> <span class="title">string</span>)</span> &#123;</span><br><span class="line">	p, err := plugin.Open(filename)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">"cannot load plugin %v"</span>, filename)</span><br><span class="line">	&#125;</span><br><span class="line">	xmapf, err := p.Lookup(<span class="string">"Map"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">"cannot find Map in %v"</span>, filename)</span><br><span class="line">	&#125;</span><br><span class="line">	mapf := xmapf.(<span class="function"><span class="keyword">func</span><span class="params">(<span class="keyword">string</span>, <span class="keyword">string</span>)</span> []<span class="title">mr</span>.<span class="title">KeyValue</span>)</span></span><br><span class="line">	xreducef, err := p.Lookup(<span class="string">"Reduce"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">"cannot find Reduce in %v"</span>, filename)</span><br><span class="line">	&#125;</span><br><span class="line">	reducef := xreducef.(<span class="function"><span class="keyword">func</span><span class="params">(<span class="keyword">string</span>, []<span class="keyword">string</span>)</span> <span class="title">string</span>)</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> mapf, reducef</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Master-对象初始化"><a href="#Master-对象初始化" class="headerlink" title="Master 对象初始化"></a>Master 对象初始化</h2><p>下面是 Master 对象中相关变量的定义，后面碰到某个变量时会对其详细解释，这里先暂时列出。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// master.go</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Master <span class="keyword">struct</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// reduce任务的数量</span></span><br><span class="line">	NReduce <span class="keyword">int</span></span><br><span class="line">    <span class="comment">// map任务的数量</span></span><br><span class="line">	NMap    <span class="keyword">int</span></span><br><span class="line">	<span class="comment">// 存放所有的map任务</span></span><br><span class="line">	MapTasks []*MapTask</span><br><span class="line">	<span class="comment">// 存放所有的reduce任务</span></span><br><span class="line">	ReduceTasks []*ReduceTask</span><br><span class="line">	<span class="comment">// Master当前所处的阶段</span></span><br><span class="line">	Phase Phase</span><br><span class="line">	<span class="comment">// map任务channel</span></span><br><span class="line">	MapTaskChan    <span class="keyword">chan</span> *MapTask</span><br><span class="line">	<span class="comment">// reduce任务channel</span></span><br><span class="line">    ReduceTaskChan <span class="keyword">chan</span> *ReduceTask</span><br><span class="line">	<span class="comment">// map任务输出的中间文件的位置，数组大小NMap * NReduce</span></span><br><span class="line">    <span class="comment">// 每个map任务输出NReduce个中间文件</span></span><br><span class="line">	IntermediateFiles [][]<span class="keyword">string</span></span><br><span class="line">	<span class="comment">// 已完成的map任务的数量</span></span><br><span class="line">	NCompleteMap    <span class="keyword">int</span></span><br><span class="line">    <span class="comment">// 已完成的reduce任务的数量</span></span><br><span class="line">	NCompleteReduce <span class="keyword">int</span></span><br><span class="line">	<span class="comment">// 互斥锁</span></span><br><span class="line">	mu sync.Mutex</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>mrmaster.go 通过调用 <code>mr.MakeMaster(os.Args[1:], 10)</code> 函数创建一个Master。</p>
+<p>下面的MakeMaster函数主要做了三件事：1. 初始化 Master 对象的各个变量；2. 调用 m.server() 开启TCP服务监听；3. 初始化 map 任务，这里为了不阻塞 MakeMaster 过程，开启了一个新的线程异步的执行 map 任务的初始化。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// master.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">MakeMaster</span><span class="params">(files []<span class="keyword">string</span>, nReduce <span class="keyword">int</span>)</span> *<span class="title">Master</span></span> &#123;</span><br><span class="line">	m := Master&#123;&#125;</span><br><span class="line">	<span class="comment">// 初始化Master各变量</span></span><br><span class="line">	m.NReduce = nReduce</span><br><span class="line">	m.MapTasks = <span class="built_in">make</span>([]*MapTask, <span class="number">0</span>)</span><br><span class="line">	m.MapTaskChan = <span class="built_in">make</span>(<span class="keyword">chan</span> *MapTask)</span><br><span class="line">	m.ReduceTaskChan = <span class="built_in">make</span>(<span class="keyword">chan</span> *ReduceTask)</span><br><span class="line">	m.NCompleteMap = <span class="number">0</span></span><br><span class="line">	m.NCompleteReduce = <span class="number">0</span></span><br><span class="line">	m.IntermediateFiles = <span class="built_in">make</span>([][]<span class="keyword">string</span>, nReduce)</span><br><span class="line">	m.NMap = <span class="built_in">len</span>(files)</span><br><span class="line">	m.Phase = Phase_Map</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 由于master和worker之间需要通过RPC来传递任务。因此，需要将两个任务对象注册到RPC中，这样</span></span><br><span class="line">    <span class="comment">// 对方才能够成功的反序列化</span></span><br><span class="line">	gob.Register(&amp;MapTask&#123;&#125;)</span><br><span class="line">	gob.Register(&amp;ReduceTask&#123;&#125;)</span><br><span class="line">    </span><br><span class="line">	m.server()</span><br><span class="line">	<span class="comment">// 初始化 Map 任务</span></span><br><span class="line">	<span class="keyword">go</span> m.GenerateMapTask(files)</span><br><span class="line">    <span class="keyword">return</span> &amp;m</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="详细实现"><a href="#详细实现" class="headerlink" title="详细实现"></a>详细实现</h2><p>下面结合介绍一下整个 lab 的详细实现。有一点要说明一下，下面几小节中各个方法的代码并不是完整的，我会删掉一些与该小节无关的代码以尽量避免干扰。</p>
+<h3 id="一-Map任务的初始化"><a href="#一-Map任务的初始化" class="headerlink" title="一  Map任务的初始化"></a>一  Map任务的初始化</h3><p>首先是 Map 任务的初始化。在最开始，mrmaster.go中会调用MakeMaster 函数生成Master对象，而MakeMaster中会调用 GenerateMapTask 函数进行 map 任务的初始化，每一个 txt 文件为一个 map 任务。</p>
+<p>该函数遍历所有的输入文件，为每个文件生成一个map任务，初始时任务为闲置（未开始）状态，当任务被分配或任务完成后，任务状态会相应的改变。map任务生成后，将其放入 MapTasks 数组存储起来，同时将其放入 MapTaskChan 中用于后面任务的分配。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// master.go</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// map任务初始化，files为所有 "pg-*.txt" 输入文件</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">GenerateMapTask</span><span class="params">(files []<span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i, file := <span class="keyword">range</span> files &#123;</span><br><span class="line">		mapTask := MapTask&#123;</span><br><span class="line">			Id:       i, <span class="comment">// 任务编号</span></span><br><span class="line">			FileName: file, <span class="comment">// 文件名称</span></span><br><span class="line">			Status:  Status_Idel, <span class="comment">// 任务状态为闲置状态</span></span><br><span class="line">			NReduce: m.NReduce, <span class="comment">// reduce任务的数量（等于 map任务输出的中间文件的数量）</span></span><br><span class="line">		&#125;</span><br><span class="line">		m.MapTasks = <span class="built_in">append</span>(m.MapTasks, &amp;mapTask)</span><br><span class="line">		<span class="comment">// 将 map 任务放到 channel 中</span></span><br><span class="line">        m.MapTaskChan &lt;- (&amp;mapTask)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="二、-Worker向-Master-拉取-Map-任务"><a href="#二、-Worker向-Master-拉取-Map-任务" class="headerlink" title="二、 Worker向 Master 拉取 Map 任务"></a>二、 Worker向 Master 拉取 Map 任务</h3><p>当 Worker 成功启动后，就可以向 Master 发起 RPC 调用来申请任务了。同时，根据 MapReduce 的特性，Master 刚开始分配的任务都是 Map 任务，只有在所有的 Map 任务都执行完毕后才会开始分配 Reduce 任务。本小节只介绍 Map 任务的申请。（为了减少代码的干扰，下面的代码中删去了与 Reduce 任务相关的部分）</p>
+<p>在mrworker.go 中，通过调用 <code>mr.Worker(mapf, reducef)</code> 方法并传入 mapf 和 reducef 两个函数作为参数完成 Worker 对象的创建工作。Worker 创建后，会调用 Run() 方法正式开始工作。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker.go</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Worker对象。因为不能与下面的Worker()方法重名，所以这里用了Work</span></span><br><span class="line"><span class="keyword">type</span> Work <span class="keyword">struct</span> &#123;</span><br><span class="line">	Mapf    <span class="function"><span class="keyword">func</span><span class="params">(<span class="keyword">string</span>, <span class="keyword">string</span>)</span> []<span class="title">KeyValue</span></span></span><br><span class="line">	Reducef <span class="function"><span class="keyword">func</span><span class="params">(<span class="keyword">string</span>, []<span class="keyword">string</span>)</span> <span class="title">string</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// main/mrworker.go calls this function.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Worker</span><span class="params">(mapf <span class="keyword">func</span>(<span class="keyword">string</span>, <span class="keyword">string</span>)</span> []<span class="title">KeyValue</span>,</span></span><br><span class="line">	reducef <span class="function"><span class="keyword">func</span><span class="params">(<span class="keyword">string</span>, []<span class="keyword">string</span>)</span> <span class="title">string</span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">	gob.Register(&amp;MapTask&#123;&#125;)</span><br><span class="line">	gob.Register(&amp;ReduceTask&#123;&#125;)</span><br><span class="line"></span><br><span class="line">	worker := &amp;Work&#123;</span><br><span class="line">		Mapf:    mapf,</span><br><span class="line">		Reducef: reducef,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 该方法会一直执行，直到master的所有任务均已完成</span></span><br><span class="line">	worker.Run()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Worker 开始工作后，首先调用 PullTask() 方法获取一个任务。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">Run</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="comment">// 获取任务</span></span><br><span class="line">        reply := w.PullTask()</span><br><span class="line">        ... ...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>PullTask() 方法会通过 RPC 调用 Master 的 AssignTask 方法向其申请任务。这里暂不考虑RPC调用失败的情况</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">PullTask</span><span class="params">()</span> *<span class="title">PullTaskReply</span></span> &#123;</span><br><span class="line">	args := PullTaskArgs&#123;&#125;</span><br><span class="line">	reply := PullTaskReply&#123;&#125;</span><br><span class="line">    <span class="comment">// RPC调用，向Master申请任务</span></span><br><span class="line">	<span class="keyword">if</span> call(<span class="string">"Master.AssignTask"</span>, &amp;args, &amp;reply) &#123;</span><br><span class="line">		<span class="keyword">return</span> &amp;reply</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Master 接收到任务申请的请求后，检查 MapTaskChan 中是否还有空闲的任务。如果存在，则分配该任务并将任务状态修改为 Progress；如果暂时没有空闲的任务可以分配，则返回 nil </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// master.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">AssignTask</span><span class="params">(args *PullTaskArgs, reply *PullTaskReply)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">select</span> &#123;</span><br><span class="line">	<span class="comment">// 存在空闲的map任务</span></span><br><span class="line">    <span class="keyword">case</span> mapTask := &lt;-m.MapTaskChan:</span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Printf(<span class="string">"Assign a mapTask : %v\n"</span>, *mapTask)</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">// 修改任务状态</span></span><br><span class="line">		mapTask.Status = Status_Progess</span><br><span class="line">		reply.Task = *mapTask</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Println(<span class="string">"No task to assign"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// No tasks can be assigned</span></span><br><span class="line">		reply.Task = <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Worker 从 PullTask 中接收到任务后，首先检查任务的状态。如果任务为 nil ，则说明 master 当前没有空闲的任务可以分配，这时候，为了避免 Worker 再频繁的向 Master 申请任务，可以先让 Worker 进程挂起一段时间（Sleep 1s），在这之后，再与 Master 通信。如果成功拿到任务，则调用 RunMapTask() 方法执行 Map 任务。</p>
+<p>这里的 for 循环是个死循环，Worker 执行完一个任务后，可以再向 Master 申请下一个任务。for 循环的退出条件会在后面的 Reduce 任务相关小节说明。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// master.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">Run</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		reply := w.PullTask()</span><br><span class="line">        <span class="keyword">if</span> reply.Task == <span class="literal">nil</span> &#123; <span class="comment">// Master暂时分配不到任务，等待1s后继续向Master申请</span></span><br><span class="line">            <span class="keyword">if</span> debug &#123;</span><br><span class="line">                log.Println(<span class="string">"Cannot apply a map Task, wait 1s"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 等待1s</span></span><br><span class="line">            time.Sleep(time.Second)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 执行 map 任务</span></span><br><span class="line">            w.RunMapTask(reply.Task)</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三、Map-任务执行"><a href="#三、Map-任务执行" class="headerlink" title="三、Map 任务执行"></a>三、Map 任务执行</h3><p>Worker 接收到来自 Master 分配的 Map 任务后，调用 RunMapTask 方法执行 Map 任务。</p>
+<p>这部分代码与 “串行MapReduce示例“的代码基本一致，这里不作过多阐述。需要注意的是，Map任务的输出需要按照分区写入多个文件中，文件的数量与NReduce一致。每个中间文件的名称为 “mr-taskId-partitionId”</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">RunMapTask</span><span class="params">(task *MapTask)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> debug &#123;</span><br><span class="line">		log.Printf(<span class="string">"Receive a map task: %v\n"</span>, *task)</span><br><span class="line">	&#125;</span><br><span class="line">	file, err := os.Open(task.FileName)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">"cannot open %v"</span>, task.FileName)</span><br><span class="line">	&#125;</span><br><span class="line">	content, err := ioutil.ReadAll(file)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">"cannot read %v"</span>, task.FileName)</span><br><span class="line">	&#125;</span><br><span class="line">	file.Close()</span><br><span class="line">	kva := w.Mapf(task.FileName, <span class="keyword">string</span>(content))</span><br><span class="line"></span><br><span class="line">	sort.Sort(ByKey(kva))</span><br><span class="line">	<span class="comment">// 中间结果；将中间结果划分成NReduce个分区存储</span></span><br><span class="line">	kvas := <span class="built_in">make</span>([][]KeyValue, task.NReduce)</span><br><span class="line">	<span class="comment">// 将中间结果分配到各个分区</span></span><br><span class="line">	<span class="keyword">for</span> _, kv := <span class="keyword">range</span> kva &#123;</span><br><span class="line">		outK := ihash(kv.Key) % task.NReduce</span><br><span class="line">		kvas[outK] = <span class="built_in">append</span>(kvas[outK], kv)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 存储中间结果</span></span><br><span class="line">	intermediateFiles := <span class="built_in">make</span>([]<span class="keyword">string</span>, <span class="number">0</span>)</span><br><span class="line">	<span class="comment">// 将中间结果写到文件中</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; task.NReduce; i++ &#123;</span><br><span class="line">		os.Mkdir(<span class="string">"maptmp"</span>, os.ModePerm)</span><br><span class="line">		filename := <span class="string">"maptmp/mr-"</span> + strconv.Itoa(task.Id) + <span class="string">"-"</span> + strconv.Itoa(i)</span><br><span class="line">		file, _ := os.Create(filename)</span><br><span class="line">		enc := json.NewEncoder(file)</span><br><span class="line">		<span class="keyword">for</span> _, kv := <span class="keyword">range</span> kvas[i] &#123;</span><br><span class="line">			err := enc.Encode(&amp;kv)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Fatal(<span class="string">"write intermediate file error"</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		intermediateFiles = <span class="built_in">append</span>(intermediateFiles, filename)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 向Master报告任务</span></span><br><span class="line">	w.ReportTaskFinish(task.Id, Phase_Map, intermediateFiles)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Map 任务完成后，调用 ReportTaskFinish 向 Master 报告</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">ReportTaskFinish</span><span class="params">(taskId <span class="keyword">int</span>, taskType Phase, intermediates []<span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	args := ReportTaskFinishArgs&#123;</span><br><span class="line">		TaskId:            taskId,</span><br><span class="line">		TaskPhase:         taskType,</span><br><span class="line">		IntermediateFiles: intermediates,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	reply := ReportTaskFinishReply&#123;&#125;</span><br><span class="line">	call(<span class="string">"Master.ReportTaskFinish"</span>, &amp;args, &amp;reply)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="四、Worker-执行完-Map-任务，向-Master-报告"><a href="#四、Worker-执行完-Map-任务，向-Master-报告" class="headerlink" title="四、Worker 执行完 Map 任务，向 Master 报告"></a>四、Worker 执行完 Map 任务，向 Master 报告</h3><p>Master 收到 Worker完成Map任务的消息后，修改这个Map任务的状态（状态变为 Completed 状态），并将Map任务产生的中间文件的位置存储下来。<strong>注意以上所有的修改均需要加锁，以避免不一致的情况。</strong> 同时，Master 还维护了 NCompleteMap 变量记录了当前已完成的Map任务的数量，当所有的Map任务均已经完成时，Master 转为 Reduce 阶段，并初始化 Reduce 任务。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// master.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">ReportTaskFinish</span><span class="params">(args *ReportTaskFinishArgs, reply *ReportTaskFinishReply)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">switch</span> args.TaskPhase &#123;</span><br><span class="line">	<span class="keyword">case</span> Phase_Map: <span class="comment">// Map阶段</span></span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Printf(<span class="string">"Complete map task %d\n"</span>, args.TaskId)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 加锁</span></span><br><span class="line">		m.mu.Lock()</span><br><span class="line">		m.MapTasks[args.TaskId].Status = Status_Completed</span><br><span class="line">		m.NCompleteMap++</span><br><span class="line">		<span class="comment">// 添加中间文件的位置</span></span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; m.NReduce; i++ &#123;</span><br><span class="line">			m.IntermediateFiles[i] = <span class="built_in">append</span>(m.IntermediateFiles[i], args.IntermediateFiles[i])</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 所有Map任务均已完成</span></span><br><span class="line">		<span class="keyword">if</span> m.NCompleteMap == m.NMap &#123;</span><br><span class="line">			<span class="keyword">if</span> debug &#123;</span><br><span class="line">				log.Println(<span class="string">"All Map Tasks finished"</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			m.Phase = Phase_Reduce</span><br><span class="line">			<span class="comment">// 初始化Reduce任务</span></span><br><span class="line">			<span class="keyword">go</span> m.GenerateReduceMap()</span><br><span class="line">		&#125;</span><br><span class="line">		m.mu.Unlock()</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="五、Master-初始化-Reduce-任务"><a href="#五、Master-初始化-Reduce-任务" class="headerlink" title="五、Master 初始化 Reduce 任务"></a>五、Master 初始化 Reduce 任务</h3><p>每个 Map 任务会输出 NReduce 个中间文件，因此 NMap 个 Map 任务总共输出 NReduce * NMap 个中间文件。在 Reduce 任务阶段，每个Reduce任务负责其中1个分区的所有中间文件。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// master.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">GenerateReduceMap</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// IntermediateFiles大小为 NReduce * NMap，即共有 NReduce 个分区</span></span><br><span class="line">    <span class="comment">// 每个reduce任务负责其中1个分区的所有中间文件</span></span><br><span class="line">	<span class="keyword">for</span> i, files := <span class="keyword">range</span> m.IntermediateFiles &#123;</span><br><span class="line">		reduceTask := ReduceTask&#123;</span><br><span class="line">			Id:        i,</span><br><span class="line">			FileNames: files,</span><br><span class="line">			Status:    Status_Idel,</span><br><span class="line">		&#125;</span><br><span class="line">		m.ReduceTasks = <span class="built_in">append</span>(m.ReduceTasks, &amp;reduceTask)</span><br><span class="line">		m.ReduceTaskChan &lt;- &amp;reduceTask</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="六、Worker-向-Master-申请-Reduce-任务"><a href="#六、Worker-向-Master-申请-Reduce-任务" class="headerlink" title="六、Worker 向 Master 申请 Reduce 任务"></a>六、Worker 向 Master 申请 Reduce 任务</h3><p>这部分代码与前一部分基本一致；这里把Reduce任务相关的代码添加上。</p>
+<p>Worker 调用 PullTask 方法向 Master 申请任务，Master 会返回自己当前所处的阶段作为任务标识</p>
+<ul>
+<li>如果 Master 处于 Phase_Complete 阶段，说明所有任务均已完成，此时 Worker 退出</li>
+<li>如果 Master 处于 Phase_Map 阶段，说明拿到的任务为 Map 任务，此时调用 RunMapTask 执行 Map 任务</li>
+<li>如果 Master 处于 Phase_Reduce 阶段，说明拿到的任务为 Reduce 任务，此时调用 RunReduceTask 执行 Reduce 任务</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">Run</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		reply := w.PullTask()</span><br><span class="line">		<span class="keyword">if</span> reply == <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">switch</span> reply.Master_Phase &#123;</span><br><span class="line">		<span class="keyword">case</span> Phase_Complete:</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		<span class="keyword">case</span> Phase_Map:</span><br><span class="line">			<span class="keyword">if</span> reply.Task == <span class="literal">nil</span> &#123; <span class="comment">// Master 暂时无法分配任务，等待1s后继续申请</span></span><br><span class="line">				<span class="keyword">if</span> debug &#123;</span><br><span class="line">					log.Println(<span class="string">"Cannot apply a map Task, wait 1s"</span>)</span><br><span class="line">				&#125;</span><br><span class="line">				time.Sleep(time.Second)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				w.RunMapTask(reply.Task.(*MapTask))</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="keyword">case</span> Phase_Reduce:</span><br><span class="line">			<span class="keyword">if</span> reply.Task == <span class="literal">nil</span> &#123; <span class="comment">// Master 暂时无法分配任务，等待1s后继续申请</span></span><br><span class="line">				<span class="keyword">if</span> debug &#123;</span><br><span class="line">					log.Println(<span class="string">"Cannot apply a reduce Task, wait 1s"</span>)</span><br><span class="line">				&#125;</span><br><span class="line">				time.Sleep(time.Second)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				w.RunReduceTask(reply.Task.(*ReduceTask))</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>PullTask 方法通过 RPC 向 Master 申请任务</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">PullTask</span><span class="params">()</span> *<span class="title">PullTaskReply</span></span> &#123;</span><br><span class="line">	args := PullTaskArgs&#123;&#125;</span><br><span class="line">	reply := PullTaskReply&#123;&#125;</span><br><span class="line">	<span class="keyword">if</span> call(<span class="string">"Master.AssignTask"</span>, &amp;args, &amp;reply) &#123;</span><br><span class="line">		<span class="keyword">return</span> &amp;reply</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，这里的 PullTaskReply{} 中的任务既可以是 Map 任务，又可以是 Reduce 任务。因此，在该对象中，使用go中的任意类型 <code>interface{}</code> 来表示任务</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// rpc.go</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> PullTaskReply <span class="keyword">struct</span> &#123;</span><br><span class="line">    <span class="comment">// 任务对象。interface&#123;&#125;代表任意类型</span></span><br><span class="line">    <span class="comment">// 可以通过 Task.(*MapTask) 或 Task.(*ReduceTask) 转变成 MapTask 或 ReduceTask</span></span><br><span class="line">	Task         <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">	Master_Phase Phase</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="七、Worker-执行-Reduce-任务"><a href="#七、Worker-执行-Reduce-任务" class="headerlink" title="七、Worker 执行 Reduce 任务"></a>七、Worker 执行 Reduce 任务</h3><p>在Reduce执行阶段，Worker读取Map任务产生的中间文件，调用 Reduce 函数计算后，将结果写入一个最终文件中，文件名为 “mr-out-taskId”。任务执行完成后，向 Master 报告</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">RunReduceTask</span><span class="params">(task *ReduceTask)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> debug &#123;</span><br><span class="line">		log.Printf(<span class="string">"Receive a reduce task: %v\n"</span>, *task)</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">// map任务产生的中间文件</span></span><br><span class="line">	files := task.FileNames</span><br><span class="line">	kva := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>][]<span class="keyword">string</span>)</span><br><span class="line">	<span class="keyword">for</span> _, fileName := <span class="keyword">range</span> files &#123;</span><br><span class="line">		file, err := os.Open(fileName)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Fatalf(<span class="string">"cannot open %v"</span>, fileName)</span><br><span class="line">		&#125;</span><br><span class="line">		dec := json.NewDecoder(file)</span><br><span class="line">		<span class="keyword">for</span> &#123;</span><br><span class="line">			<span class="keyword">var</span> kv KeyValue</span><br><span class="line">			<span class="keyword">if</span> err := dec.Decode(&amp;kv); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">			kva[kv.Key] = <span class="built_in">append</span>(kva[kv.Key], kv.Value)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">// 文件名为 "mr-out-taskId"</span></span><br><span class="line">	ofile, _ := os.Create(<span class="string">"mr-out-"</span> + strconv.Itoa(task.Id))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> k := <span class="keyword">range</span> kva &#123;</span><br><span class="line">		output := w.Reducef(k, kva[k])</span><br><span class="line">		fmt.Fprintf(ofile, <span class="string">"%v %v\n"</span>, k, output)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	w.ReportTaskFinish(task.Id, Phase_Reduce, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="八、Worker-执行完-Reduce-任务，向-Master-报告"><a href="#八、Worker-执行完-Reduce-任务，向-Master-报告" class="headerlink" title="八、Worker 执行完 Reduce 任务，向 Master 报告"></a>八、Worker 执行完 Reduce 任务，向 Master 报告</h3><p>Master 根据 TaskPhase 参数判断 worker 提交的任务的类型。对于 reduce 任务，Master 维护了 NCompleteReduce 变量来表示当前已经完成的 reduce 任务的数量。若所有任务均已完成，Master会转变为 Phase_Completed 阶段。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// master.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">ReportTaskFinish</span><span class="params">(args *ReportTaskFinishArgs, reply *ReportTaskFinishReply)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">switch</span> args.TaskPhase &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">case</span> Phase_Map:</span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Printf(<span class="string">"Complete map task %d\n"</span>, args.TaskId)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// lock</span></span><br><span class="line">		m.mu.Lock()</span><br><span class="line">		m.MapTasks[args.TaskId].Status = Status_Completed</span><br><span class="line">		m.NCompleteMap++</span><br><span class="line">		<span class="comment">// Add the intermediate files</span></span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; m.NReduce; i++ &#123;</span><br><span class="line">			m.IntermediateFiles[i] = <span class="built_in">append</span>(m.IntermediateFiles[i], args.IntermediateFiles[i])</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// All map tasks are completed</span></span><br><span class="line">		<span class="keyword">if</span> m.NCompleteMap == m.NMap &#123;</span><br><span class="line">			<span class="keyword">if</span> debug &#123;</span><br><span class="line">				log.Println(<span class="string">"All Map Tasks finished"</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			m.Phase = Phase_Reduce</span><br><span class="line">			<span class="comment">// generate the reduce tasks</span></span><br><span class="line">			<span class="keyword">go</span> m.GenerateReduceMap()</span><br><span class="line">		&#125;</span><br><span class="line">		m.mu.Unlock()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">case</span> Phase_Reduce:</span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Printf(<span class="string">"Complete reduce task %d\n"</span>, args.TaskId)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// lock</span></span><br><span class="line">		m.mu.Lock()</span><br><span class="line">		m.ReduceTasks[args.TaskId].Status = Status_Completed</span><br><span class="line">		m.NCompleteReduce++</span><br><span class="line">		<span class="comment">// All Reduce tasks are completed</span></span><br><span class="line">		<span class="keyword">if</span> m.NCompleteReduce == m.NReduce &#123;</span><br><span class="line">			<span class="keyword">if</span> debug &#123;</span><br><span class="line">				log.Println(<span class="string">"All Reduce Tasks finished"</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			m.Phase = Phase_Complete</span><br><span class="line">		&#125;</span><br><span class="line">		m.mu.Unlock()</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="九、超时任务监测及重分配"><a href="#九、超时任务监测及重分配" class="headerlink" title="九、超时任务监测及重分配"></a>九、超时任务监测及重分配</h3><p>对于分配出去的每一个任务，Master 都会开启一个新的线程来监测该任务的状态（下面的 <code>go m.MonitorMapTask(mapTask)</code> 或 <code>go m.MonitorReduceTask(reduceTask)</code>）。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// master.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">AssignTask</span><span class="params">(args *PullTaskArgs, reply *PullTaskReply)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">select</span> &#123;</span><br><span class="line">	<span class="keyword">case</span> mapTask := &lt;-m.MapTaskChan:</span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Printf(<span class="string">"Assign a mapTask : %v\n"</span>, *mapTask)</span><br><span class="line">		&#125;</span><br><span class="line">		mapTask.Status = Status_Progess</span><br><span class="line">		reply.Task = *mapTask</span><br><span class="line">		<span class="comment">// 监测Map任务</span></span><br><span class="line">		<span class="keyword">go</span> m.MonitorMapTask(mapTask)</span><br><span class="line">	<span class="keyword">case</span> reduceTask := &lt;-m.ReduceTaskChan:</span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Printf(<span class="string">"Assign a reduceTask : %v\n"</span>, *reduceTask)</span><br><span class="line">		&#125;</span><br><span class="line">		reduceTask.Status = Status_Progess</span><br><span class="line">		reply.Task = *reduceTask</span><br><span class="line">		<span class="comment">// 监测Reduce任务</span></span><br><span class="line">		<span class="keyword">go</span> m.MonitorReduceTask(reduceTask)</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Println(<span class="string">"No task to assign"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// No tasks can be assigned</span></span><br><span class="line">		reply.Task = <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	reply.Master_Phase = m.Phase</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以 <code>go m.MonitorReduceTask(reduceTask)</code> 为例。该方法使用一个 NewTicker 定时器，该定时器相当于一个 channel，每隔 10s，系统会向定时器中发送一条信息。下面的 for 循环持续监测任务的状态，如果超过10s后任务仍未完成，将默认worker已经宕机。此时，这个任务会被设为 Idel 状态并重新加入任务队列 ReduceTaskChan 中</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// master.go</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">MonitorReduceTask</span><span class="params">(task *ReduceTask)</span></span> &#123;</span><br><span class="line">	<span class="comment">// timeout = 10s</span></span><br><span class="line">	t := time.NewTicker(time.Second * <span class="number">10</span>)</span><br><span class="line">	<span class="keyword">defer</span> t.Stop()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="comment">// timeout</span></span><br><span class="line">		<span class="keyword">case</span> &lt;-t.C:</span><br><span class="line">			m.mu.Lock()</span><br><span class="line">			task.Status = Status_Idel</span><br><span class="line">			m.ReduceTaskChan &lt;- task</span><br><span class="line">			m.mu.Unlock()</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="comment">// task finished in 10s</span></span><br><span class="line">			<span class="keyword">if</span> task.Status == Status_Completed &#123;</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上就是整个代码的主体部分。所有代码的汇总见下一小节。</p>
+<h2 id="代码汇总"><a href="#代码汇总" class="headerlink" title="代码汇总"></a>代码汇总</h2><p><strong>master.go</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> mr</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"encoding/gob"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"sync"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">import</span> <span class="string">"net"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"os"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"net/rpc"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"net/http"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Phase <span class="keyword">int8</span></span><br><span class="line"><span class="keyword">type</span> Status <span class="keyword">int8</span></span><br><span class="line"><span class="keyword">type</span> MStatus <span class="keyword">int8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	<span class="comment">// the master's phase</span></span><br><span class="line">	Phase_Map      = Phase(<span class="number">1</span>)</span><br><span class="line">	Phase_Reduce   = Phase(<span class="number">2</span>)</span><br><span class="line">	Phase_Complete = Phase(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// the task's status</span></span><br><span class="line">	Status_Idel      = Status(<span class="number">0</span>)</span><br><span class="line">	Status_Progess   = Status(<span class="number">1</span>)</span><br><span class="line">	Status_Completed = Status(<span class="number">2</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> WorkerMachine <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id     <span class="keyword">int64</span></span><br><span class="line">	Status Status</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MapTask <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id       <span class="keyword">int</span></span><br><span class="line">	FileName <span class="keyword">string</span></span><br><span class="line">	WorkerId <span class="keyword">int64</span></span><br><span class="line">	Status   Status</span><br><span class="line">	NReduce  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ReduceTask <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id        <span class="keyword">int</span></span><br><span class="line">	FileNames []<span class="keyword">string</span></span><br><span class="line">	WorkerId  <span class="keyword">int64</span></span><br><span class="line">	Status    Status</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Master <span class="keyword">struct</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// The number of reduce tasks</span></span><br><span class="line">	NReduce <span class="keyword">int</span></span><br><span class="line">	<span class="comment">// The number of map tasks</span></span><br><span class="line">	NMap <span class="keyword">int</span></span><br><span class="line">	<span class="comment">// array of map tasks</span></span><br><span class="line">	MapTasks []*MapTask</span><br><span class="line">	<span class="comment">// array of reduce tasks</span></span><br><span class="line">	ReduceTasks []*ReduceTask</span><br><span class="line">	<span class="comment">// the master's phase : map, reduce or complete</span></span><br><span class="line">	Phase Phase</span><br><span class="line">	<span class="comment">// the channel of map task</span></span><br><span class="line">	MapTaskChan <span class="keyword">chan</span> *MapTask</span><br><span class="line">	<span class="comment">// the channel of reduce task</span></span><br><span class="line">	ReduceTaskChan <span class="keyword">chan</span> *ReduceTask</span><br><span class="line">	<span class="comment">// the location of intermediate files for map tasks.  size = NMap * NReduce</span></span><br><span class="line">	IntermediateFiles [][]<span class="keyword">string</span></span><br><span class="line">	<span class="comment">// the number of map tasks which has completed</span></span><br><span class="line">	NCompleteMap <span class="keyword">int</span></span><br><span class="line">	<span class="comment">// the number of reduce tasks which has completed</span></span><br><span class="line">	NCompleteReduce <span class="keyword">int</span></span><br><span class="line">	<span class="comment">// mutex lock</span></span><br><span class="line">	mu sync.Mutex</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// start a thread that listens for RPCs from worker.go</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">server</span><span class="params">()</span></span> &#123;</span><br><span class="line">	rpc.Register(m)</span><br><span class="line">	rpc.HandleHTTP()</span><br><span class="line">	<span class="comment">//l, e := net.Listen("tcp", ":1234")</span></span><br><span class="line">	sockname := masterSock()</span><br><span class="line">	os.Remove(sockname)</span><br><span class="line">	l, e := net.Listen(<span class="string">"unix"</span>, sockname)</span><br><span class="line">	<span class="keyword">if</span> e != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"listen error:"</span>, e)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">go</span> http.Serve(l, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">GenerateMapTask</span><span class="params">(files []<span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i, file := <span class="keyword">range</span> files &#123;</span><br><span class="line">		mapTask := MapTask&#123;</span><br><span class="line">			Id:       i,</span><br><span class="line">			FileName: file,</span><br><span class="line">			Status:   Status_Idel,</span><br><span class="line">			NReduce:  m.NReduce,</span><br><span class="line">		&#125;</span><br><span class="line">		m.MapTasks = <span class="built_in">append</span>(m.MapTasks, &amp;mapTask)</span><br><span class="line">		m.MapTaskChan &lt;- &amp;mapTask</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">GenerateReduceMap</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i, files := <span class="keyword">range</span> m.IntermediateFiles &#123;</span><br><span class="line">		reduceTask := ReduceTask&#123;</span><br><span class="line">			Id:        i,</span><br><span class="line">			FileNames: files,</span><br><span class="line">			Status:    Status_Idel,</span><br><span class="line">		&#125;</span><br><span class="line">		m.ReduceTasks = <span class="built_in">append</span>(m.ReduceTasks, &amp;reduceTask)</span><br><span class="line">		m.ReduceTaskChan &lt;- &amp;reduceTask</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">AssignTask</span><span class="params">(args *PullTaskArgs, reply *PullTaskReply)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">select</span> &#123;</span><br><span class="line">	<span class="keyword">case</span> mapTask := &lt;-m.MapTaskChan:</span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Printf(<span class="string">"Assign a mapTask : %v\n"</span>, *mapTask)</span><br><span class="line">		&#125;</span><br><span class="line">		mapTask.Status = Status_Progess</span><br><span class="line">		reply.Task = *mapTask</span><br><span class="line">		<span class="comment">// monitor the task</span></span><br><span class="line">		<span class="keyword">go</span> m.MonitorMapTask(mapTask)</span><br><span class="line">	<span class="keyword">case</span> reduceTask := &lt;-m.ReduceTaskChan:</span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Printf(<span class="string">"Assign a reduceTask : %v\n"</span>, *reduceTask)</span><br><span class="line">		&#125;</span><br><span class="line">		reduceTask.Status = Status_Progess</span><br><span class="line">		reply.Task = *reduceTask</span><br><span class="line">		<span class="comment">// monitor the task</span></span><br><span class="line">		<span class="keyword">go</span> m.MonitorReduceTask(reduceTask)</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Println(<span class="string">"No task to assign"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// No tasks can be assigned</span></span><br><span class="line">		reply.Task = <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	reply.Master_Phase = m.Phase</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">ReportTaskFinish</span><span class="params">(args *ReportTaskFinishArgs, reply *ReportTaskFinishReply)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">switch</span> args.TaskPhase &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">case</span> Phase_Map:</span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Printf(<span class="string">"Complete map task %d\n"</span>, args.TaskId)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// lock</span></span><br><span class="line">		m.mu.Lock()</span><br><span class="line">		m.MapTasks[args.TaskId].Status = Status_Completed</span><br><span class="line">		m.NCompleteMap++</span><br><span class="line">		<span class="comment">// Add the intermediate files</span></span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; m.NReduce; i++ &#123;</span><br><span class="line">			m.IntermediateFiles[i] = <span class="built_in">append</span>(m.IntermediateFiles[i], args.IntermediateFiles[i])</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// All map tasks are completed</span></span><br><span class="line">		<span class="keyword">if</span> m.NCompleteMap == m.NMap &#123;</span><br><span class="line">			<span class="keyword">if</span> debug &#123;</span><br><span class="line">				log.Println(<span class="string">"All Map Tasks finished"</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			m.Phase = Phase_Reduce</span><br><span class="line">			<span class="comment">// generate the reduce tasks</span></span><br><span class="line">			<span class="keyword">go</span> m.GenerateReduceMap()</span><br><span class="line">		&#125;</span><br><span class="line">		m.mu.Unlock()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">case</span> Phase_Reduce:</span><br><span class="line">		<span class="keyword">if</span> debug &#123;</span><br><span class="line">			log.Printf(<span class="string">"Complete reduce task %d\n"</span>, args.TaskId)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// lock</span></span><br><span class="line">		m.mu.Lock()</span><br><span class="line">		m.ReduceTasks[args.TaskId].Status = Status_Completed</span><br><span class="line">		m.NCompleteReduce++</span><br><span class="line">		<span class="comment">// All Reduce tasks are completed</span></span><br><span class="line">		<span class="keyword">if</span> m.NCompleteReduce == m.NReduce &#123;</span><br><span class="line">			<span class="keyword">if</span> debug &#123;</span><br><span class="line">				log.Println(<span class="string">"All Reduce Tasks finished"</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			m.Phase = Phase_Complete</span><br><span class="line">		&#125;</span><br><span class="line">		m.mu.Unlock()</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">MonitorMapTask</span><span class="params">(task *MapTask)</span></span> &#123;</span><br><span class="line">	<span class="comment">// timeout = 10s</span></span><br><span class="line">	t := time.NewTicker(time.Second * <span class="number">10</span>)</span><br><span class="line">	<span class="keyword">defer</span> t.Stop()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="comment">// timeout</span></span><br><span class="line">		<span class="keyword">case</span> &lt;-t.C:</span><br><span class="line">			m.mu.Lock()</span><br><span class="line">			task.Status = Status_Idel</span><br><span class="line">			m.MapTaskChan &lt;- task</span><br><span class="line">			m.mu.Unlock()</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="comment">// task finished in 10s</span></span><br><span class="line">			<span class="keyword">if</span> task.Status == Status_Completed &#123;</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">MonitorReduceTask</span><span class="params">(task *ReduceTask)</span></span> &#123;</span><br><span class="line">	<span class="comment">// timeout = 10s</span></span><br><span class="line">	t := time.NewTicker(time.Second * <span class="number">10</span>)</span><br><span class="line">	<span class="keyword">defer</span> t.Stop()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="comment">// timeout</span></span><br><span class="line">		<span class="keyword">case</span> &lt;-t.C:</span><br><span class="line">			m.mu.Lock()</span><br><span class="line">			task.Status = Status_Idel</span><br><span class="line">			m.ReduceTaskChan &lt;- task</span><br><span class="line">			m.mu.Unlock()</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="comment">// task finished in 10s</span></span><br><span class="line">			<span class="keyword">if</span> task.Status == Status_Completed &#123;</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// main/mrmaster.go calls Done() periodically to find out</span></span><br><span class="line"><span class="comment">// if the entire job has finished.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Master)</span> <span class="title">Done</span><span class="params">()</span> <span class="title">bool</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> m.Phase == Phase_Complete</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// create a Master.</span></span><br><span class="line"><span class="comment">// main/mrmaster.go calls this function.</span></span><br><span class="line"><span class="comment">// nReduce is the number of reduce tasks to use.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">MakeMaster</span><span class="params">(files []<span class="keyword">string</span>, nReduce <span class="keyword">int</span>)</span> *<span class="title">Master</span></span> &#123;</span><br><span class="line">	m := Master&#123;&#125;</span><br><span class="line"></span><br><span class="line">	m.NReduce = nReduce</span><br><span class="line">	m.MapTasks = <span class="built_in">make</span>([]*MapTask, <span class="number">0</span>)</span><br><span class="line">	m.MapTaskChan = <span class="built_in">make</span>(<span class="keyword">chan</span> *MapTask)</span><br><span class="line">	m.ReduceTaskChan = <span class="built_in">make</span>(<span class="keyword">chan</span> *ReduceTask)</span><br><span class="line">	m.NCompleteMap = <span class="number">0</span></span><br><span class="line">	m.NCompleteReduce = <span class="number">0</span></span><br><span class="line">	m.IntermediateFiles = <span class="built_in">make</span>([][]<span class="keyword">string</span>, nReduce)</span><br><span class="line">	m.NMap = <span class="built_in">len</span>(files)</span><br><span class="line">	m.Phase = Phase_Map</span><br><span class="line"></span><br><span class="line">	gob.Register(&amp;MapTask&#123;&#125;)</span><br><span class="line">	gob.Register(&amp;ReduceTask&#123;&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// generate the map task</span></span><br><span class="line">	<span class="keyword">go</span> m.GenerateMapTask(files)</span><br><span class="line">	m.server()</span><br><span class="line">	<span class="keyword">return</span> &amp;m</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>worker.go</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> mr</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"encoding/gob"</span></span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">	<span class="string">"sort"</span></span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">import</span> <span class="string">"log"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"net/rpc"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"hash/fnv"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Map functions return a slice of KeyValue.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">type</span> KeyValue <span class="keyword">struct</span> &#123;</span><br><span class="line">	Key   <span class="keyword">string</span></span><br><span class="line">	Value <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// for sorting by key.</span></span><br><span class="line"><span class="keyword">type</span> ByKey []KeyValue</span><br><span class="line"></span><br><span class="line"><span class="comment">// for sorting by key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a ByKey)</span> <span class="title">Len</span><span class="params">()</span> <span class="title">int</span></span>           &#123; <span class="keyword">return</span> <span class="built_in">len</span>(a) &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a ByKey)</span> <span class="title">Swap</span><span class="params">(i, j <span class="keyword">int</span>)</span></span>      &#123; a[i], a[j] = a[j], a[i] &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a ByKey)</span> <span class="title">Less</span><span class="params">(i, j <span class="keyword">int</span>)</span> <span class="title">bool</span></span> &#123; <span class="keyword">return</span> a[i].Key &lt; a[j].Key &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// use ihash(key) % NReduce to choose the reduce</span></span><br><span class="line"><span class="comment">// task number for each KeyValue emitted by Map.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ihash</span><span class="params">(key <span class="keyword">string</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	h := fnv.New32a()</span><br><span class="line">	h.Write([]<span class="keyword">byte</span>(key))</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">int</span>(h.Sum32() &amp; <span class="number">0x7fffffff</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Work <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id      <span class="keyword">int64</span></span><br><span class="line">	Mapf    <span class="function"><span class="keyword">func</span><span class="params">(<span class="keyword">string</span>, <span class="keyword">string</span>)</span> []<span class="title">KeyValue</span></span></span><br><span class="line">	Reducef <span class="function"><span class="keyword">func</span><span class="params">(<span class="keyword">string</span>, []<span class="keyword">string</span>)</span> <span class="title">string</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// main/mrworker.go calls this function.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Worker</span><span class="params">(mapf <span class="keyword">func</span>(<span class="keyword">string</span>, <span class="keyword">string</span>)</span> []<span class="title">KeyValue</span>,</span></span><br><span class="line">	reducef <span class="function"><span class="keyword">func</span><span class="params">(<span class="keyword">string</span>, []<span class="keyword">string</span>)</span> <span class="title">string</span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">	gob.Register(&amp;MapTask&#123;&#125;)</span><br><span class="line">	gob.Register(&amp;ReduceTask&#123;&#125;)</span><br><span class="line"></span><br><span class="line">	worker := &amp;Work&#123;</span><br><span class="line">		Mapf:    mapf,</span><br><span class="line">		Reducef: reducef,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	worker.Run()</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">Run</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		reply := w.PullTask()</span><br><span class="line">		<span class="keyword">if</span> reply == <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">switch</span> reply.Master_Phase &#123;</span><br><span class="line">		<span class="keyword">case</span> Phase_Complete:</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		<span class="keyword">case</span> Phase_Map:</span><br><span class="line">			<span class="keyword">if</span> reply.Task == <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">if</span> debug &#123;</span><br><span class="line">					log.Println(<span class="string">"Cannot apply a map Task, wait 1s"</span>)</span><br><span class="line">				&#125;</span><br><span class="line">				time.Sleep(time.Second)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				w.RunMapTask(reply.Task.(*MapTask))</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="keyword">case</span> Phase_Reduce:</span><br><span class="line">			<span class="keyword">if</span> reply.Task == <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">if</span> debug &#123;</span><br><span class="line">					log.Println(<span class="string">"Cannot apply a reduce Task, wait 1s"</span>)</span><br><span class="line">				&#125;</span><br><span class="line">				time.Sleep(time.Second)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				w.RunReduceTask(reply.Task.(*ReduceTask))</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">PullTask</span><span class="params">()</span> *<span class="title">PullTaskReply</span></span> &#123;</span><br><span class="line">	args := PullTaskArgs&#123;&#125;</span><br><span class="line">	reply := PullTaskReply&#123;&#125;</span><br><span class="line">	<span class="keyword">if</span> call(<span class="string">"Master.AssignTask"</span>, &amp;args, &amp;reply) &#123;</span><br><span class="line">		<span class="keyword">return</span> &amp;reply</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">RunMapTask</span><span class="params">(task *MapTask)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> debug &#123;</span><br><span class="line">		log.Printf(<span class="string">"Receive a map task: %v\n"</span>, *task)</span><br><span class="line">	&#125;</span><br><span class="line">	file, err := os.Open(task.FileName)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">"cannot open %v"</span>, task.FileName)</span><br><span class="line">	&#125;</span><br><span class="line">	content, err := ioutil.ReadAll(file)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">"cannot read %v"</span>, task.FileName)</span><br><span class="line">	&#125;</span><br><span class="line">	file.Close()</span><br><span class="line">	kva := w.Mapf(task.FileName, <span class="keyword">string</span>(content))</span><br><span class="line"></span><br><span class="line">	sort.Sort(ByKey(kva))</span><br><span class="line"></span><br><span class="line">	kvas := <span class="built_in">make</span>([][]KeyValue, task.NReduce)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _, kv := <span class="keyword">range</span> kva &#123;</span><br><span class="line">		outK := ihash(kv.Key) % task.NReduce</span><br><span class="line">		kvas[outK] = <span class="built_in">append</span>(kvas[outK], kv)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	intermediateFiles := <span class="built_in">make</span>([]<span class="keyword">string</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; task.NReduce; i++ &#123;</span><br><span class="line">		os.Mkdir(<span class="string">"maptmp"</span>, os.ModePerm)</span><br><span class="line">		filename := <span class="string">"maptmp/mr-"</span> + strconv.Itoa(task.Id) + <span class="string">"-"</span> + strconv.Itoa(i)</span><br><span class="line">		file, _ := os.Create(filename)</span><br><span class="line">		enc := json.NewEncoder(file)</span><br><span class="line">		<span class="keyword">for</span> _, kv := <span class="keyword">range</span> kvas[i] &#123;</span><br><span class="line">			err := enc.Encode(&amp;kv)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Fatal(<span class="string">"write intermediate file error"</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		intermediateFiles = <span class="built_in">append</span>(intermediateFiles, filename)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	w.ReportTaskFinish(task.Id, Phase_Map, intermediateFiles)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">RunReduceTask</span><span class="params">(task *ReduceTask)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> debug &#123;</span><br><span class="line">		log.Printf(<span class="string">"Receive a reduce task: %v\n"</span>, *task)</span><br><span class="line">	&#125;</span><br><span class="line">	files := task.FileNames</span><br><span class="line">	kva := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>][]<span class="keyword">string</span>)</span><br><span class="line">	<span class="keyword">for</span> _, fileName := <span class="keyword">range</span> files &#123;</span><br><span class="line">		file, err := os.Open(fileName)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Fatalf(<span class="string">"cannot open %v"</span>, fileName)</span><br><span class="line">		&#125;</span><br><span class="line">		dec := json.NewDecoder(file)</span><br><span class="line">		<span class="keyword">for</span> &#123;</span><br><span class="line">			<span class="keyword">var</span> kv KeyValue</span><br><span class="line">			<span class="keyword">if</span> err := dec.Decode(&amp;kv); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">			kva[kv.Key] = <span class="built_in">append</span>(kva[kv.Key], kv.Value)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	ofile, _ := os.Create(<span class="string">"mr-out-"</span> + strconv.Itoa(task.Id))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> k := <span class="keyword">range</span> kva &#123;</span><br><span class="line">		output := w.Reducef(k, kva[k])</span><br><span class="line">		fmt.Fprintf(ofile, <span class="string">"%v %v\n"</span>, k, output)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	w.ReportTaskFinish(task.Id, Phase_Reduce, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Work)</span> <span class="title">ReportTaskFinish</span><span class="params">(taskId <span class="keyword">int</span>, taskType Phase, intermediates []<span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	args := ReportTaskFinishArgs&#123;</span><br><span class="line">		TaskId:            taskId,</span><br><span class="line">		TaskPhase:         taskType,</span><br><span class="line">		IntermediateFiles: intermediates,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	reply := ReportTaskFinishReply&#123;&#125;</span><br><span class="line">	call(<span class="string">"Master.ReportTaskFinish"</span>, &amp;args, &amp;reply)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// send an RPC request to the master, wait for the response.</span></span><br><span class="line"><span class="comment">// usually returns true.</span></span><br><span class="line"><span class="comment">// returns false if something goes wrong.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">call</span><span class="params">(rpcname <span class="keyword">string</span>, args <span class="keyword">interface</span>&#123;&#125;, reply <span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	<span class="comment">// c, err := rpc.DialHTTP("tcp", "127.0.0.1"+":1234")</span></span><br><span class="line">	sockname := masterSock()</span><br><span class="line">	c, err := rpc.DialHTTP(<span class="string">"unix"</span>, sockname)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"dialing:"</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> c.Close()</span><br><span class="line"></span><br><span class="line">	err = c.Call(rpcname, args, reply)</span><br><span class="line">	<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(err)</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>rpc.go</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> mr</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// RPC definitions.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// remember to capitalize all names.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"os"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"strconv"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> PullTaskArgs <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="comment">//Id int64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> PullTaskReply <span class="keyword">struct</span> &#123;</span><br><span class="line">	Task         <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">	Master_Phase Phase</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ReportTaskFinishArgs <span class="keyword">struct</span> &#123;</span><br><span class="line">	TaskId            <span class="keyword">int</span></span><br><span class="line">	TaskPhase         Phase</span><br><span class="line">	IntermediateFiles []<span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ReportTaskFinishReply <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Cook up a unique-ish UNIX-domain socket name</span></span><br><span class="line"><span class="comment">// in /var/tmp, for the master.</span></span><br><span class="line"><span class="comment">// Can't use the current directory since</span></span><br><span class="line"><span class="comment">// Athena AFS doesn't support UNIX-domain sockets.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">masterSock</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	s := <span class="string">"/var/tmp/824-mr-"</span></span><br><span class="line">	s += strconv.Itoa(os.Getuid())</span><br><span class="line">	<span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/03/27/%E5%89%91%E6%8C%87Offer-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -464,427 +936,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/03/23/%E5%89%91%E6%8C%87Offer-%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/23/%E5%89%91%E6%8C%87Offer-%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84/" itemprop="url">剑指Offer-矩阵中的路径</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-23T09:30:45+08:00">
-                2020-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
-                    <span itemprop="name">刷题</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87Offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指Offer</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  431
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。例如，在下面的3×4的矩阵中包含一条字符串“bfce”的路径（路径中的字母用加粗标出）。</p>
-<p>[[“a”,”<strong>b</strong>“,”c”,”e”],<br>[“s”,”<strong>f</strong>“,”<strong>c</strong>“,”s”],<br>[“a”,”d”,”<strong>e</strong>“,”e”]]</p>
-<p>但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：board &#x3D; [[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;E&quot;],[&quot;S&quot;,&quot;F&quot;,&quot;C&quot;,&quot;S&quot;],</span><br><span class="line">[&quot;A&quot;,&quot;D&quot;,&quot;E&quot;,&quot;E&quot;]], word &#x3D; &quot;ABCCED&quot;</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：board &#x3D; [[&quot;a&quot;,&quot;b&quot;],[&quot;c&quot;,&quot;d&quot;]], word &#x3D; &quot;abcd&quot;</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= board.length &lt;= 200</code></li>
-<li><code>1 &lt;= board[i].length &lt;= 200</code></li>
-</ul>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>许久不写 DFS，竟然在这道题上卡了一个小时</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">exist</span><span class="params">(self, board: List[List[str]], word: str)</span> -&gt; bool:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(i, j, k)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> <span class="number">0</span> &lt;= i &lt; len(board) <span class="keyword">or</span> <span class="keyword">not</span> <span class="number">0</span> &lt;= j &lt; len(board[<span class="number">0</span>]) <span class="keyword">or</span> board[i][j] != word[k]: <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">if</span> k == len(word)<span class="number">-1</span>: <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            tmp, board[i][j] = board[i][j], <span class="string">'.'</span></span><br><span class="line">            <span class="keyword">if</span> dfs(i+<span class="number">1</span>, j, k+<span class="number">1</span>) <span class="keyword">or</span> dfs(i<span class="number">-1</span>, j, k+<span class="number">1</span>) <span class="keyword">or</span> dfs(i, j+<span class="number">1</span>, k+<span class="number">1</span>) <span class="keyword">or</span> dfs(i, j<span class="number">-1</span>, k+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            board[i][j] = tmp</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(board)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(len(board[<span class="number">0</span>])):</span><br><span class="line">                <span class="keyword">if</span> dfs(i, j, <span class="number">0</span>): <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/03/22/LeetCode-945-%E4%BD%BF%E6%95%B0%E7%BB%84%E5%94%AF%E4%B8%80%E7%9A%84%E6%9C%80%E5%B0%8F%E5%A2%9E%E9%87%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/22/LeetCode-945-%E4%BD%BF%E6%95%B0%E7%BB%84%E5%94%AF%E4%B8%80%E7%9A%84%E6%9C%80%E5%B0%8F%E5%A2%9E%E9%87%8F/" itemprop="url">LeetCode 945 使数组唯一的最小增量</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-22T11:52:43+08:00">
-                2020-03-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
-                    <span itemprop="name">刷题</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定整数数组 A，每次 <em>move</em> 操作将会选择任意 <code>A[i]</code>，并将其递增 <code>1</code>。</p>
-<p>返回使 <code>A</code> 中的每个值都是唯一的最少操作次数。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,2,2]</span><br><span class="line">输出：1</span><br><span class="line">解释：经过一次 move 操作，数组将变为 [1, 2, 3]。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：[3,2,1,2,1,7]</span><br><span class="line">输出：6</span><br><span class="line">解释：经过 6 次 move 操作，数组将变为 [3, 4, 1, 2, 5, 7]。</span><br><span class="line">可以看出 5 次或 5 次以下的 move 操作是不能让数组的每个值唯一的。</span><br></pre></td></tr></table></figure>
-<p><strong>提示：</strong></p>
-<ol>
-<li><code>0 &lt;= A.length &lt;= 40000</code></li>
-<li><code>0 &lt;= A[i] &lt; 40000</code></li>
-</ol>
-<h1 id="思路及代码"><a href="#思路及代码" class="headerlink" title="思路及代码"></a>思路及代码</h1><h2 id="解法一：普通排序再遍历"><a href="#解法一：普通排序再遍历" class="headerlink" title="解法一：普通排序再遍历"></a>解法一：普通排序再遍历</h2><p>将数组 <code>A</code> 排序，遍历每个元素，如果当前元素小于等于其前面的元素，就将当前元素等于前面元素加1</p>
-<p>时间复杂度为 $O(n\log n)$</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minIncrementForUnique</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">    sort (A.<span class="built_in">begin</span>(), A.<span class="built_in">end</span>());</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; A.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (A[i] &lt;= A[i<span class="number">-1</span>]) &#123;</span><br><span class="line">            ans += A[i<span class="number">-1</span>] - A[i] + <span class="number">1</span>;</span><br><span class="line">            A[i] = A[i<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="解法二：计数法（预存每个数的出现次数）"><a href="#解法二：计数法（预存每个数的出现次数）" class="headerlink" title="解法二：计数法（预存每个数的出现次数）"></a>解法二：计数法（预存每个数的出现次数）</h2><p>注意到数组 <code>A</code> 各元素的范围在 <code>[0, 40000)</code> 之间。因此，我们可以开辟一个大小为 40000 的数组 $times$，存储每个数的出现次数。然后遍历数组 $times$，如果某个数 $i$ 的出现次数 $times[i]$ 大于1，那么这个数只留下 1 个，剩下 $times[i]-1$ 个数都 加 1 变为 $i+1$ ，如此循环下去。</p>
-<p>时间复杂度为 $O(n)$</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> times[<span class="number">40000</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minIncrementForUnique</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(times, <span class="number">0</span>, <span class="keyword">sizeof</span> times);</span><br><span class="line">    <span class="keyword">int</span> minV = <span class="number">40000</span>, maxV = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        times[A[i]]++;</span><br><span class="line">        minV = <span class="built_in">min</span>(minV, A[i]);</span><br><span class="line">        maxV = <span class="built_in">max</span>(maxV, A[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = minV; i &lt; maxV; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (times[i] &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 更新答案</span></span><br><span class="line">            ans += times[i] - <span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 将剩下的 times[i]-1 个数变为 i+1</span></span><br><span class="line">            times[i+<span class="number">1</span>] += times[i] - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设 maxV 有 x 个，则需要更新 (x - 1) * x / 2 次</span></span><br><span class="line">    ans += (times[maxV] - <span class="number">1</span>) * times[maxV] / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="解法三：线性探测"><a href="#解法三：线性探测" class="headerlink" title="解法三：线性探测"></a>解法三：线性探测</h2><p><strong>该解法摘自 LeetCode</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">作者：sweetiee</span><br><span class="line">链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;minimum-increment-to-make-array-unique&#x2F;solution&#x2F;ji-shu-onxian-xing-tan-ce-fa-onpai-xu-onlogn-yi-ya&#x2F;</span><br><span class="line">来源：力扣（LeetCode）</span><br></pre></td></tr></table></figure>
-<p>这道题可以看作是 把原数组映射到一个地址不冲突的区域，映射后的地址不小于原数组对应的元素。</p>
-<p>比如，<code>[3, 2, 1, 2, 1, 7]</code> 就映射成了 <code>[3, 2, 1, 4, 5, 7]</code></p>
-<p>那么这其实和 <strong>解决hash冲突的线性探测法</strong>很像，只不过这里的探测是单向（往右）的：如果地址冲突了，会探测它的下一个位置，如果下一个位置还是冲突，继续向后看，直到第一个不冲突的位置为止。</p>
-<p>但是，直接进行线性探测可以会因为多次冲突导致探测时间太长，因此我们可以考虑在探测的过程中进行<strong>路径压缩</strong>。</p>
-<p>如何路径压缩呢？<strong>就是经过某条路径最终探测到一个空位置x后，将这条路径上的值都变成空位置所在的下标x，那么假如下次探测的点又是这条路径上的点，则可以直接跳转到这次探测到的空位置x，从x开始继续探测。</strong></p>
-<p>下面用样例2：[3, 2, 1, 2, 1, 7]，来模拟一遍线性探测的过程.</p>
-<p><strong>step1: 插入3：</strong></p>
-<p><img src="1.png" alt=""></p>
-<p>因为3的位置是空的，所以直接放入3即可。（此时数组变成了上图，红色表示本次的更改）</p>
-<p><strong>step2: 插入2：</strong></p>
-<p><img src="2.png" alt=""></p>
-<p><strong>step3: 插入1：</strong></p>
-<p><img src="3.png" alt=""></p>
-<p><strong>step4: 插入2：</strong></p>
-<p><img src="4.png" alt=""></p>
-<p>此时我们发现2的位置已经有值了，于是继续向后探测，直到找到空位4，于是2映射到了4。<br>并且！！我们要对刚刚走过的路径2-&gt;3-&gt;4进行压缩，即将他们的值都设置为本次探测到的空位4(那么下次探测就可以直接从4往后找了)。</p>
-<p><strong>step5: 插入1：</strong></p>
-<p><img src="5.png" alt=""></p>
-<p><strong>step6: 插入7：</strong></p>
-<p><img src="6.png" alt=""></p>
-<p>代码如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">move</span>[<span class="number">80000</span>];</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findPos</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="built_in">move</span>[x];</span><br><span class="line">        <span class="keyword">return</span> b == <span class="number">-1</span> ? <span class="built_in">move</span>[x] = x : <span class="built_in">move</span>[x] = findPos(b + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minIncrementForUnique</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">memset</span>(<span class="built_in">move</span>, <span class="number">-1</span>, <span class="keyword">sizeof</span> <span class="built_in">move</span>);</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x : A) &#123;</span><br><span class="line">            ans += findPos(x) - x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -934,7 +985,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -956,7 +1007,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
