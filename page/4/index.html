@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/04/08/%E5%89%91%E6%8C%87Offer-%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2021/02/01/LeetCode-37-%E8%A7%A3%E6%95%B0%E7%8B%AC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -281,7 +281,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/08/%E5%89%91%E6%8C%87Offer-%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/" itemprop="url">剑指Offer 链表中倒数第k个节点</a></h1>
+                <a class="post-title-link" href="/2021/02/01/LeetCode-37-%E8%A7%A3%E6%95%B0%E7%8B%AC/" itemprop="url">LeetCode 37 解数独</a></h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-08T09:11:00+08:00">
-                2020-04-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-01T10:43:25+08:00">
+                2021-02-01
               </time>
             
 
@@ -327,8 +327,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87Offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指Offer</span>
+                  <a href="/categories/%E5%88%B7%E9%A2%98/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -358,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  362
+                  2.1k
                 </span>
               
 
@@ -374,7 +374,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  9
                 </span>
               
             </div>
@@ -397,18 +397,46 @@
       
         
           
-            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个节点是值为4的节点。</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 k &#x3D; 2.</span><br><span class="line"></span><br><span class="line">返回链表 4-&gt;5.</span><br></pre></td></tr></table></figure>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>这个题最容易想到的思路是先将链表遍历一遍，计算出链表的长度 $n$ ，然后再遍历链表找到第 $n - k + 1$ 个元素。这种方法需要遍历链表两次，在时间上有些劣势。</p>
-<p>其实我们可以只遍历链表一次就可以完成。算法流程如下</p>
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>编写一个程序，通过填充空格来解决数独问题。</p>
+<p>一个数独的解法需<strong>遵循如下规则</strong>：</p>
 <ol>
-<li>设置两个指针：fast 和 slow。</li>
-<li>fast 指针先向前走 $k$ 步（结束之后，fast 指针和 slow 指针间相差 $k$ 步）</li>
-<li>两个指针共同移动（都向前走 1 步，如此循环），当 fast 指针走过链表尾节点后跳出循环</li>
-<li>此时 slow 指针与尾节点的距离为 $k-1$,  即 slow 指针指向了链表倒数第 $k$ 个节点。</li>
+<li>数字 <code>1-9</code> 在每一行只能出现一次。</li>
+<li>数字 <code>1-9</code> 在每一列只能出现一次。</li>
+<li>数字 <code>1-9</code> 在每一个以粗实线分隔的 <code>3x3</code> 宫内只能出现一次。</li>
 </ol>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">getKthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    ListNode fast = head, slow = head;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++) </span><br><span class="line">        fast = fast.next;</span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="keyword">null</span>) &#123;</span><br><span class="line">        fast = fast.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>空白格用 <code>&#39;.&#39;</code> 表示。</p>
+<p><img src="1.png" alt=""></p>
+<p>一个数独。</p>
+<p><img src="2.png" alt=""></p>
+<p>答案被标成红色。</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li>给定的数独序列只包含数字 <code>1-9</code> 和字符 <code>&#39;.&#39;</code> 。</li>
+<li>你可以假设给定的数独只有唯一解。</li>
+<li>给定数独永远是 <code>9x9</code> 形式的。</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>这个题目显然是用回溯法来求解。我们可以依次枚举每一个空白格中填的数字，通过递归 + 回溯的方式枚举所有的填法。当递归填完最后一个空白格后，如果仍没有冲突发生，说明数独已经解出。如果在递归过程中，当前的空白格不能填下任何一个数字，说明之前某次填的有问题，那么就进行回溯。</p>
+<p>如何判断一个空白格中能否填写某个数字呢，这需要去记录该空白格所在的行、列以及九宫格中已经填写过的数字，每个数字在同一行、同一列、同一个九宫格中只能出现一次。因此我们可以使用 <code>rows[i], columns[j], blocks[x][y]</code> 分别表示第 $i$ 行，第 $j$ 列，第$(x, y)$ 个九宫格中填写数字的情况。表示数字填写的方法有两种：一种是使用类似哈希表的方法，用长度为9的布尔数组记录分别记录数字 1-9 是否填写过；另一种是使用一个 9 bit的整数来记录，第 $i$ 位代表数字 $i+1$ 是否填写过，该位为0表示未填写过，1表示填写过。</p>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><h2 id="原始回溯解法"><a href="#原始回溯解法" class="headerlink" title="原始回溯解法"></a>原始回溯解法</h2><p>使用一个长度为 9 的布尔数组记录数字 [1, 9] 是否出现过，数组第 $i$ 个元素的值为 true 当且仅当数字 $i+1$ 出现过。例如 <code>rows[2][3] = true</code> 表示数字 4 在第 2 行已经出现过，那么在遍历第二行的空白格时，就不能填入数字 4。</p>
+<p>我们首先找到所有的空白格，放到数组 <code>emptys</code> 中，而对于有数字的格子，分别更新 <code>rows, cols, blocks</code> 这三个数组的状态值。然后，依次对每个空白格子递归填数即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 行、列</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">boolean</span>[][] rows, cols;</span><br><span class="line"><span class="comment">// 九宫格</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">boolean</span>[][][] blocks;</span><br><span class="line"><span class="comment">// 记录空白格子的下标</span></span><br><span class="line"><span class="keyword">private</span> List&lt;<span class="keyword">int</span>[]&gt; emptys;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">solveSudoku</span><span class="params">(<span class="keyword">char</span>[][] board)</span> </span>&#123;</span><br><span class="line">    rows = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">9</span>][<span class="number">9</span>];</span><br><span class="line">    cols = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">9</span>][<span class="number">9</span>];</span><br><span class="line">    blocks = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">3</span>][<span class="number">3</span>][<span class="number">9</span>];</span><br><span class="line">    emptys = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (board[i][j] == <span class="string">'.'</span>) &#123;</span><br><span class="line">            emptys.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i, j&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 将数字范围规定在0-8，因此减1</span></span><br><span class="line">            <span class="keyword">int</span> v = board[i][j] - <span class="string">'0'</span> - <span class="number">1</span>;</span><br><span class="line">            rows[i][v] = cols[j][v] = blocks[i / <span class="number">3</span>][j / <span class="number">3</span>][v] = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dfs(board, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pos == emptys.size()) &#123;</span><br><span class="line">        <span class="comment">// 空白格子都填完了</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> r = emptys.get(pos)[<span class="number">0</span>], c = emptys.get(pos)[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) &#123; <span class="comment">// 尝试数字i+1能否填写</span></span><br><span class="line">        <span class="keyword">if</span> (!rows[r][i] &amp;&amp; !cols[c][i] &amp;&amp; !blocks[r / <span class="number">3</span>][c / <span class="number">3</span>][i]) &#123;</span><br><span class="line">            <span class="comment">// board[r][c] = i</span></span><br><span class="line">            rows[r][i] = cols[c][i] = blocks[r / <span class="number">3</span>][c / <span class="number">3</span>][i] = <span class="keyword">true</span>;</span><br><span class="line">            board[r][c] = (<span class="keyword">char</span>) (i + <span class="string">'0'</span> + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (dfs(board, pos + <span class="number">1</span>)) &#123;</span><br><span class="line">                <span class="comment">// 填写数字i+1可以使得数独有解</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 不可填写数字i+1，恢复原状态</span></span><br><span class="line">            rows[r][i] = cols[c][i] = blocks[r / <span class="number">3</span>][c / <span class="number">3</span>][i] = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 数字1-9都不能填，说明前面某次填写有问题，因此回溯</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用位运算进行状态压缩"><a href="#使用位运算进行状态压缩" class="headerlink" title="使用位运算进行状态压缩"></a>使用位运算进行状态压缩</h2><p>上面的解法中，使用了长度为 9 的数组来表示每个数字是否出现过，算法的空间复杂度并不优秀。为了减少空间复杂度，我们可以使用一个整数来表示每个数字是否出现过。</p>
+<p>具体地，数 $b$ 的二进制表示的第 $i$ 位（从低到高，最低位为第 $0$ 位）为 $1$，当且仅当数字 $i+1$ 出现过。例如当 $b$ 的二进制为 $(011000100)_2$ 时，就表示数字 $3, 7, 8$ 已经出现过了。</p>
+<p>在本题中会用到下面几种位运算的技巧：</p>
+<ul>
+<li><p><strong>将数字 $digit$ 的第 $i$ 位设为1，并且能够再将第 $i$ 位恢复为0</strong>：</p>
+<p>  使用 <code>digit ^ (1&lt;&lt; i)</code>。若原来是0，则第一次会将第 $i$ 位设为 1，第二次会将第 $i$ 位设为 0。</p>
+</li>
+<li><p><strong>计算第 $(i, j)$ 个空白格子可以填写哪些数字</strong></p>
+<p>  首先计算  <code>rows[i] | cols[j] | blocks[i / 3][j / 3]</code> 得到当前已经填写过的所有数字。然后对这个值<strong>按位取反</strong>，取反后第 $k$ 位为1就表示该位置可以填入数字 $k+1$，因此我们可以通过寻找 1 来进行枚举。但由于按位取反后，这个数的高位（第10-31位）也全都变成了 1，而这些位置是我们不应该枚举到的。为了排除这些位置，我们可以将按位取反后的值与 $(111111111)<em>2 = (1FF)</em>{16}$ 进行<strong>按位与</strong>运算，将所有无关的位置设为 0。</p>
+<p>  可以使用 <code>mask &amp;= (mask - 1)</code> 来枚举二进制中的所有 1。</p>
+<p>  可以使用 $b \ \&amp; \ (-b) $ 或 $b \ \&amp; \ (\sim b + 1) $  得到 $b$ 二进制表示中最低位的 1。 例如 <code>(010100) &amp; (101100) = 000100</code>。</p>
+<p>  当我们得到这个最低位的 1 时，我们可以通过一些语言自带的函数得到这个最低位的 1究竟是第几位，例如 <code>Integer.bitCount(digit - 1)</code></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] rows, cols;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[][] blocks;</span><br><span class="line"><span class="keyword">private</span> List&lt;<span class="keyword">int</span>[]&gt; spaces;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">solveSudoku</span><span class="params">(<span class="keyword">char</span>[][] board)</span> </span>&#123;</span><br><span class="line">    rows = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>];</span><br><span class="line">    cols = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>];</span><br><span class="line">    blocks = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][<span class="number">3</span>];</span><br><span class="line">    spaces = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (board[i][j] == <span class="string">'.'</span>) &#123;</span><br><span class="line">            spaces.add(<span class="keyword">new</span> <span class="keyword">int</span>[] &#123;i, j&#125;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> digit = board[i][j] - <span class="string">'0'</span> - <span class="number">1</span>;</span><br><span class="line">            flip(i, j, digit);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dfs(board, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pos == spaces.size()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i = spaces.get(pos)[<span class="number">0</span>], j = spaces.get(pos)[<span class="number">1</span>];</span><br><span class="line">    <span class="comment">// 若mask的第i位为1，则说明可以填写数字i+1</span></span><br><span class="line">    <span class="keyword">int</span> mask = ~(rows[i] | cols[j] | blocks[i / <span class="number">3</span>][j / <span class="number">3</span>]) &amp; <span class="number">0x1ff</span>;</span><br><span class="line">    <span class="keyword">for</span> (; mask != <span class="number">0</span>; mask &amp;= (mask - <span class="number">1</span>)) &#123; <span class="comment">// 枚举所有的1，并不断消除最低位的1</span></span><br><span class="line">        <span class="comment">// 找到当前最低位的1</span></span><br><span class="line">        <span class="keyword">int</span> digitMask = mask &amp; -mask;</span><br><span class="line">        <span class="comment">// 当前这个最低位的1是第几位</span></span><br><span class="line">        <span class="keyword">int</span> digit = Integer.bitCount(digitMask - <span class="number">1</span>);</span><br><span class="line">        flip(i, j, digit);</span><br><span class="line">        board[i][j] = (<span class="keyword">char</span>) (digit + <span class="string">'0'</span> + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (dfs(board, pos + <span class="number">1</span>)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        flip(i, j, digit);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">flip</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> digit)</span> </span>&#123;</span><br><span class="line">    rows[i] ^= (<span class="number">1</span> &lt;&lt; digit);</span><br><span class="line">    cols[j] ^= (<span class="number">1</span> &lt;&lt; digit);</span><br><span class="line">    blocks[i / <span class="number">3</span>][j / <span class="number">3</span>] ^= (<span class="number">1</span> &lt;&lt; digit);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="预填确定值"><a href="#预填确定值" class="headerlink" title="预填确定值"></a>预填确定值</h2><p>在数独中，如果一个空白格子只有唯一的数可以填入，即其对应的 <code>mask &amp;= (mask - 1) = 0</code>。此时，我们可以直接在这个空白格中填入这个数，不用等到后续的递归遍历，这样可以进一步减少递归的层数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] rows, cols;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[][] blocks;</span><br><span class="line"><span class="keyword">private</span> List&lt;<span class="keyword">int</span>[]&gt; spaces;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">solveSudoku</span><span class="params">(<span class="keyword">char</span>[][] board)</span> </span>&#123;</span><br><span class="line">    rows = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>];</span><br><span class="line">    cols = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>];</span><br><span class="line">    blocks = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][<span class="number">3</span>];</span><br><span class="line">    spaces = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (board[i][j] != <span class="string">'.'</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> digit = board[i][j] - <span class="string">'0'</span> - <span class="number">1</span>;</span><br><span class="line">            flip(i, j, digit);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        <span class="keyword">boolean</span> modified = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (board[i][j] == <span class="string">'.'</span>) &#123;</span><br><span class="line">                <span class="keyword">int</span> mask = ~(rows[i] | cols[j] | blocks[i / <span class="number">3</span>][j / <span class="number">3</span>]) &amp; <span class="number">0x1ff</span>;</span><br><span class="line">                <span class="comment">// mask &amp; (mask - 1) 这个式子可以消除mask最低位的1</span></span><br><span class="line">                <span class="comment">// 若消除后变为0，则说明mask中只有一个1</span></span><br><span class="line">                <span class="keyword">if</span> ((mask &amp; (mask - <span class="number">1</span>)) == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">int</span> digit = Integer.bitCount(mask - <span class="number">1</span>);</span><br><span class="line">                    flip(i, j, digit);</span><br><span class="line">                    board[i][j] = (<span class="keyword">char</span>) (digit + <span class="string">'0'</span> + <span class="number">1</span>);</span><br><span class="line">                    modified = <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!modified) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (board[i][j] == <span class="string">'.'</span>) &#123;</span><br><span class="line">            spaces.add(<span class="keyword">new</span> <span class="keyword">int</span>[] &#123;i, j&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dfs(board, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">flip</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> digit)</span> </span>&#123;</span><br><span class="line">    rows[i] ^= (<span class="number">1</span> &lt;&lt; digit);</span><br><span class="line">    cols[j] ^= (<span class="number">1</span> &lt;&lt; digit);</span><br><span class="line">    blocks[i / <span class="number">3</span>][j / <span class="number">3</span>] ^= (<span class="number">1</span> &lt;&lt; digit);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pos == spaces.size()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i = spaces.get(pos)[<span class="number">0</span>], j = spaces.get(pos)[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> mask = ~(rows[i] | cols[j] | blocks[i / <span class="number">3</span>][j / <span class="number">3</span>]) &amp; <span class="number">0x1ff</span>;</span><br><span class="line">    <span class="keyword">for</span> (; mask != <span class="number">0</span>; mask &amp;= (mask - <span class="number">1</span>)) &#123;</span><br><span class="line">        <span class="keyword">int</span> digitMask = mask &amp; -mask;</span><br><span class="line">        <span class="keyword">int</span> digit = Integer.bitCount(digitMask - <span class="number">1</span>);</span><br><span class="line">        flip(i, j, digit);</span><br><span class="line">        board[i][j] = (<span class="keyword">char</span>) (digit + <span class="string">'0'</span> + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (dfs(board, pos + <span class="number">1</span>)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        flip(i, j, digit);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -457,7 +485,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/04/07/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/10/22/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -476,7 +504,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/07/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/" itemprop="url">程序员面试金典 旋转矩阵</a></h1>
+                <a class="post-title-link" href="/2020/10/22/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AD%A6%E4%B9%A0/" itemprop="url">Java虚拟机学习</a></h1>
         
 
         <div class="post-meta">
@@ -488,8 +516,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-07T09:17:04+08:00">
-                2020-04-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-22T12:25:37+08:00">
+                2020-10-22
               </time>
             
 
@@ -511,8 +539,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
-                    <span itemprop="name">刷题</span>
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
                   </a>
                 </span>
 
@@ -522,8 +550,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8/" itemprop="url" rel="index">
-                    <span itemprop="name">程序员面试金典</span>
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -553,7 +581,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  522
+                  743
                 </span>
               
 
@@ -592,30 +620,31 @@
       
         
           
-            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一幅由 <code>N × N</code> 矩阵表示的图像，其中每个像素的大小为 4 字节。请你设计一种算法，将图像旋转 90 度。<strong>不能使用额外的内存空间</strong></p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">给定 matrix &#x3D; </span><br><span class="line">[</span><br><span class="line">  [1,2,3],</span><br><span class="line">  [4,5,6],</span><br><span class="line">  [7,8,9]</span><br><span class="line">],</span><br><span class="line">原地旋转输入矩阵，使其变为:</span><br><span class="line">[</span><br><span class="line">  [7,4,1],</span><br><span class="line">  [8,5,2],</span><br><span class="line">  [9,6,3]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">给定 matrix &#x3D;</span><br><span class="line">[</span><br><span class="line">  [ 5, 1, 9,11],</span><br><span class="line">  [ 2, 4, 8,10],</span><br><span class="line">  [13, 3, 6, 7],</span><br><span class="line">  [15,14,12,16]</span><br><span class="line">], </span><br><span class="line">原地旋转输入矩阵，使其变为:</span><br><span class="line">[</span><br><span class="line">  [15,13, 2, 5],</span><br><span class="line">  [14, 3, 4, 1],</span><br><span class="line">  [12, 6, 8, 9],</span><br><span class="line">  [16, 7,10,11]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p><strong>转运下面大神的思路</strong></p>
-<blockquote>
-<p><a href="https://leetcode-cn.com/problems/rotate-matrix-lcci/solution/c-tu-jie-yuan-di-cao-zuo-ji-bai-shuang-bai-vv-by-t/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/rotate-matrix-lcci/solution/c-tu-jie-yuan-di-cao-zuo-ji-bai-shuang-bai-vv-by-t/</a></p>
-</blockquote>
-<p><strong>来观察下正方形矩阵旋转90度时究竟发生了什么。</strong></p>
-<p><img src="1.gif" alt=""></p>
-<p>观察图中颜色相同的四个位置，当旋转90度后，对应位置的元素发生了顺时针的交换。</p>
-<p>设四个位置中，位于<strong>左上角区域</strong>的位置坐标为 $(i,j)$，则按顺时针顺序，四个位置分别为 $(i,j)$,  $(j, n-i-1)$,  $(n-i-1,n-j-1)$,  $(n-j-1,i)$ </p>
-<p>matrix.size() 为奇数时，位置的对应关系相同，但左上角区域并<strong>不是整个矩阵的四分之一</strong>，如下图示：</p>
-<p><img src="2.png" alt=""></p>
-<p>其实就是<strong>多了中间列的上半部分</strong>。</p>
-<p>那么现在捋一下如何<strong>原地操作元素</strong>：<br>枚举左上区域的所有位置，然后通过上面总结的位置关系直接交换元素。<br>对于一个位置 (i,j)，需要<strong>交换三次</strong>：</p>
-<ol>
-<li><code>swap(matrix[i][j], matrix[j][n-i-1]);</code></li>
-<li><code>swap(matrix[i][j], matrix[n-i-1][n-j-1]);</code></li>
-<li><code>swap(matrix[i][j], matrix[n-j-1][i]);</code></li>
-</ol>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = matrix.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 这里行 或 列，谁多出一个都可以。即也可以是 i &lt; (n+1) / 2</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n / <span class="number">2</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (n + <span class="number">1</span>) / <span class="number">2</span>; j++) &#123;</span><br><span class="line">        swap(matrix[i][j], matrix[j][n-i<span class="number">-1</span>]);</span><br><span class="line">        swap(matrix[i][j], matrix[n-i<span class="number">-1</span>][n-j<span class="number">-1</span>]);</span><br><span class="line">        swap(matrix[i][j], matrix[n-j<span class="number">-1</span>][i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+            <h1 id="Java内存区域"><a href="#Java内存区域" class="headerlink" title="Java内存区域"></a>Java内存区域</h1><h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><p>Java 虚拟机所管理的内存主要包括以下五个运行时区域：</p>
+<ul>
+<li>程序计数器（Program Counter Register）</li>
+<li>虚拟机栈（VM Stack）</li>
+<li>本地方法栈（Native Method Stack）</li>
+<li>方法区（Method Area）</li>
+<li>堆（Heap）</li>
+</ul>
+<p>其中，每个线程都会有自己的 <code>程序计数器</code>、<code>虚拟机栈</code> 和 <code>本地方法栈</code>。<code>堆</code> 和 <code>方法区</code> 由所有线程共享。</p>
+<p><img src="1.png" alt=""></p>
+<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器可以看作是当前线程所执行的字节码的行号指示器。<strong>每个线程都有自己的程序计数器</strong>，以便线程切换后相应线程能恢复到正确的执行位置。</p>
+<p>如果线程正在执行的是一个 Java 方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果正在执行的是本地 (Native) 方法，这个计数器值则应为空。</p>
+<p>程序计数器是<strong>唯一一个</strong>没有规定任何 OutOfMemoryError 情况的区域。</p>
+<h3 id="Java-虚拟机栈"><a href="#Java-虚拟机栈" class="headerlink" title="Java 虚拟机栈"></a>Java 虚拟机栈</h3><p>Java 虚拟机栈描述的是 Java 方法执行的线程内存模型。每个方法执行的时候，Java 虚拟机都会同步创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态连接、方法出口等信息。每一个方法被调用直至执行完毕的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</p>
+<p>局部变量表存放了编译器可知的各种 Java 虚拟机基本数据类型（ boolean, byte, char, short, int, float, long, double）、对象引用（reference 类型）和 returnAddress 类型（指向了一条字节码指令的地址）。</p>
+<p>这些数据类型再局部变量表中的存储空间以局部变量槽（Slot）来表示，其中64位的long 和 double 类型的数据会占用两个变量槽，其余数据类型占用一个变量槽。<strong>局部变量表所需的内存空间在编译期间完成分配</strong>。在方法运行期间不会改变局部变量表的大小（这里的 “大小” 是指变量槽的数量）。</p>
+<p>Java 虚拟机栈会有两类异常状况：</p>
+<ul>
+<li>如果线程请求的栈深度大于虚拟机所允许的深度，将会抛出 StackOverflowError 异常</li>
+<li>如果线程申请栈空间 或 栈扩展（要注意HotSpot虚拟机的栈容量不可以动态扩展）失败时，会抛出 OutOfMemoryError 异常。</li>
+</ul>
+<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>本地方法栈 与 Java虚拟机栈所发挥的作用很相似，区别是虚拟机栈为虚拟机执行 Java 方法服务，而本地方法栈为虚拟机用到的本地（Native）方法服务。</p>
+<h3 id="Java-堆"><a href="#Java-堆" class="headerlink" title="Java 堆"></a>Java 堆</h3><p>Java 堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。</p>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><h3 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h3><h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3><h2 id="Java对象的分配、布局和访问"><a href="#Java对象的分配、布局和访问" class="headerlink" title="Java对象的分配、布局和访问"></a>Java对象的分配、布局和访问</h2><p>sdf</p>
+<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1>
           
         
       
@@ -663,7 +692,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/04/04/LeetCode-42-%E6%8E%A5%E9%9B%A8%E6%B0%B4/">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/07/18/LeetCode-802-%E6%89%BE%E5%88%B0%E6%9C%80%E7%BB%88%E7%9A%84%E5%AE%89%E5%85%A8%E7%8A%B6%E6%80%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -682,7 +711,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/04/LeetCode-42-%E6%8E%A5%E9%9B%A8%E6%B0%B4/" itemprop="url">LeetCode 42 接雨水</a></h1>
+                <a class="post-title-link" href="/2020/07/18/LeetCode-802-%E6%89%BE%E5%88%B0%E6%9C%80%E7%BB%88%E7%9A%84%E5%AE%89%E5%85%A8%E7%8A%B6%E6%80%81/" itemprop="url">LeetCode 802 找到最终的安全状态</a></h1>
         
 
         <div class="post-meta">
@@ -694,8 +723,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-04T17:16:38+08:00">
-                2020-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-18T19:11:45+08:00">
+                2020-07-18
               </time>
             
 
@@ -719,6 +748,17 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
                     <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -748,7 +788,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  985
                 </span>
               
 
@@ -764,7 +804,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  4
                 </span>
               
             </div>
@@ -787,58 +827,22 @@
       
         
           
-            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定 <em>n</em> 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
-<p><img src="1.png" alt=""></p>
-<p>上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 <strong>感谢 Marcos</strong> 贡献此图。</p>
-<p><strong>示例:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [0,1,0,2,1,0,1,3,2,1,2,1]</span><br><span class="line">输出: 6</span><br></pre></td></tr></table></figure>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>根据木桶原理，每根柱子能够承接雨水的数量等于其两边最大高度柱子中的较小者减去当前柱子的高度。</p>
-<p>举个栗子，对于下面的柱子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[4, 3, 1, 2, 5, 4]</span><br></pre></td></tr></table></figure>
-<p>柱子 1 所能承接雨水的数量为 3。计算方法是：分别寻找柱子 1 左右两边高度最高的柱子——柱子 4 和 柱子 5；取两个柱子中高度较小者——柱子 4；柱子 4 的高度减去柱子 1 的高度 得到结果为3。</p>
-<p>因此，问题求解的核心在于，对于数组中的每个元素，如何找到其左右两边元素的最大值。</p>
-<h2 id="思路1-动态规划"><a href="#思路1-动态规划" class="headerlink" title="思路1  动态规划"></a>思路1  动态规划</h2><ul>
-<li>令 <code>left_max[i]​</code>  表示数组 <code>height</code> 中从最左端到下标 i 最高的柱子高度，则 <code>left_max[i]  = max(left_max[i-1], height[i])​</code></li>
-<li>令 <code>right_max[i]​</code> 表示数组 <code>height</code> 中从下标 i 到最右端最高的柱子高度，则  <code>right_max[i] = max(right_max[i+1], height[i])</code></li>
-<li>遍历数组 $height$，将 <code>min(left_max[i], right_max[i]) - height[i]</code> 更新到答案中</li>
-</ul>
-<p>算法时间复杂度为 $O(n)$，空间复杂度为 $O(n)$</p>
-<p><strong>代码如下</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">height</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">height</span> == null)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span> = <span class="built_in">height</span>.<span class="built_in">size</span>();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left_max(<span class="built_in">size</span>), right_max(<span class="built_in">size</span>);</span><br><span class="line">    left_max[<span class="number">0</span>] = <span class="built_in">height</span>[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="built_in">size</span>; i++) &#123;</span><br><span class="line">        left_max[i] = <span class="built_in">max</span>(<span class="built_in">height</span>[i], left_max[i - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    right_max[<span class="built_in">size</span> - <span class="number">1</span>] = <span class="built_in">height</span>[<span class="built_in">size</span> - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="built_in">size</span> - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        right_max[i] = <span class="built_in">max</span>(<span class="built_in">height</span>[i], right_max[i + <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="built_in">size</span> - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        ans += <span class="built_in">min</span>(left_max[i], right_max[i]) - <span class="built_in">height</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="思路2-双指针"><a href="#思路2-双指针" class="headerlink" title="思路2 双指针"></a>思路2 双指针</h2><p>在上面动态规划的解法中，我们用到了 $left_max, right_max$ 两个数组，但是这两个数组中的每个元素其实我们只使用了一次，也就是说，当我们使用 $left_max[i]$ 时，$left_max[0] \ 至 \ left_max[i-1]$ 都不会再用到了。把这些不会用到的元素也存下来就有些浪费空间了，现在我们就来看一下如何去掉这两个数组。</p>
-<p>先回顾一下两个数组是如何更新的</p>
-<p>$left_max[i] = max(left_max[i-1], height[i])$</p>
-<p>$right_max[i] = max(right_max[i+1], height[i])$</p>
-<p>可以看到：left_max[i] 的值只与 left_max[i-1] 有关，与 left_max[0] 至 left_max[i-2] 的值都无关。设 left_max[i] 是本次遍历中所要计算的最大值，那么 left_max[i-1] 就是遍历所要计算的最大值，因此，我们完全可以只通过left_max这一个变量来维护这一系列的最大值</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等号左边的left_max是本次要计算的left_max，相当于left_max[i]</span></span><br><span class="line"><span class="comment">// 等号右边的left_max是前一次遍历中计算的left_max, 相当于left_max[i-1]</span></span><br><span class="line">left_max = <span class="built_in">max</span>(left_max, <span class="built_in">height</span>[i])</span><br></pre></td></tr></table></figure>
-<p>同理，right_max[i] 也可由 right_max 替代</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等号左边的right_max是本次要计算的right_max，相当于right_max[i]</span></span><br><span class="line"><span class="comment">// 等号右边的right_max是前一次遍历中计算的right_max, 相当于right_max[i+1]</span></span><br><span class="line">right_max = <span class="built_in">max</span>(right_max, <span class="built_in">height</span>[i])</span><br></pre></td></tr></table></figure>
-<p>回到我们的题目中来，我们可以使用上面的优化，先将代码中的left_max数组去掉</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">height</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">height</span> == null)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span> = <span class="built_in">height</span>.<span class="built_in">size</span>();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; right_max(<span class="built_in">size</span>);</span><br><span class="line">    left_max = <span class="built_in">height</span>[<span class="number">0</span>];</span><br><span class="line">    right_max[<span class="built_in">size</span> - <span class="number">1</span>] = <span class="built_in">height</span>[<span class="built_in">size</span> - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="built_in">size</span> - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        right_max[i] = <span class="built_in">max</span>(<span class="built_in">height</span>[i], right_max[i + <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="built_in">size</span> - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        left_max = <span class="built_in">max</span>(left_max, <span class="built_in">height</span>[i]);</span><br><span class="line">        ans += <span class="built_in">min</span>(left_max, right_max[i]) - <span class="built_in">height</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那么，right_max数组是否也能直接去掉呢？显然是不行的，因此我们的求解过程是<strong>从左到右</strong>遍历的，left_max数组可以去掉的原因是它的计算过程也是从左到右遍历的，而right_max数组的计算过程是<strong>从右到左</strong>遍历的，因此不能直接去掉。</p>
-<p>也就是说，无论是我们从左往右算，还是从右往左算，都只能去掉两个数组中的一个，那怎么做才能把这两个数组都去掉呢？相信你已经想到了，那就是<strong>既从左往右算，又从右往左算</strong>。</p>
-<p>我们使用两个双指针 left 和 right 分别指向 height 数组的左右端点，同时使用上面的 left_max 和 right_max 分别维护左右两个方向的最大值。</p>
-<p>在思路 1 中，对于位置 left 的柱子，其载水量为</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">min</span>(left_max[left], right_max[left]) - <span class="built_in">height</span>[left];</span><br></pre></td></tr></table></figure>
-<p>现在我们可以把两个数组去掉，其结果为</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">min</span>(left_max, <span class="built_in">max</span>(<span class="built_in">height</span>[left], <span class="built_in">height</span>[left+<span class="number">1</span>], ... , <span class="built_in">height</span>[right]) ) - <span class="built_in">height</span>[left];</span><br></pre></td></tr></table></figure>
-<p>如果 <code>left_max &lt; height[right]</code>  或是小于这其中的任意一个，那么上式等于 <code>left_max - height[left]</code>。这种情况下，我们不需要遍历 left 位置右边那一堆柱子的高度就可以得到 left 位置的载水量。</p>
-<p>同理，对于位置 right 的柱子，其载水量为</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">min</span>(right_max, <span class="built_in">max</span>(<span class="built_in">height</span>[<span class="number">0</span>], <span class="built_in">height</span>[<span class="number">1</span>], ... , <span class="built_in">height</span>[right]) ) - <span class="built_in">height</span>[right];</span><br></pre></td></tr></table></figure>
-<p>如果 <code>right_max &lt; height[0]</code> 或是小于这其中的任意一个，那么上式等于 <code>right_max - height[right]</code>。</p>
-<p>这样我们得到了下面的算法</p>
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>在有向图中, 我们从某个节点和每个转向处开始, 沿着图的有向边走。 如果我们到达的节点是终点 (即它没有连出的有向边), 我们停止。现在, 如果我们最后能走到终点，那么我们的起始节点是<em>最终安全</em>的。 更具体地说, 存在一个自然数 <code>K</code>, 无论选择从哪里开始行走, 我们走了不到 <code>K</code> 步后必能停止在一个终点。</p>
+<p>哪些节点最终是安全的？ 结果返回一个有序的数组。</p>
+<p>该有向图有 <code>N</code> 个节点，标签为 <code>0, 1, ..., N-1</code>, 其中 <code>N</code> 是 <code>graph</code> 的节点数. 图以以下的形式给出: <code>graph[i]</code>是节点 <code>j</code> 的一个列表，满足 <code>(i, j)</code> 是图的一条有向边。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">输入：graph &#x3D; [[1,2],[2,3],[5],[0],[5],[],[]]</span><br><span class="line">输出：[2,4,5,6]</span><br></pre></td></tr></table></figure>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>这道题的意思是判断有向图中的每个节点能否走到<strong>环</strong>中，输出所有不能走到<strong>环</strong>中的点。</p>
+<h2 id="解法一：拓扑排序"><a href="#解法一：拓扑排序" class="headerlink" title="解法一：拓扑排序"></a>解法一：拓扑排序</h2><p>我们可以首先考虑所有出度为0的节点，它们一定都是安全的节点。 其次，仅与这些点直接相连的节点也一定都是安全的。依次类推，仅与这些安全的节点相连的节点也一定都是安全的。</p>
+<p>那么，我们可以将所有的边全部反向。反向之后，所有入度为0的点都是安全的，我们把这些点以及与这些点相连的边全部删除，随后新的图中所有入度为0的点也都是安全的。以此类推即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; eventualSafeNodes(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph) &#123;</span><br><span class="line">    <span class="keyword">int</span> n = graph.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> *degree = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">    <span class="keyword">bool</span> *<span class="built_in">end</span> = <span class="keyword">new</span> <span class="keyword">bool</span>[n];</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[n];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) degree[i] = <span class="built_in">end</span>[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="keyword">for</span> (<span class="keyword">int</span> v : graph[i]) &#123;</span><br><span class="line">        G[v].push_back(i);</span><br><span class="line">        ++degree[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="keyword">if</span> (!degree[i])</span><br><span class="line">        q.push(i);</span><br><span class="line">    <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">        <span class="keyword">int</span> u = q.front(); q.pop();</span><br><span class="line">        <span class="built_in">end</span>[u] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> v : G[u]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (--degree[v] == <span class="number">0</span>) &#123;</span><br><span class="line">                q.push(v);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="keyword">if</span> (<span class="built_in">end</span>[i])</span><br><span class="line">        res.push_back(i);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法二：DFS"><a href="#解法二：DFS" class="headerlink" title="解法二：DFS"></a>解法二：DFS</h2><p>还可以用深度优先搜索的方法来判断每个节点是否能够走到环中。在遍历的过程中，对于每个节点 u，我们设置三个状态：</p>
 <ul>
-<li>使用两个双指针 left 和 right 分别指向 height 数组的左右端点，同时使用上面的 left_max 和 right_max 分别维护左右两个方向的最大值。</li>
-<li>当 left &lt;= right 时<ul>
-<li>更新 <code>left_max = max(left_max, height[left])</code></li>
-<li>更新 <code>right_max = max(right_max, height[right])</code></li>
-<li>如果 <code>left_max &lt;= right_max</code>，根据木桶效应， left 位置的柱子的载水量可以直接算出，结果为 <code>left_max - height[left]</code>。</li>
-<li>如果 <code>right_max &lt;= left_max</code>，根据木桶效应， right 位置的柱子的载水量可以直接算出，结果为 <code>right_max - height[right]</code>。</li>
-<li>更新 left 指针或 right 指针位置，重复以上步骤</li>
+<li><code>vis[u] = 0</code>：该节点还未被访问</li>
+<li><code>vis[u] = 1</code>：该节点在这一轮遍历中已经被访问过或者该节点在环中</li>
+<li><code>vis[u] = 2</code>：该节点遍历完毕且该节点是安全节点（不能走到环中）</li>
 </ul>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">height</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left_max = <span class="number">0</span>, right_max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = <span class="built_in">height</span>.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        left_max = <span class="built_in">max</span>(left_max, <span class="built_in">height</span>[left]);</span><br><span class="line">        right_max = <span class="built_in">max</span>(right_max, <span class="built_in">height</span>[right]);</span><br><span class="line">        <span class="keyword">if</span> (left_max &lt; right_max) &#123; <span class="comment">// 右边再大也没用，因为左边是短板</span></span><br><span class="line">            ans += left_max - <span class="built_in">height</span>[left++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123; <span class="comment">// right_max &lt;= left_max // 做百年再大也没用，因为右边是短板</span></span><br><span class="line">            ans += right_max - <span class="built_in">height</span>[right--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当我们第一次访问一个节点 u 时，我们将其设置为 vis = 1，并继续搜索与该节点相连的节点。如果在搜索过程中我们遇到一个 vis = 1 的节点，那么说明找到了一个环，那么在本轮搜索中 u 以及与 u 连通的点都可以到达这个环，因此这些点都不是安全的节点，此时退出本轮搜索，保持这些点 vis = 1 的状态不变。如果搜索过程中，没有遇到 vis = 1 的节点，则说明它是一个安全的节点，此时将其设置为 vis = 2。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dfs返回true表示节点u是一个安全的节点</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph, <span class="keyword">int</span> *vis, <span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (vis[u]) <span class="keyword">return</span> vis[u] == <span class="number">2</span>;</span><br><span class="line">    vis[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> v : graph[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (vis[v] == <span class="number">1</span> || !dfs(graph, vis, v)) &#123;</span><br><span class="line">            vis[u] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 已遍历过且为安全的节点, vis=2</span></span><br><span class="line">    vis[u] = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; eventualSafeNodes(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph) &#123;</span><br><span class="line">    <span class="keyword">int</span> *vis = <span class="keyword">new</span> <span class="keyword">int</span>[graph.<span class="built_in">size</span>()];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph.<span class="built_in">size</span>(); i++) vis[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dfs(graph, vis, i)) &#123;</span><br><span class="line">            res.push_back(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -878,7 +882,7 @@
 
   
  <nav class="pagination">
-   <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
+   <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
  </nav>
 
 
@@ -923,7 +927,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -945,7 +949,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

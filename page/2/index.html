@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2021/02/02/LeetCode-440-%E5%AD%97%E5%85%B8%E5%BA%8F%E7%9A%84%E7%AC%ACK%E5%B0%8F%E6%95%B0%E5%AD%97/">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2021/02/20/LeetCode-772-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8III/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -281,7 +281,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/02/02/LeetCode-440-%E5%AD%97%E5%85%B8%E5%BA%8F%E7%9A%84%E7%AC%ACK%E5%B0%8F%E6%95%B0%E5%AD%97/" itemprop="url">LeetCode 440 字典序的第K小数字</a></h1>
+                <a class="post-title-link" href="/2021/02/20/LeetCode-772-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8III/" itemprop="url">LeetCode 772 基本计算器III</a></h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,436 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-02T09:28:52+08:00">
-                2021-02-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-20T19:56:05+08:00">
+                2021-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8/" itemprop="url" rel="index">
+                    <span itemprop="name">程序员面试金典</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>实现一个基本的计算器来计算简单的表达式字符串。</p>
+<p>表达式字符串只包含非负整数， <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> 操作符，左括号 <code>(</code> ，右括号 <code>)</code>和空格 。整数除法需要向下截断。</p>
+<p>你可以假定给定的字符串总是有效的。所有的中间结果的范围为 <code>[-2147483648, 2147483647]</code>。</p>
+<p><strong>进阶：</strong>你可以在不使用内置库函数的情况下解决此问题吗？</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s &#x3D; &quot;1 + 1&quot;</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s &#x3D; &quot; 6-4 &#x2F; 2 &quot;</span><br><span class="line">输出：4</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s &#x3D; &quot;2*(5+5*2)&#x2F;3+(6&#x2F;2+8)&quot;</span><br><span class="line">输出：21</span><br></pre></td></tr></table></figure>
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s &#x3D; &quot;(2+6* 3+5- (3*14&#x2F;7+2)*5)+3&quot;</span><br><span class="line">输出：-12</span><br></pre></td></tr></table></figure>
+<p><strong>示例 5：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s &#x3D; &quot;0&quot;</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+<h1 id="解法一：递归法"><a href="#解法一：递归法" class="headerlink" title="解法一：递归法"></a>解法一：递归法</h1><p>顺序遍历表达式串：</p>
+<ul>
+<li>若当前字符为数字，则迭代地将字符串转化为数字num</li>
+<li><p>若当前字符是符号或已经访问到字符串末尾，则考虑<strong>前一个符号 sign</strong>。</p>
+<ul>
+<li>若 sign 为 <code>+</code> 或 <code>-</code> ，则将 <code>+num</code> 或 <code>-num</code> 压入栈中</li>
+<li>若 sign 为 <code>*</code> 或 <code>\</code> ，则将栈顶元素弹出，与 num 相乘或相除，并将结果压入栈中。</li>
+</ul>
+</li>
+<li><p>若当前符号是 <code>(</code>，则递归算出括号内表达式的值</p>
+</li>
+<li>若当前符号是 <code>)</code>，则返回栈中各元素的和，表示结束了一层递归</li>
+</ul>
+<p>最后计算栈中各元素的和，即为最终的和。代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LeetCode772</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        pos = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> dfs(s.toCharArray());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[] ch)</span> </span>&#123;</span><br><span class="line">        Deque&lt;Integer&gt; st = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> sign = <span class="string">'+'</span>;</span><br><span class="line">        <span class="keyword">for</span> (; pos &lt; ch.length; pos++) &#123;</span><br><span class="line">            <span class="keyword">char</span> c = ch[pos];</span><br><span class="line">            <span class="keyword">if</span> (Character.isDigit(c)) &#123;</span><br><span class="line">                num *= <span class="number">10</span>;</span><br><span class="line">                num += c - <span class="string">'0'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="string">'('</span>) &#123;</span><br><span class="line">                ++pos;</span><br><span class="line">                num += dfs(ch);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (pos == ch.length - <span class="number">1</span> || (!Character.isDigit(c) &amp;&amp; c != <span class="string">' '</span>)) &#123;</span><br><span class="line">                <span class="keyword">switch</span> (sign) &#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'+'</span>: st.push(num); <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'-'</span>: st.push(-num); <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'*'</span>: st.push(st.pop() * num); <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'/'</span>: st.push(st.pop() / num); <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">default</span>: <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                sign = c;</span><br><span class="line">                num = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="string">')'</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> getSum(st);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> getSum(st);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(Deque&lt;Integer&gt; q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!q.isEmpty()) &#123;</span><br><span class="line">            sum += q.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="解法二-非递归法"><a href="#解法二-非递归法" class="headerlink" title="解法二 非递归法"></a>解法二 非递归法</h1><p>使用两个栈 <code>num_stack</code> 和 <code>op_stack</code> ，其中 <code>num_stack</code> 用来存储数字，<code>op_stack</code> 用来存储操作符。</p>
+<p>顺序遍历表达式串：</p>
+<ul>
+<li><p>若当前字符为数字，则将数字放入 <code>num_stack</code> 栈，此处要考虑多位数字的情况</p>
+</li>
+<li><p>若当前字符为 <code>(</code>，直接入 <code>op_stack</code> 栈</p>
+</li>
+<li><p>若当前字符为 <code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>。比较 <code>op_stack</code> 栈顶操作符的优先级与当前操作符的优先级，如果栈顶操作符的优先级大于等于当前操作符的优先级，则从 <code>num_stack</code> 栈中 pop 两个元素，<code>op_stack</code> 中 pop 一个元素，将计算结果存入 <code>num_stack</code> 中。重复这个过程，直到 <code>op_stack</code> 栈空或者其栈顶操作符的优先级小于当前操作符的优先级，此时再将当前操作符存入 <code>op_stack</code>。</p>
+<p>  各操作符优先级中，<code>()</code> 最小，<code>-+</code> 次之，<code>*/</code> 最大。</p>
+</li>
+<li><p>若当前字符为 <code>)</code>，则依次取出 <code>num_stack</code> 栈顶两元素，与 <code>op_stack</code> 栈顶操作符运算后，将结果压入 <code>num_stack</code> 栈中。重复该过程，直到 <code>op_stack</code> 栈顶元素为 <code>(</code>。</p>
+</li>
+</ul>
+<p>最后，再执行一次计算操作：依次取出 <code>num_stack</code> 栈顶两元素，与 <code>op_stack</code> 栈顶操作符运算后，将结果压入 <code>num_stack</code> 栈中。重复该过程，直到 <code>op_stack</code> 栈空。</p>
+<p>最终<code>num_stack</code> 栈顶元素即为最终结果。代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    Deque&lt;Integer&gt; num_stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    Deque&lt;Character&gt; op_stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, a, b;</span><br><span class="line">    <span class="keyword">char</span> op;</span><br><span class="line">    <span class="keyword">char</span>[] ch = s.toCharArray();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (i &lt; ch.length) &#123;</span><br><span class="line">        <span class="keyword">char</span> c = ch[i];</span><br><span class="line">        <span class="keyword">if</span> (Character.isDigit(c)) &#123;</span><br><span class="line">            <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (i &lt; ch.length &amp;&amp; Character.isDigit(ch[i])) &#123;</span><br><span class="line">                num *= <span class="number">10</span>;</span><br><span class="line">                num += ch[i] - <span class="string">'0'</span>;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            num_stack.push(num);</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">'('</span>) &#123;</span><br><span class="line">            op_stack.push(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">')'</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> ((op = op_stack.pop()) != <span class="string">'('</span>) &#123;</span><br><span class="line">                b = num_stack.pop();</span><br><span class="line">                a = num_stack.pop();</span><br><span class="line">                num_stack.push(calc(a, b, op));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (c != <span class="string">' '</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!op_stack.isEmpty() &amp;&amp; priority(op_stack.peek()) &gt;= priority(c)) &#123;</span><br><span class="line">                op = op_stack.pop();</span><br><span class="line">                b = num_stack.pop();</span><br><span class="line">                a = num_stack.pop();</span><br><span class="line">                num_stack.push(calc(a, b, op));</span><br><span class="line">            &#125;</span><br><span class="line">            op_stack.push(c);</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!op_stack.isEmpty()) &#123;</span><br><span class="line">        op = op_stack.pop();</span><br><span class="line">        b = num_stack.pop();</span><br><span class="line">        a = num_stack.pop();</span><br><span class="line">        num_stack.push(calc(a, b, op));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num_stack.peek();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">priority</span><span class="params">(<span class="keyword">char</span> c)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (c == <span class="string">'('</span> || c == <span class="string">')'</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (c == <span class="string">'+'</span> || c == <span class="string">'-'</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (c == <span class="string">'*'</span> || c == <span class="string">'/'</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">char</span> op)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (op) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'+'</span>: <span class="keyword">return</span> a + b;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'-'</span>: <span class="keyword">return</span> a - b;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'*'</span>: <span class="keyword">return</span> a * b;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'/'</span>: <span class="keyword">return</span> a / b;</span><br><span class="line">        <span class="keyword">default</span>: <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2021/02/20/LeetCode-227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8II/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/02/20/LeetCode-227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8II/" itemprop="url">LeetCode 227 基本计算器II</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-20T19:47:56+08:00">
+                2021-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8/" itemprop="url" rel="index">
+                    <span itemprop="name">程序员面试金典</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  393
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>实现一个基本的计算器来计算一个简单的字符串表达式的值。</p>
+<p>字符串表达式仅包含非负整数，<code>+</code>， <code>-</code> ，<code>*</code>，<code>/</code> 四种运算符和空格 <code> </code>。 整数除法仅保留整数部分。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;3+2*2&quot;</span><br><span class="line">输出: 7</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot; 3&#x2F;2 &quot;</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot; 3+5 &#x2F; 2 &quot;</span><br><span class="line">输出: 5</span><br></pre></td></tr></table></figure>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>本题可以用一个栈来存储中间结果。</p>
+<ul>
+<li>当遇到 + 号时，将后面的数字 $num$ 存入栈中</li>
+<li>当遇到 - 号时，将后面的数字变为 $-num$ 存入栈中</li>
+<li>当遇到 <em> 号时，取出栈顶元素 $num1$，获取后面的数字 $num2$，将结果 $num1 </em> num2$ 存入栈中</li>
+<li>当遇到 / 号时，取出栈顶元素 $num1$，获取后面的数字 $num2$，将结果 $num1 / num2$ 存入栈中</li>
+</ul>
+<p>最后，将栈中所有元素相加即为最后的答案。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LeetCode16_26</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 当前的位置</span></span><br><span class="line">    <span class="keyword">int</span> pos;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 解析从pos位置开始的数字</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">(<span class="keyword">char</span>[] ch)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (; pos &lt; ch.length &amp;&amp; Character.isDigit(ch[pos]); pos++) &#123;</span><br><span class="line">            ans *= <span class="number">10</span>;</span><br><span class="line">            ans += ch[pos] - <span class="string">'0'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        Deque&lt;Integer&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">char</span>[] ch = s.toCharArray();</span><br><span class="line">        <span class="comment">// 正负号</span></span><br><span class="line">        <span class="keyword">int</span> symbol = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (pos = <span class="number">0</span>; pos &lt; ch.length; pos++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ch[pos] == <span class="string">' '</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> (Character.isDigit(ch[pos])) &#123;</span><br><span class="line">                stack.push(symbol * getNumber(ch));</span><br><span class="line">                pos--;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">switch</span> (ch[pos]) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">'+'</span>:</span><br><span class="line">                    symbol = <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">'-'</span>:</span><br><span class="line">                    symbol = -<span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">'*'</span>:</span><br><span class="line">                    pos++;</span><br><span class="line">                    <span class="keyword">while</span> (ch[pos] == <span class="string">' '</span>) pos++;</span><br><span class="line">                    stack.push(stack.pop() * getNumber(ch));</span><br><span class="line">                    pos--;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">'/'</span>:</span><br><span class="line">                    pos++;</span><br><span class="line">                    <span class="keyword">while</span> (ch[pos] == <span class="string">' '</span>) pos++;</span><br><span class="line">                    stack.push(stack.pop() / getNumber(ch));</span><br><span class="line">                    pos--;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty()) ans += stack.pop();</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2021/02/04/LeetCode-85-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/02/04/LeetCode-85-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" itemprop="url">LeetCode 84-85 最大矩形</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-04T08:34:15+08:00">
+                2021-02-04
               </time>
             
 
@@ -358,7 +786,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k
+                  1.6k
                 </span>
               
 
@@ -397,466 +825,55 @@
       
         
           
-            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定整数 <code>n</code> 和 <code>k</code>，找到 <code>1</code> 到 <code>n</code> 中字典序第 <code>k</code> 小的数字。</p>
-<p>注意：$1 ≤ k ≤ n ≤ 10^9$。</p>
-<p><strong>示例 :</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">n: 13   k: 2</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">10</span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line">字典序的排列是 [1, 10, 11, 12, 13, 2, 3, 4, 5, 6, 7, 8, 9]，所以第二小的数字是 10。</span><br></pre></td></tr></table></figure>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>所谓字典序其实就是按照数字的前缀进行排序。如果我们将 $1-n$ 这 $n$ 个数字组成一棵前缀树（或者叫“字典树”，其根节点为空节点）Trie，那么对这棵树进行先序遍历时，第 $k$ （不包括根节点）个节点即对应了字典序的第 $k$ 小的数字。然而，构造字典树并进行先序遍历需要花费 $O(n)$ 的时间以及 $O(n)$ 的空间，这对于本题来说是不允许的。因此，我们需要针对这两个过程进行优化。</p>
-<p>首先，我们在先序遍历时，首先会遍历以 $1$ 为前缀的数字。如果以 $1$ 为前缀的数字个数小于 $k$ ，就说明第 $k$ 个的数字的前缀肯定大于1。然后，我们继续遍历以 $2$ 为前缀的数字，若 <code>前缀为1的数字个数 + 前缀为2的数字个数 &gt;= k</code>，就说明第 $k$ 个的数字的前缀肯定为 $2$，否则继续去遍历前缀为3的数字，以此类推。</p>
-<p>在上面的过程中，我们能够推断出第 $k$ 个数字的前缀是多少，而推断的关键在于<strong>如何计算指定前缀下的数字的个数</strong>。按照上面的计算方式，这个时间复杂度是 $O(n)$，肯定不符合要求，因此，这一步计算是我们优化的关键。</p>
-<h2 id="计算指定前缀下的数字的个数"><a href="#计算指定前缀下的数字的个数" class="headerlink" title="计算指定前缀下的数字的个数"></a>计算指定前缀下的数字的个数</h2><p>假设 $n = 1248$，我们要计算以 $1$ 为前缀的数字的个数。</p>
-<p>我们可以用数学的方法来一步步算一下：</p>
-<ul>
-<li>长度为 1 的数字有 1 个：1。写成区间为 $[1, 2)$。</li>
-<li>长度为 2 的数字有 10 个：$10 \sim 19$。写成区间为 $[10, 20)$。</li>
-<li>长度为 3 的数字有 100 个：$100 \sim 199$。写成区间为 $[100, 200)$。</li>
-<li>长度为 4 的数字有 249 个：$1000 \sim 1248$。写成区间为 $[1000, 1248]$。</li>
-</ul>
-<p>可以看到，除了第 4 个外，前三个都是有规律的，其数字个数等于 $10^{l-1}$（其中 $l$ 指的是数字的长度）。到了最后的第四层，因为 $1999 &gt; 1248$，所以最后一层数字的个数要用 $n - 1000 + 1 = 249$ 来计算。</p>
-<p>把上面的步骤翻译成代码，就可以在 $O(log_{10}n)$ 的复杂度内算出指定前缀下的数字个数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以prefix为前缀（包括prefix本身）并且小于等于n的数字的个数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> prefix</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> n</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">long</span> <span class="title">getCount</span><span class="params">(<span class="keyword">long</span> prefix, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 最终的答案</span></span><br><span class="line">    <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 每一层数字的最大个数。其值为10的幂次：1、10、100、1000...</span></span><br><span class="line">    level = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (prefix &lt;= n) &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 分别计算每一层，以prefix为前缀并且小于等于n的数字的个数。</span></span><br><span class="line"><span class="comment">         * 下面一层的数字一定大于上面一层的所有数字（越往下位数越大）；因此，若某一层的数字已经超过n了，就不需要往下找了.</span></span><br><span class="line"><span class="comment">         * 假设n=1248, 找前缀为1的数</span></span><br><span class="line"><span class="comment">         * 那么第一层是 [1, 2) 有一个数，也就是10^0</span></span><br><span class="line"><span class="comment">         * 第二层是 [10, 20) 有10个数，也就是10^1</span></span><br><span class="line"><span class="comment">         * 第三层是 [100, 200) 有100个数，也就是10^2</span></span><br><span class="line"><span class="comment">         * 第四层就不能是[1000, 2000)了，因为2000已经超了1248, 所以是[1000, 1248)，也就是 n - prefix + 1。这里 n=1248, prefix = 1000</span></span><br><span class="line"><span class="comment">         [1, 2) -&gt; [10, 20) -&gt; [100, 200) -&gt; [1000, 1248]</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        ans += Math.min(level, n - prefix + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 往下面走一层，数字个数为1、10、100、1000...。</span></span><br><span class="line"><span class="comment">         * 例如：[1, 2) -&gt; [10, 20) -&gt; [100, 200)</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        prefix *= <span class="number">10</span>;</span><br><span class="line">        level *= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="如何定位-k-的位置"><a href="#如何定位-k-的位置" class="headerlink" title="如何定位 k 的位置"></a>如何定位 k 的位置</h2><p>计算出指定前缀下的数字的个数，我们可以逐步地确定出 $k$ 的具体位置。</p>
-<p>我们首先计算以数字 $1$ 为前缀的数字的个数，这里有两种情况</p>
-<ul>
-<li>如果个数大于等于 $k$，说明以数字 $1$ 开头的数字串太多了，并且第 $k$ 个数字一定是以数字 $1$ 开头。此时，我们可以缩小范围，向下走一层，将前缀乘10，计算以数字 $10$ 为前缀的数字的个数。</li>
-<li>如果个数小于 $k$ ，说明以数字 $1$ 开头的数字串都算进去，也不够。此时我们应该向右走一步，将前缀 + 1，计算以数字 $2$ 为前缀的数字的个数。</li>
-</ul>
-<p>在向下或向右走的过程中，继续按照上面的两种情况进行处理，直到找到第 $k$ 个位置为止。</p>
-<p>实现的代码如下所示</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findKthNumber</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> prefix = <span class="number">1L</span>;</span><br><span class="line">    <span class="keyword">long</span> p = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (p &lt; k) &#123;</span><br><span class="line">        <span class="comment">// 以prefix为前缀的数字的个数</span></span><br><span class="line">        <span class="keyword">long</span> cnt = getCount(prefix, n);</span><br><span class="line">        <span class="keyword">if</span> (p + cnt - <span class="number">1</span> &gt;= k) &#123; <span class="comment">// 这里的p已经包含了prefix自身，为了避免重复计算，最后要减1</span></span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 进到if里说明以prefix为前缀的数太多了。</span></span><br><span class="line"><span class="comment">             * 因此第k小的数一定以prefix为前缀。</span></span><br><span class="line"><span class="comment">             * 因此只向下寻找prefix前缀的数即可。</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            p++; <span class="comment">// 往下走一步；p加1是因为要加下一个节点</span></span><br><span class="line">            prefix *= <span class="number">10</span>; <span class="comment">// 下一层的前缀</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 以prefix为前缀的数都算进去，也不够。</span></span><br><span class="line"><span class="comment">             * 说明第k小的数不是以prefix为前缀。</span></span><br><span class="line"><span class="comment">             * 所以需要从下一个前缀开始找</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            p += cnt; <span class="comment">// 往右走一步；p加上当前prefix的数字个数cnt-1，以及下一个节点（右边节点），一共是cnt个节点</span></span><br><span class="line">            prefix++; <span class="comment">// 找下一个前缀</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>) prefix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>最终的代码如下所示</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以prefix为前缀（包括prefix本身）并且小于等于n的数字的个数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> prefix</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> n</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">long</span> <span class="title">getCount</span><span class="params">(<span class="keyword">long</span> prefix, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 最终的答案</span></span><br><span class="line">    <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 每一层数字的最大个数。其值为10的幂次：1、10、100、1000...</span></span><br><span class="line">    level = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (prefix &lt;= n) &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 分别计算每一层，以prefix为前缀并且小于等于n的数字的个数。</span></span><br><span class="line"><span class="comment">         * 下面一层的数字一定大于上面一层的所有数字（越往下位数越大）；因此，若某一层的数字已经超过n了，就不需要往下找了</span></span><br><span class="line"><span class="comment">         [1, 2) -&gt; [10, 20) -&gt; [100, 200) -&gt; [1000, 1248]</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        ans += Math.min(level, n - prefix + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 往下面走一层，数字个数为1、10、100、1000...。</span></span><br><span class="line"><span class="comment">         * 例如：[1, 2) -&gt; [10, 20) -&gt; [100, 200)</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        prefix *= <span class="number">10</span>;</span><br><span class="line">        level *= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findKthNumber</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> prefix = <span class="number">1L</span>;</span><br><span class="line">    <span class="keyword">long</span> p = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (p &lt; k) &#123;</span><br><span class="line">        <span class="comment">// 以prefix为前缀的数字的个数</span></span><br><span class="line">        <span class="keyword">long</span> cnt = getCount(prefix, n);</span><br><span class="line">        <span class="keyword">if</span> (p + cnt - <span class="number">1</span> &gt;= k) &#123; <span class="comment">// 这里的p已经包含了prefix自身，为了避免重复计算，最后要减1</span></span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 进到if里说明以prefix为前缀的数太多了。</span></span><br><span class="line"><span class="comment">             * 因此第k小的数一定以prefix为前缀。</span></span><br><span class="line"><span class="comment">             * 因此只向下寻找prefix前缀的数即可。</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            p++; <span class="comment">// 往下走一步；p加1是因为要加下一个节点</span></span><br><span class="line">            prefix *= <span class="number">10</span>; <span class="comment">// 下一层的前缀</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 以prefix为前缀的数都算进去，也不够。</span></span><br><span class="line"><span class="comment">             * 说明第k小的数不是以prefix为前缀。</span></span><br><span class="line"><span class="comment">             * 所以需要从下一个前缀开始找</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            p += cnt; <span class="comment">// 往右走一步；p加上当前prefix的数字个数cnt-1，以及下一个节点（右边节点），一共是cnt个节点</span></span><br><span class="line">            prefix++; <span class="comment">// 找下一个前缀</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>) prefix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2021/02/01/LeetCode-37-%E8%A7%A3%E6%95%B0%E7%8B%AC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/02/01/LeetCode-37-%E8%A7%A3%E6%95%B0%E7%8B%AC/" itemprop="url">LeetCode 37 解数独</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-01T10:43:25+08:00">
-                2021-02-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
-                    <span itemprop="name">刷题</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  9
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>编写一个程序，通过填充空格来解决数独问题。</p>
-<p>一个数独的解法需<strong>遵循如下规则</strong>：</p>
-<ol>
-<li>数字 <code>1-9</code> 在每一行只能出现一次。</li>
-<li>数字 <code>1-9</code> 在每一列只能出现一次。</li>
-<li>数字 <code>1-9</code> 在每一个以粗实线分隔的 <code>3x3</code> 宫内只能出现一次。</li>
-</ol>
-<p>空白格用 <code>&#39;.&#39;</code> 表示。</p>
+            <h1 id="84-柱状图中最大的矩形"><a href="#84-柱状图中最大的矩形" class="headerlink" title="84 柱状图中最大的矩形"></a>84 柱状图中最大的矩形</h1><p>给定 <em>n</em> 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。</p>
+<p>求在该柱状图中，能够勾勒出来的矩形的最大面积。</p>
 <p><img src="1.png" alt=""></p>
-<p>一个数独。</p>
+<p>以上是柱状图的示例，其中每个柱子的宽度为 1，给定的高度为 <code>[2,1,5,6,2,3]</code>。</p>
 <p><img src="2.png" alt=""></p>
-<p>答案被标成红色。</p>
-<p><strong>提示：</strong></p>
+<p>图中阴影部分为所能勾勒出的最大矩形面积，其面积为 <code>10</code> 个单位。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,1,5,6,2,3]</span><br><span class="line">输出: 10</span><br></pre></td></tr></table></figure>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我们可以枚举每一根柱子的高 $h_i$，计算以 $h_i$ 为高的矩形的面积 $area_i$，那么最终矩形的最大面积即为 各 $area_i$ 的最大值。</p>
+<p>具体做法是：使用一重循环枚举每一根柱子，将其固定为矩形的高度 $h$。随后我们从这根柱子开始向左右两侧燕伸，直到遇到高度小于 $h$ 的柱子，这样就确定了矩形的左右边界。如果左右边界之间的宽度为 $\omega$，那么对应的矩形面积即为 $\omega * h$。</p>
+<p>为此，我们维护两个数组 $left$ 和 $right$，其中：</p>
 <ul>
-<li>给定的数独序列只包含数字 <code>1-9</code> 和字符 <code>&#39;.&#39;</code> 。</li>
-<li>你可以假设给定的数独只有唯一解。</li>
-<li>给定数独永远是 <code>9x9</code> 形式的。</li>
+<li>$left[i]$ 表示从柱子 $i$ 向左边延伸，找到的第一个高度小于 $h_i$ 的柱子。边界条件为 $left[0] = -1$</li>
+<li>$right[i]$ 表示从柱子 $i$ 向右边延伸，找到的第一个高度小于 $h_i$ 的柱子。边界条件为 $right[n-1] = n$</li>
 </ul>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>这个题目显然是用回溯法来求解。我们可以依次枚举每一个空白格中填的数字，通过递归 + 回溯的方式枚举所有的填法。当递归填完最后一个空白格后，如果仍没有冲突发生，说明数独已经解出。如果在递归过程中，当前的空白格不能填下任何一个数字，说明之前某次填的有问题，那么就进行回溯。</p>
-<p>如何判断一个空白格中能否填写某个数字呢，这需要去记录该空白格所在的行、列以及九宫格中已经填写过的数字，每个数字在同一行、同一列、同一个九宫格中只能出现一次。因此我们可以使用 <code>rows[i], columns[j], blocks[x][y]</code> 分别表示第 $i$ 行，第 $j$ 列，第$(x, y)$ 个九宫格中填写数字的情况。表示数字填写的方法有两种：一种是使用类似哈希表的方法，用长度为9的布尔数组记录分别记录数字 1-9 是否填写过；另一种是使用一个 9 bit的整数来记录，第 $i$ 位代表数字 $i+1$ 是否填写过，该位为0表示未填写过，1表示填写过。</p>
-<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><h2 id="原始回溯解法"><a href="#原始回溯解法" class="headerlink" title="原始回溯解法"></a>原始回溯解法</h2><p>使用一个长度为 9 的布尔数组记录数字 [1, 9] 是否出现过，数组第 $i$ 个元素的值为 true 当且仅当数字 $i+1$ 出现过。例如 <code>rows[2][3] = true</code> 表示数字 4 在第 2 行已经出现过，那么在遍历第二行的空白格时，就不能填入数字 4。</p>
-<p>我们首先找到所有的空白格，放到数组 <code>emptys</code> 中，而对于有数字的格子，分别更新 <code>rows, cols, blocks</code> 这三个数组的状态值。然后，依次对每个空白格子递归填数即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 行、列</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">boolean</span>[][] rows, cols;</span><br><span class="line"><span class="comment">// 九宫格</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">boolean</span>[][][] blocks;</span><br><span class="line"><span class="comment">// 记录空白格子的下标</span></span><br><span class="line"><span class="keyword">private</span> List&lt;<span class="keyword">int</span>[]&gt; emptys;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">solveSudoku</span><span class="params">(<span class="keyword">char</span>[][] board)</span> </span>&#123;</span><br><span class="line">    rows = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">9</span>][<span class="number">9</span>];</span><br><span class="line">    cols = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">9</span>][<span class="number">9</span>];</span><br><span class="line">    blocks = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">3</span>][<span class="number">3</span>][<span class="number">9</span>];</span><br><span class="line">    emptys = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (board[i][j] == <span class="string">'.'</span>) &#123;</span><br><span class="line">            emptys.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i, j&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 将数字范围规定在0-8，因此减1</span></span><br><span class="line">            <span class="keyword">int</span> v = board[i][j] - <span class="string">'0'</span> - <span class="number">1</span>;</span><br><span class="line">            rows[i][v] = cols[j][v] = blocks[i / <span class="number">3</span>][j / <span class="number">3</span>][v] = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dfs(board, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pos == emptys.size()) &#123;</span><br><span class="line">        <span class="comment">// 空白格子都填完了</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> r = emptys.get(pos)[<span class="number">0</span>], c = emptys.get(pos)[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) &#123; <span class="comment">// 尝试数字i+1能否填写</span></span><br><span class="line">        <span class="keyword">if</span> (!rows[r][i] &amp;&amp; !cols[c][i] &amp;&amp; !blocks[r / <span class="number">3</span>][c / <span class="number">3</span>][i]) &#123;</span><br><span class="line">            <span class="comment">// board[r][c] = i</span></span><br><span class="line">            rows[r][i] = cols[c][i] = blocks[r / <span class="number">3</span>][c / <span class="number">3</span>][i] = <span class="keyword">true</span>;</span><br><span class="line">            board[r][c] = (<span class="keyword">char</span>) (i + <span class="string">'0'</span> + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (dfs(board, pos + <span class="number">1</span>)) &#123;</span><br><span class="line">                <span class="comment">// 填写数字i+1可以使得数独有解</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 不可填写数字i+1，恢复原状态</span></span><br><span class="line">            rows[r][i] = cols[c][i] = blocks[r / <span class="number">3</span>][c / <span class="number">3</span>][i] = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 数字1-9都不能填，说明前面某次填写有问题，因此回溯</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="使用位运算进行状态压缩"><a href="#使用位运算进行状态压缩" class="headerlink" title="使用位运算进行状态压缩"></a>使用位运算进行状态压缩</h2><p>上面的解法中，使用了长度为 9 的数组来表示每个数字是否出现过，算法的空间复杂度并不优秀。为了减少空间复杂度，我们可以使用一个整数来表示每个数字是否出现过。</p>
-<p>具体地，数 $b$ 的二进制表示的第 $i$ 位（从低到高，最低位为第 $0$ 位）为 $1$，当且仅当数字 $i+1$ 出现过。例如当 $b$ 的二进制为 $(011000100)_2$ 时，就表示数字 $3, 7, 8$ 已经出现过了。</p>
-<p>在本题中会用到下面几种位运算的技巧：</p>
+<p>例如，对于下面的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h &#x3D; [2, 4, 5, 6, 2, 3]</span><br><span class="line">高度为5的柱子下标为2，左边第一个比它小的柱子下标为1，右边第一个比它小的柱子下标为4。</span><br><span class="line">因此：left[2] &#x3D; 1; right[2] &#x3D; 4</span><br></pre></td></tr></table></figure>
+<p>那么，如何计算 $left[i]$ 呢？</p>
+<p>我们首先比较 $i$ 左边柱子的高度 $h[i-1]$ 与 $i$ 的高度 $h[i]$ 的大小，若 $h[i-1] &lt; h[i]$，那么 $left[i] = i - 1$。如果 $h[i-1] &gt;= h[i]$，那么我们可以向左找到第一个高度小于 $h[i-1]$ 的柱子再跟柱子 $i$ 比较。那左边第一个第一个高度小于 $h[i-1]$ 的柱子如何找呢？其实不用找，这个柱子就是 $left[i-1]$ 。</p>
+<p>根据这个思路，我们可以在 $O(n)$ 的时间复杂度内计算出 $left$ 数组的值，代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">left[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">int</span> j = i - <span class="number">1</span>; <span class="comment">// i左边的柱子</span></span><br><span class="line">    <span class="keyword">while</span> (j != -<span class="number">1</span> &amp;&amp; h[j] &gt;= h[i]) &#123;</span><br><span class="line">        j = left[j];</span><br><span class="line">    &#125;</span><br><span class="line">    left[i] = j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类似的，$right$ 数组的值也可以在 $O(n)$ 的时间复杂度内求出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">right[n-<span class="number">1</span>] = n;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    <span class="keyword">int</span> j = n + <span class="number">1</span>; <span class="comment">// i右边的柱子</span></span><br><span class="line">    <span class="keyword">while</span> (j != -<span class="number">1</span> &amp;&amp; h[j] &gt;= h[i]) &#123;</span><br><span class="line">        j = right[j];</span><br><span class="line">    &#125;</span><br><span class="line">    right[i] = j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>计算出这两个数组后，对于每根柱子 $i$，以其高度 $h[i]$ 为高的矩形面积即为</p>
+<script type="math/tex; mode=display">
+\begin{align}
+area_i &= h[i] * [(right[i] - 1) - (left[i] + 1) + 1] \\
+       &= h[i] * (right[i] - left[i] + 1)
+\end{align}</script><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="keyword">int</span>[] heights)</span> </span>&#123;</span><br><span class="line">         <span class="comment">/*</span></span><br><span class="line"><span class="comment">            使用 left 和 right 数组 记录 从 i 左右两边延伸，第一个比 i 位置小的柱子索引位置</span></span><br><span class="line"><span class="comment">            那么第 i 根柱子能组成面积的宽度就是 right[i] - left[i] - 1</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="keyword">int</span> n = heights.length;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] left = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">int</span>[] right = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="comment">// 第一根柱子，左边不存在比它小的</span></span><br><span class="line">        left[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 第二根柱子，右边不存在比它大的</span></span><br><span class="line">        right[n-<span class="number">1</span>] = n;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> j = i - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (j != -<span class="number">1</span> &amp;&amp; heights[j] &gt;= heights[i]) &#123;</span><br><span class="line">                j = left[j];</span><br><span class="line">            &#125;</span><br><span class="line">            left[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (j != n &amp;&amp; heights[j] &gt;= heights[i]) &#123;</span><br><span class="line">                j = right[j];</span><br><span class="line">            &#125;</span><br><span class="line">            right[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> maxArea = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> width = right[i] - left[i] - <span class="number">1</span>;</span><br><span class="line">            maxArea = Math.max(maxArea, heights[i] * width);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxArea;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="85-最大矩形"><a href="#85-最大矩形" class="headerlink" title="85 最大矩形"></a>85 最大矩形</h1><p>给定一个仅包含 <code>0</code> 和 <code>1</code> 、大小为 <code>rows x cols</code> 的二维二进制矩阵，找出只包含 <code>1</code> 的最大矩形，并返回其面积。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix &#x3D; [[&quot;1&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;],</span><br><span class="line">                [&quot;1&quot;,&quot;0&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;],</span><br><span class="line">                [&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;],</span><br><span class="line">                [&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;]]</span><br><span class="line">输出：6</span><br><span class="line">解释：最大矩形如上图所示。</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
 <ul>
-<li><p><strong>将数字 $digit$ 的第 $i$ 位设为1，并且能够再将第 $i$ 位恢复为0</strong>：</p>
-<p>  使用 <code>digit ^ (1&lt;&lt; i)</code>。若原来是0，则第一次会将第 $i$ 位设为 1，第二次会将第 $i$ 位设为 0。</p>
-</li>
-<li><p><strong>计算第 $(i, j)$ 个空白格子可以填写哪些数字</strong></p>
-<p>  首先计算  <code>rows[i] | cols[j] | blocks[i / 3][j / 3]</code> 得到当前已经填写过的所有数字。然后对这个值<strong>按位取反</strong>，取反后第 $k$ 位为1就表示该位置可以填入数字 $k+1$，因此我们可以通过寻找 1 来进行枚举。但由于按位取反后，这个数的高位（第10-31位）也全都变成了 1，而这些位置是我们不应该枚举到的。为了排除这些位置，我们可以将按位取反后的值与 $(111111111)<em>2 = (1FF)</em>{16}$ 进行<strong>按位与</strong>运算，将所有无关的位置设为 0。</p>
-<p>  可以使用 <code>mask &amp;= (mask - 1)</code> 来枚举二进制中的所有 1。</p>
-<p>  可以使用 $b \ \&amp; \ (-b) $ 或 $b \ \&amp; \ (\sim b + 1) $  得到 $b$ 二进制表示中最低位的 1。 例如 <code>(010100) &amp; (101100) = 000100</code>。</p>
-<p>  当我们得到这个最低位的 1 时，我们可以通过一些语言自带的函数得到这个最低位的 1究竟是第几位，例如 <code>Integer.bitCount(digit - 1)</code></p>
-</li>
+<li><code>rows == matrix.length</code></li>
+<li><code>cols == matrix[0].length</code></li>
+<li><code>0 &lt;= row, cols &lt;= 200</code></li>
+<li><code>matrix[i][j]</code> 为 <code>&#39;0&#39;</code> 或 <code>&#39;1&#39;</code></li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] rows, cols;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[][] blocks;</span><br><span class="line"><span class="keyword">private</span> List&lt;<span class="keyword">int</span>[]&gt; spaces;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">solveSudoku</span><span class="params">(<span class="keyword">char</span>[][] board)</span> </span>&#123;</span><br><span class="line">    rows = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>];</span><br><span class="line">    cols = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>];</span><br><span class="line">    blocks = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][<span class="number">3</span>];</span><br><span class="line">    spaces = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (board[i][j] == <span class="string">'.'</span>) &#123;</span><br><span class="line">            spaces.add(<span class="keyword">new</span> <span class="keyword">int</span>[] &#123;i, j&#125;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> digit = board[i][j] - <span class="string">'0'</span> - <span class="number">1</span>;</span><br><span class="line">            flip(i, j, digit);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dfs(board, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pos == spaces.size()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i = spaces.get(pos)[<span class="number">0</span>], j = spaces.get(pos)[<span class="number">1</span>];</span><br><span class="line">    <span class="comment">// 若mask的第i位为1，则说明可以填写数字i+1</span></span><br><span class="line">    <span class="keyword">int</span> mask = ~(rows[i] | cols[j] | blocks[i / <span class="number">3</span>][j / <span class="number">3</span>]) &amp; <span class="number">0x1ff</span>;</span><br><span class="line">    <span class="keyword">for</span> (; mask != <span class="number">0</span>; mask &amp;= (mask - <span class="number">1</span>)) &#123; <span class="comment">// 枚举所有的1，并不断消除最低位的1</span></span><br><span class="line">        <span class="comment">// 找到当前最低位的1</span></span><br><span class="line">        <span class="keyword">int</span> digitMask = mask &amp; -mask;</span><br><span class="line">        <span class="comment">// 当前这个最低位的1是第几位</span></span><br><span class="line">        <span class="keyword">int</span> digit = Integer.bitCount(digitMask - <span class="number">1</span>);</span><br><span class="line">        flip(i, j, digit);</span><br><span class="line">        board[i][j] = (<span class="keyword">char</span>) (digit + <span class="string">'0'</span> + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (dfs(board, pos + <span class="number">1</span>)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        flip(i, j, digit);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">flip</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> digit)</span> </span>&#123;</span><br><span class="line">    rows[i] ^= (<span class="number">1</span> &lt;&lt; digit);</span><br><span class="line">    cols[j] ^= (<span class="number">1</span> &lt;&lt; digit);</span><br><span class="line">    blocks[i / <span class="number">3</span>][j / <span class="number">3</span>] ^= (<span class="number">1</span> &lt;&lt; digit);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="预填确定值"><a href="#预填确定值" class="headerlink" title="预填确定值"></a>预填确定值</h2><p>在数独中，如果一个空白格子只有唯一的数可以填入，即其对应的 <code>mask &amp;= (mask - 1) = 0</code>。此时，我们可以直接在这个空白格中填入这个数，不用等到后续的递归遍历，这样可以进一步减少递归的层数。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] rows, cols;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[][] blocks;</span><br><span class="line"><span class="keyword">private</span> List&lt;<span class="keyword">int</span>[]&gt; spaces;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">solveSudoku</span><span class="params">(<span class="keyword">char</span>[][] board)</span> </span>&#123;</span><br><span class="line">    rows = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>];</span><br><span class="line">    cols = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>];</span><br><span class="line">    blocks = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][<span class="number">3</span>];</span><br><span class="line">    spaces = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (board[i][j] != <span class="string">'.'</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> digit = board[i][j] - <span class="string">'0'</span> - <span class="number">1</span>;</span><br><span class="line">            flip(i, j, digit);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        <span class="keyword">boolean</span> modified = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (board[i][j] == <span class="string">'.'</span>) &#123;</span><br><span class="line">                <span class="keyword">int</span> mask = ~(rows[i] | cols[j] | blocks[i / <span class="number">3</span>][j / <span class="number">3</span>]) &amp; <span class="number">0x1ff</span>;</span><br><span class="line">                <span class="comment">// mask &amp; (mask - 1) 这个式子可以消除mask最低位的1</span></span><br><span class="line">                <span class="comment">// 若消除后变为0，则说明mask中只有一个1</span></span><br><span class="line">                <span class="keyword">if</span> ((mask &amp; (mask - <span class="number">1</span>)) == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">int</span> digit = Integer.bitCount(mask - <span class="number">1</span>);</span><br><span class="line">                    flip(i, j, digit);</span><br><span class="line">                    board[i][j] = (<span class="keyword">char</span>) (digit + <span class="string">'0'</span> + <span class="number">1</span>);</span><br><span class="line">                    modified = <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!modified) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (board[i][j] == <span class="string">'.'</span>) &#123;</span><br><span class="line">            spaces.add(<span class="keyword">new</span> <span class="keyword">int</span>[] &#123;i, j&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dfs(board, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">flip</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> digit)</span> </span>&#123;</span><br><span class="line">    rows[i] ^= (<span class="number">1</span> &lt;&lt; digit);</span><br><span class="line">    cols[j] ^= (<span class="number">1</span> &lt;&lt; digit);</span><br><span class="line">    blocks[i / <span class="number">3</span>][j / <span class="number">3</span>] ^= (<span class="number">1</span> &lt;&lt; digit);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pos == spaces.size()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i = spaces.get(pos)[<span class="number">0</span>], j = spaces.get(pos)[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> mask = ~(rows[i] | cols[j] | blocks[i / <span class="number">3</span>][j / <span class="number">3</span>]) &amp; <span class="number">0x1ff</span>;</span><br><span class="line">    <span class="keyword">for</span> (; mask != <span class="number">0</span>; mask &amp;= (mask - <span class="number">1</span>)) &#123;</span><br><span class="line">        <span class="keyword">int</span> digitMask = mask &amp; -mask;</span><br><span class="line">        <span class="keyword">int</span> digit = Integer.bitCount(digitMask - <span class="number">1</span>);</span><br><span class="line">        flip(i, j, digit);</span><br><span class="line">        board[i][j] = (<span class="keyword">char</span>) (digit + <span class="string">'0'</span> + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (dfs(board, pos + <span class="number">1</span>)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        flip(i, j, digit);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/10/22/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/10/22/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AD%A6%E4%B9%A0/" itemprop="url">Java虚拟机学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-22T12:25:37+08:00">
-                2020-10-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  743
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java内存区域"><a href="#Java内存区域" class="headerlink" title="Java内存区域"></a>Java内存区域</h1><h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><p>Java 虚拟机所管理的内存主要包括以下五个运行时区域：</p>
+<h2 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h2><p>这个题目其实是上面一题的二维版，我们可以每次把前 $i$ 行看成一个柱形图，然后调用上面一题的解法算出一个面积，最终取一个最大值。</p>
+<p>例如，对于示例1中的例子：</p>
 <ul>
-<li>程序计数器（Program Counter Register）</li>
-<li>虚拟机栈（VM Stack）</li>
-<li>本地方法栈（Native Method Stack）</li>
-<li>方法区（Method Area）</li>
-<li>堆（Heap）</li>
+<li>第 1 行可以看作是一个高度 $h = [1, 0, 1, 0, 0]$ 的柱形图，求得最大面积为 $1$。</li>
+<li>前 2 行可以看作是一个高度 $h = [2, 0, 2, 1, 1]$ 的柱形图，求得最大面积为 $3$。</li>
+<li>前 3 行可以看作是一个高度 $h = [3, 1, 3, 2, 2]$ 的柱形图，求得最大面积为 $6$。</li>
+<li>前 4 行可以看作是一个高度 $h = [4, 0, 0, 3, 0]$ 的柱形图，求得最大面积为 $4$。</li>
 </ul>
-<p>其中，每个线程都会有自己的 <code>程序计数器</code>、<code>虚拟机栈</code> 和 <code>本地方法栈</code>。<code>堆</code> 和 <code>方法区</code> 由所有线程共享。</p>
-<p><img src="1.png" alt=""></p>
-<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器可以看作是当前线程所执行的字节码的行号指示器。<strong>每个线程都有自己的程序计数器</strong>，以便线程切换后相应线程能恢复到正确的执行位置。</p>
-<p>如果线程正在执行的是一个 Java 方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果正在执行的是本地 (Native) 方法，这个计数器值则应为空。</p>
-<p>程序计数器是<strong>唯一一个</strong>没有规定任何 OutOfMemoryError 情况的区域。</p>
-<h3 id="Java-虚拟机栈"><a href="#Java-虚拟机栈" class="headerlink" title="Java 虚拟机栈"></a>Java 虚拟机栈</h3><p>Java 虚拟机栈描述的是 Java 方法执行的线程内存模型。每个方法执行的时候，Java 虚拟机都会同步创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态连接、方法出口等信息。每一个方法被调用直至执行完毕的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</p>
-<p>局部变量表存放了编译器可知的各种 Java 虚拟机基本数据类型（ boolean, byte, char, short, int, float, long, double）、对象引用（reference 类型）和 returnAddress 类型（指向了一条字节码指令的地址）。</p>
-<p>这些数据类型再局部变量表中的存储空间以局部变量槽（Slot）来表示，其中64位的long 和 double 类型的数据会占用两个变量槽，其余数据类型占用一个变量槽。<strong>局部变量表所需的内存空间在编译期间完成分配</strong>。在方法运行期间不会改变局部变量表的大小（这里的 “大小” 是指变量槽的数量）。</p>
-<p>Java 虚拟机栈会有两类异常状况：</p>
-<ul>
-<li>如果线程请求的栈深度大于虚拟机所允许的深度，将会抛出 StackOverflowError 异常</li>
-<li>如果线程申请栈空间 或 栈扩展（要注意HotSpot虚拟机的栈容量不可以动态扩展）失败时，会抛出 OutOfMemoryError 异常。</li>
-</ul>
-<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>本地方法栈 与 Java虚拟机栈所发挥的作用很相似，区别是虚拟机栈为虚拟机执行 Java 方法服务，而本地方法栈为虚拟机用到的本地（Native）方法服务。</p>
-<h3 id="Java-堆"><a href="#Java-堆" class="headerlink" title="Java 堆"></a>Java 堆</h3><p>Java 堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。</p>
-<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><h3 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h3><h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3><h2 id="Java对象的分配、布局和访问"><a href="#Java对象的分配、布局和访问" class="headerlink" title="Java对象的分配、布局和访问"></a>Java对象的分配、布局和访问</h2><p>sdf</p>
-<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maximalRectangle</span><span class="params">(<span class="keyword">char</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = matrix.length, n;</span><br><span class="line">    <span class="keyword">if</span> (m == <span class="number">0</span> || ((n = matrix[<span class="number">0</span>].length) == <span class="number">0</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> maxArea = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 柱状图高度</span></span><br><span class="line">    <span class="keyword">int</span>[] heights = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][j] == <span class="string">'0'</span>) &#123;</span><br><span class="line">                heights[j] = <span class="number">0</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 这句等价于 heights[i][j] = (i == 0 ? 1 : heights[i-1][j] + 1); </span></span><br><span class="line">                heights[j] = (i == <span class="number">0</span> ? <span class="number">1</span> : heights[j] + <span class="number">1</span>); </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> area = largestRectangleArea(heights);</span><br><span class="line">        maxArea = Math.max(maxArea, area);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxArea;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="keyword">int</span>[] heights)</span> </span>&#123;</span><br><span class="line">     <span class="comment">/*</span></span><br><span class="line"><span class="comment">        使用 left 和 right 数组 记录 从 i 左右两边延伸，第一个比 i 位置小的柱子索引位置</span></span><br><span class="line"><span class="comment">        那么第 i 根柱子能组成面积的宽度就是 right[i] - left[i] - 1</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">int</span> n = heights.length;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span>[] left = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">    <span class="keyword">int</span>[] right = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">    <span class="comment">// 第一根柱子，左边不存在比它小的</span></span><br><span class="line">    left[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 第二根柱子，右边不存在比它大的</span></span><br><span class="line">    right[n-<span class="number">1</span>] = n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = i - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (j != -<span class="number">1</span> &amp;&amp; heights[j] &gt;= heights[i]) &#123;</span><br><span class="line">            j = left[j];</span><br><span class="line">        &#125;</span><br><span class="line">        left[i] = j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (j != n &amp;&amp; heights[j] &gt;= heights[i]) &#123;</span><br><span class="line">            j = right[j];</span><br><span class="line">        &#125;</span><br><span class="line">        right[i] = j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> maxArea = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> width = right[i] - left[i] - <span class="number">1</span>;</span><br><span class="line">        maxArea = Math.max(maxArea, heights[i] * width);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxArea;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -895,7 +912,7 @@
 
   
  <nav class="pagination">
-   <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
+   <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
  </nav>
 
 
@@ -940,7 +957,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -962,7 +979,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
