@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/04/07/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/04/08/%E5%89%91%E6%8C%87Offer-%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -281,7 +281,202 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/07/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/" itemprop="url">程序员面试金典 旋转矩阵</a></h1>
+                <a class="post-title-link" href="/2020/04/08/%E5%89%91%E6%8C%87Offer-%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/" itemprop="url">剑指Offer 链表中倒数第k个节点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-08T09:11:00+08:00">
+                2020-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  362
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个节点是值为4的节点。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 k &#x3D; 2.</span><br><span class="line"></span><br><span class="line">返回链表 4-&gt;5.</span><br></pre></td></tr></table></figure>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>这个题最容易想到的思路是先将链表遍历一遍，计算出链表的长度 $n$ ，然后再遍历链表找到第 $n - k + 1$ 个元素。这种方法需要遍历链表两次，在时间上有些劣势。</p>
+<p>其实我们可以只遍历链表一次就可以完成。算法流程如下</p>
+<ol>
+<li>设置两个指针：fast 和 slow。</li>
+<li>fast 指针先向前走 $k$ 步（结束之后，fast 指针和 slow 指针间相差 $k$ 步）</li>
+<li>两个指针共同移动（都向前走 1 步，如此循环），当 fast 指针走过链表尾节点后跳出循环</li>
+<li>此时 slow 指针与尾节点的距离为 $k-1$,  即 slow 指针指向了链表倒数第 $k$ 个节点。</li>
+</ol>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">getKthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    ListNode fast = head, slow = head;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++) </span><br><span class="line">        fast = fast.next;</span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="keyword">null</span>) &#123;</span><br><span class="line">        fast = fast.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/04/07/LeetCode-48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/07/LeetCode-48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/" itemprop="url">LeetCode 48 旋转图像</a></h1>
         
 
         <div class="post-meta">
@@ -358,7 +553,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  522
+                  1.1k
                 </span>
               
 
@@ -374,7 +569,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  5
                 </span>
               
             </div>
@@ -402,7 +597,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">给定 matrix &#x3D; </span><br><span class="line">[</span><br><span class="line">  [1,2,3],</span><br><span class="line">  [4,5,6],</span><br><span class="line">  [7,8,9]</span><br><span class="line">],</span><br><span class="line">原地旋转输入矩阵，使其变为:</span><br><span class="line">[</span><br><span class="line">  [7,4,1],</span><br><span class="line">  [8,5,2],</span><br><span class="line">  [9,6,3]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p><strong>示例 2:</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">给定 matrix &#x3D;</span><br><span class="line">[</span><br><span class="line">  [ 5, 1, 9,11],</span><br><span class="line">  [ 2, 4, 8,10],</span><br><span class="line">  [13, 3, 6, 7],</span><br><span class="line">  [15,14,12,16]</span><br><span class="line">], </span><br><span class="line">原地旋转输入矩阵，使其变为:</span><br><span class="line">[</span><br><span class="line">  [15,13, 2, 5],</span><br><span class="line">  [14, 3, 4, 1],</span><br><span class="line">  [12, 6, 8, 9],</span><br><span class="line">  [16, 7,10,11]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p><strong>转运下面大神的思路</strong></p>
+<h1 id="思路一-原地旋转"><a href="#思路一-原地旋转" class="headerlink" title="思路一 原地旋转"></a>思路一 原地旋转</h1><p><strong>转运下面大神的思路</strong></p>
 <blockquote>
 <p><a href="https://leetcode-cn.com/problems/rotate-matrix-lcci/solution/c-tu-jie-yuan-di-cao-zuo-ji-bai-shuang-bai-vv-by-t/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/rotate-matrix-lcci/solution/c-tu-jie-yuan-di-cao-zuo-ji-bai-shuang-bai-vv-by-t/</a></p>
 </blockquote>
@@ -419,7 +614,30 @@
 <li><code>swap(matrix[i][j], matrix[n-i-1][n-j-1]);</code></li>
 <li><code>swap(matrix[i][j], matrix[n-j-1][i]);</code></li>
 </ol>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = matrix.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 这里行 或 列，谁多出一个都可以。即也可以是 i &lt; (n+1) / 2</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n / <span class="number">2</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (n + <span class="number">1</span>) / <span class="number">2</span>; j++) &#123;</span><br><span class="line">        swap(matrix[i][j], matrix[j][n-i<span class="number">-1</span>]);</span><br><span class="line">        swap(matrix[i][j], matrix[n-i<span class="number">-1</span>][n-j<span class="number">-1</span>]);</span><br><span class="line">        swap(matrix[i][j], matrix[n-j<span class="number">-1</span>][i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = matrix.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 这里行 或 列，谁多出一个都可以。即也可以是 i &lt; (n+1) / 2</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n / <span class="number">2</span>; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; (n + <span class="number">1</span>) / <span class="number">2</span>; j++) &#123;</span><br><span class="line">        swap(matrix[i][j], matrix[j][n-i<span class="number">-1</span>]);</span><br><span class="line">        swap(matrix[i][j], matrix[n-i<span class="number">-1</span>][n-j<span class="number">-1</span>]);</span><br><span class="line">        swap(matrix[i][j], matrix[n-j<span class="number">-1</span>][i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="思路二-用翻转代替旋转"><a href="#思路二-用翻转代替旋转" class="headerlink" title="思路二 用翻转代替旋转"></a>思路二 用翻转代替旋转</h1><blockquote>
+<p>搬运 LeetCode 官方题解</p>
+<p><a href="https://leetcode-cn.com/problems/rotate-matrix-lcci/solution/xuan-zhuan-ju-zhen-by-leetcode-solution/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/rotate-matrix-lcci/solution/xuan-zhuan-ju-zhen-by-leetcode-solution/</a></p>
+</blockquote>
+<p>我们还可以另辟蹊径，用翻转操作代替旋转操作。我们还是以题目中的示例二</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} 5 & 1 & 9 & 11 \\ 2 & 4 & 8 & 10 \\ 13 & 3 & 6 & 7 \\ 15 & 14 & 12 & 16 \end{bmatrix}</script><p>作为例子，先将其通过水平轴翻转得到：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} 5 & 1 & 9 & 11 \\ 2 & 4 & 8 & 10 \\ 13 & 3 & 6 & 7 \\ 15 & 14 & 12 & 16 \end{bmatrix} \xrightarrow{水平翻转} \begin{bmatrix} 15 & 14 & 12 & 16 \\ 13 & 3 & 6 & 7 \\ 2 & 4 & 8 & 10 \\ 5 & 1 & 9 & 11 \end{bmatrix}</script><p>再根据主对角线翻转得到：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} 15 & 14 & 12 & 16 \\ 13 & 3 & 6 & 7 \\ 2 & 4 & 8 & 10 \\ 5 & 1 & 9 & 11 \end{bmatrix} \xrightarrow{主对角线翻转} \begin{bmatrix} 15 & 13 & 2 & 5 \\ 14 & 3 & 4 & 1 \\ 12 & 6 & 8 & 9 \\ 16 & 7 & 10 & 11 \end{bmatrix}</script><p>就得到了答案。这是为什么呢？对于水平轴翻转而言，我们只需要枚举矩阵上半部分的元素，和下半部分的元素进行交换，即</p>
+<script type="math/tex; mode=display">
+\textit{matrix}[\textit{row}][\textit{col}] \xrightarrow{水平轴翻转} \textit{matrix}[n - \textit{row} - 1][\textit{col}]
+matrix[row][col]</script><p>对于主对角线翻转而言，我们只需要枚举对角线左侧的元素，和右侧的元素进行交换，即</p>
+<script type="math/tex; mode=display">
+\textit{matrix}[\textit{row}][\textit{col}] \xrightarrow{主对角线翻转} \textit{matrix}[\textit{col}][\textit{row}]
+matrix[row][col]</script><p>将它们联立即可得到：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} \textit{matrix}[\textit{row}][\textit{col}] & \xrightarrow{水平轴翻转} \textit{matrix}[n - \textit{row} - 1][\textit{col}] \\ &\xrightarrow{主对角线翻转} \textit{matrix}[\textit{col}][n - \textit{row} - 1] \end{aligned}</script><p>和方法一、方法二中的关键等式：</p>
+<script type="math/tex; mode=display">
+\textit{matrix}_\textit{new}[\textit{col}][n - \textit{row} - 1] = \textit{matrix}[\textit{row}][\textit{col}]</script><p>是一致的。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = matrix.length;</span><br><span class="line">        <span class="comment">// 水平翻转</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n / <span class="number">2</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++j) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp = matrix[i][j];</span><br><span class="line">                matrix[i][j] = matrix[n - i - <span class="number">1</span>][j];</span><br><span class="line">                matrix[n - i - <span class="number">1</span>][j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 主对角线翻转</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; ++j) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp = matrix[i][j];</span><br><span class="line">                matrix[i][j] = matrix[j][i];</span><br><span class="line">                matrix[j][i] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果是求逆时针旋转 90 度后的图像的话，那需要先垂直翻转，再沿副对角线翻转</p>
 
           
         
@@ -621,11 +839,10 @@
 <p>算法时间复杂度为 $O(n)$，空间复杂度为 $O(n)$</p>
 <p><strong>代码如下</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">height</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">height</span> == null)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span> = <span class="built_in">height</span>.<span class="built_in">size</span>();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left_max(<span class="built_in">size</span>), right_max(<span class="built_in">size</span>);</span><br><span class="line">    left_max[<span class="number">0</span>] = <span class="built_in">height</span>[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="built_in">size</span>; i++) &#123;</span><br><span class="line">        left_max[i] = <span class="built_in">max</span>(<span class="built_in">height</span>[i], left_max[i - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    right_max[<span class="built_in">size</span> - <span class="number">1</span>] = <span class="built_in">height</span>[<span class="built_in">size</span> - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="built_in">size</span> - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        right_max[i] = <span class="built_in">max</span>(<span class="built_in">height</span>[i], right_max[i + <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="built_in">size</span> - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        ans += <span class="built_in">min</span>(left_max[i], right_max[i]) - <span class="built_in">height</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="思路2-双指针"><a href="#思路2-双指针" class="headerlink" title="思路2 双指针"></a>思路2 双指针</h2><p>在上面动态规划的解法中，我们用到了 $left_max, right_max$ 两个数组，但是这两个数组中的每个元素其实我们只使用了一次，也就是说，当我们使用 $left_max[i]$ 时，$left_max[0] \ 至 \ left_max[i-1]$ 都不会再用到了。把这些不会用到的元素也存下来就有些浪费空间了，现在我们就来看一下如何去掉这两个数组。</p>
+<h2 id="思路2-双指针"><a href="#思路2-双指针" class="headerlink" title="思路2 双指针"></a>思路2 双指针</h2><p>在上面动态规划的解法中，我们用到了 <code>left_max,  right_max</code>​ 两个数组，但是这两个数组中的每个元素其实我们只使用了一次，也就是说，当我们使用 <code>left_max[i]</code> 时，<code>left_max[0]</code>  至 <code>left_max[i-1]</code> 都不会再用到了。把这些不会用到的元素也存下来就有些浪费空间了，现在我们就来看一下如何去掉这两个数组。</p>
 <p>先回顾一下两个数组是如何更新的</p>
-<p>$left_max[i] = max(left_max[i-1], height[i])$</p>
-<p>$right_max[i] = max(right_max[i+1], height[i])$</p>
-<p>可以看到：left_max[i] 的值只与 left_max[i-1] 有关，与 left_max[0] 至 left_max[i-2] 的值都无关。设 left_max[i] 是本次遍历中所要计算的最大值，那么 left_max[i-1] 就是遍历所要计算的最大值，因此，我们完全可以只通过left_max这一个变量来维护这一系列的最大值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">left_max[i] &#x3D; max(left_max[i-1], height[i])</span><br><span class="line">right_max[i] &#x3D; max(right_max[i+1], height[i])</span><br></pre></td></tr></table></figure>
+<p>可以看到：left_max[i] 的值只与 left_max[i-1] 有关，与  left_max[0] 至 left_max[i-2] 的值都无关。设 left_max[i] 是本次遍历中所要计算的最大值，那么 left_max[i-1] 就是遍历所要计算的最大值，因此，我们完全可以只通过 left_max 这一个变量来维护这一系列的最大值</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等号左边的left_max是本次要计算的left_max，相当于left_max[i]</span></span><br><span class="line"><span class="comment">// 等号右边的left_max是前一次遍历中计算的left_max, 相当于left_max[i-1]</span></span><br><span class="line">left_max = <span class="built_in">max</span>(left_max, <span class="built_in">height</span>[i])</span><br></pre></td></tr></table></figure>
 <p>同理，right_max[i] 也可由 right_max 替代</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等号左边的right_max是本次要计算的right_max，相当于right_max[i]</span></span><br><span class="line"><span class="comment">// 等号右边的right_max是前一次遍历中计算的right_max, 相当于right_max[i+1]</span></span><br><span class="line">right_max = <span class="built_in">max</span>(right_max, <span class="built_in">height</span>[i])</span><br></pre></td></tr></table></figure>
@@ -654,205 +871,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">height</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left_max = <span class="number">0</span>, right_max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = <span class="built_in">height</span>.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        left_max = <span class="built_in">max</span>(left_max, <span class="built_in">height</span>[left]);</span><br><span class="line">        right_max = <span class="built_in">max</span>(right_max, <span class="built_in">height</span>[right]);</span><br><span class="line">        <span class="keyword">if</span> (left_max &lt; right_max) &#123; <span class="comment">// 右边再大也没用，因为左边是短板</span></span><br><span class="line">            ans += left_max - <span class="built_in">height</span>[left++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123; <span class="comment">// right_max &lt;= left_max // 做百年再大也没用，因为右边是短板</span></span><br><span class="line">            ans += right_max - <span class="built_in">height</span>[right--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2020/04/01/%E5%89%91%E6%8C%87Offer-%E6%A0%91%E7%9A%84%E5%AD%90%E7%BB%93%E6%9E%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/01/%E5%89%91%E6%8C%87Offer-%E6%A0%91%E7%9A%84%E5%AD%90%E7%BB%93%E6%9E%84/" itemprop="url">剑指Offer 树的子结构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-01T09:28:14+08:00">
-                2020-04-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
-                    <span itemprop="name">刷题</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87Offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指Offer</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  548
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入两棵完全二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)</p>
-<p>B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
-<p>例如:<br>给定的树 A:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    3  </span><br><span class="line">   &#x2F; \  </span><br><span class="line">  4   5 </span><br><span class="line"> &#x2F; \ </span><br><span class="line">1   2</span><br></pre></td></tr></table></figure>
-<p>给定的树 B：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  4  </span><br><span class="line"> &#x2F; </span><br><span class="line">1</span><br></pre></td></tr></table></figure>
-<p>返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。</p>
-<p>输入按照完全二叉树的 BFS 遍历顺序输入</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：A &#x3D; [1,2,3], B &#x3D; [3,1]</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：A &#x3D; [3,4,5,1,2], B &#x3D; [4,1]</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>回顾一下做字符串匹配时的思路。假设我们要判断字符串  <code>B = &quot;cde&quot;</code> 是否是字符串 <code>A = &quot;abcdef&quot;</code> 的子串，那么我们首先要找到 $A$ 中哪个位置的字符与 $B$ 的第一个字符 <code>c</code> 相等，经过这个步骤后，我们找到了子串 <code>A1 = &quot;cdef&quot;</code>；然后，我们需要判断 $B$ 是否是 $A1$ 的前缀，如果是，则说明 $B$ 是 $A$ 的字串，如果不是，那么我们需要最开始的步骤，在 $A$ 中再寻找下一个等于 <code>c</code> 的字符的位置进行判断。</p>
-<p>这道题也是类似，要判断 $B$ 是否是 $A$ 的子树，我们先找到 $A$ 中哪个节点与 $B$ 的根节点相等，然后再判断 $B$ 是否是以该节点为根的树的前缀，如果不是，则再去 $A$ 中找到下一个这样的节点再做判断，以此类推。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubStructure</span><span class="params">(TreeNode A, TreeNode B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (A == <span class="keyword">null</span> || B == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">// A.val与B.val相等，判断B是否是A的前缀树</span></span><br><span class="line">        <span class="keyword">if</span> (A.val == B.val &amp;&amp; isPrefix(A, B)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">// A.val与B.val不相等 或者 相等但不是前缀，则再去找下一个满足条件的A</span></span><br><span class="line">        <span class="keyword">if</span> (isSubStructure(A.left, B) || isSubStructure(A.right, B)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 判断B是否是A的前缀</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isPrefix</span><span class="params">(TreeNode A, TreeNode B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (B == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>; <span class="comment">// 空树是A的前缀</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (A == <span class="keyword">null</span> || A.val != B.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> isPrefix(A.left, B.left) &amp;&amp; isPrefix(A.right, B.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">height</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left_max = <span class="number">0</span>, right_max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = <span class="built_in">height</span>.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        left_max = <span class="built_in">max</span>(left_max, <span class="built_in">height</span>[left]);</span><br><span class="line">        right_max = <span class="built_in">max</span>(right_max, <span class="built_in">height</span>[right]);</span><br><span class="line">        <span class="keyword">if</span> (left_max &lt; right_max) &#123; <span class="comment">// 右边再大也没用，因为左边是短板</span></span><br><span class="line">            ans += left_max - <span class="built_in">height</span>[left++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123; <span class="comment">// right_max &lt;= left_max // 左边再大也没用，因为右边是短板</span></span><br><span class="line">            ans += right_max - <span class="built_in">height</span>[right--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -937,7 +956,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -959,7 +978,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

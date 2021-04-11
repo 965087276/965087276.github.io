@@ -262,6 +262,204 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="965087276.github.io/2021/04/11/LeetCode-2021%E6%98%A5%E6%88%98%E9%98%9F%E8%B5%9B-3-%E7%94%B5%E5%8A%A8%E8%BD%A6%E6%B8%B8%E5%9F%8E%E5%B8%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Interstellar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/11/LeetCode-2021%E6%98%A5%E6%88%98%E9%98%9F%E8%B5%9B-3-%E7%94%B5%E5%8A%A8%E8%BD%A6%E6%B8%B8%E5%9F%8E%E5%B8%82/" itemprop="url">LeetCode 2021春战队赛 3 电动车游城市</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-11T11:30:42+08:00">
+                2021-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  664
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>小明的电动车电量充满时可行驶距离为 <code>cnt</code>，每行驶 1 单位距离消耗 1 单位电量，且花费 1 单位时间。小明想选择电动车作为代步工具。地图上共有 N 个景点，景点编号为 0 ~ N-1。他将地图信息以 <code>[城市 A 编号,城市 B 编号,两城市间距离]</code> 格式整理在在二维数组 <code>paths</code>，表示城市 A、B 间存在双向通路。初始状态，电动车电量为 0。每个城市都设有充电桩，<code>charge[i]</code> 表示第 i 个城市每充 1 单位电量需要花费的单位时间。请返回小明最少需要花费多少单位时间从起点城市 <code>start</code> 抵达终点城市 <code>end</code>。</p>
+<p><strong>示例 1：</strong></p>
+<blockquote>
+<p>输入：<code>paths = [[1,3,3],[3,2,1],[2,1,3],[0,1,4],[3,0,5]],cnt = 6, start = 1, end = 0, charge = [2,10,4,1]</code></p>
+<p>输出：<code>43</code></p>
+<p>解释：最佳路线为：1-&gt;3-&gt;0。<br>在城市 1 仅充 3 单位电至城市 3，然后在城市 3 充 5 单位电，行驶至城市 5。<br>充电用时共 3<em>10 + 5</em>1= 35<br>行驶用时 3 + 5 = 8，此时总用时最短 43。</p>
+</blockquote>
+<p><img src="1.png" alt=""></p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>将二元组 <code>(city, charge)</code> 视为节点，然后建图，以 <code>(start, 0)</code> 为起点跑一遍 Dijkstra 算法即可得到最终的结果。</p>
+<p>该图中，边有下面两种形式：</p>
+<ul>
+<li>在点 <code>u</code> 充一单位电，边为 <code>(u, charge) -&gt; (u, charge + 1)</code>，边权为 <code>在点 u 充一单位电的花费</code></li>
+<li>由点 <code>u</code> 到 点 <code>v</code> ，设两点间距离为 <code>dis</code> ，则边为 <code>(u, charge) -&gt; (v, charge - dis)</code>，边权为 <code>dis</code></li>
+</ul>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">electricCarPlan</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; paths, <span class="keyword">int</span> cnt, <span class="keyword">int</span> start, <span class="keyword">int</span> <span class="built_in">end</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; charge)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = charge.<span class="built_in">size</span>();</span><br><span class="line">    <span class="comment">// 节点i，j度电时的最小花费</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dist(n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(cnt+<span class="number">1</span>, INF));</span><br><span class="line">    dist[start][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;&gt; G(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;path : paths) &#123;</span><br><span class="line">        <span class="keyword">int</span> u = path[<span class="number">0</span>], v = path[<span class="number">1</span>], w = path[<span class="number">2</span>];</span><br><span class="line">        G[u].emplace_back(v, w);</span><br><span class="line">        G[v].emplace_back(u, w);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// (花费, 节点u, 剩余电量)</span></span><br><span class="line">    priority_queue&lt;tuple&lt;<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="built_in">vector</span>&lt;tuple&lt;<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;, greater&lt;&gt;&gt; q;</span><br><span class="line">    q.emplace(<span class="number">0</span>, start, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">        <span class="keyword">auto</span> [cost, u, remain] = q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">if</span> (u == <span class="built_in">end</span>) <span class="keyword">return</span> cost;</span><br><span class="line">        <span class="keyword">if</span> (cost &gt; dist[u][remain]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="comment">// 当前电充不满，就充一分钟</span></span><br><span class="line">        <span class="keyword">if</span> (remain &lt; cnt) &#123;</span><br><span class="line">            <span class="keyword">int</span> cost2 = cost + charge[u];</span><br><span class="line">            <span class="keyword">int</span> remain2 = remain + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (cost2 &lt; dist[u][remain2]) &#123;</span><br><span class="line">                dist[u][remain2] = cost2;</span><br><span class="line">                q.emplace(cost2, u, remain2);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果某条边能走，就走这条边</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> [v, w] : G[u]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (remain &gt;= w &amp;&amp; cost + w &lt; dist[v][remain - w]) &#123;</span><br><span class="line">                dist[v][remain - w] = cost + w;</span><br><span class="line">                q.emplace(cost + w, v, remain - w);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="965087276.github.io/2021/03/04/LeetCode-395-%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -659,196 +857,6 @@ h_{e_1} < h_{e_2} < h_{e_3} < ... < h_{e_k} \\
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="965087276.github.io/2021/02/22/LeetCode-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%E7%9A%84%E8%BF%AD%E4%BB%A3%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Interstellar">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/02/22/LeetCode-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%E7%9A%84%E8%BF%AD%E4%BB%A3%E7%AE%97%E6%B3%95/" itemprop="url">LeetCode 二叉树遍历的迭代算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-22T21:39:54+08:00">
-                2021-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index">
-                    <span itemprop="name">刷题</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87Offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指Offer</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  608
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="LeetCode-144-二叉树的前序遍历"><a href="#LeetCode-144-二叉树的前序遍历" class="headerlink" title="LeetCode 144 二叉树的前序遍历"></a>LeetCode 144 二叉树的前序遍历</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorderTraversal(TreeNode* root) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; st;</span><br><span class="line">        TreeNode *node = root;</span><br><span class="line">        <span class="keyword">while</span> (!st.empty() || node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="comment">// 遍历到最左节点</span></span><br><span class="line">            <span class="keyword">while</span> (node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">                res.push_back(node-&gt;val);</span><br><span class="line">                st.push(node);</span><br><span class="line">                node = node-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            node = st.top(); </span><br><span class="line">            st.pop();</span><br><span class="line">            <span class="comment">// 设置右节点继续遍历</span></span><br><span class="line">            node = node-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="LeetCode-94-二叉树的中序遍历"><a href="#LeetCode-94-二叉树的中序遍历" class="headerlink" title="LeetCode 94 二叉树的中序遍历"></a>LeetCode 94 二叉树的中序遍历</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; inorderTraversal(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> res;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; st;</span><br><span class="line">    TreeNode *node = root;</span><br><span class="line">    <span class="keyword">while</span> (!st.empty() || node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span> (node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            st.push(node);</span><br><span class="line">            node = node-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        node = st.top(); st.pop();</span><br><span class="line">        res.push_back(node-&gt;val);</span><br><span class="line">        node = node-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="LeetCode-145-二叉树的后序遍历"><a href="#LeetCode-145-二叉树的后序遍历" class="headerlink" title="LeetCode 145 二叉树的后序遍历"></a>LeetCode 145 二叉树的后序遍历</h1><h2 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h2><blockquote>
-<p>作者：dian-dao-de-hu-die<br>链接：<a href="https://leetcode-cn.com/problems/binary-tree-preorder-traversal/solution/er-cha-shu-qian-zhong-hou-xu-die-dai-bia-ozsw/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/binary-tree-preorder-traversal/solution/er-cha-shu-qian-zhong-hou-xu-die-dai-bia-ozsw/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前序遍历顺序为：根 -&gt; 左 -&gt; 右</span></span><br><span class="line"><span class="comment">// 后序遍历顺序为：左 -&gt; 右 -&gt; 根</span></span><br><span class="line"><span class="comment">// 所以, 我们可以把前序遍历的稍作修改: 根 -&gt; 右 -&gt; 左, </span></span><br><span class="line"><span class="comment">// 然后结果存放到栈里进行倒序, 之后再遍历结果栈就可以输出后序遍历了</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; postorderTraversal(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> res;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; st;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; res_st;</span><br><span class="line">    TreeNode *node = root;</span><br><span class="line">    <span class="keyword">while</span> (!st.empty() || node) &#123;</span><br><span class="line">        <span class="keyword">while</span> (node) &#123;</span><br><span class="line">            res_st.push(node);</span><br><span class="line">            st.push(node);</span><br><span class="line">            node = node-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        node = st.top(); st.pop();</span><br><span class="line">        node = node-&gt;left;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (!res_st.empty()) &#123;</span><br><span class="line">        res.push_back(res_st.top()-&gt;val);</span><br><span class="line">        res_st.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; postorderTraversal(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> res;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; st;</span><br><span class="line">    TreeNode *node = root;</span><br><span class="line">    <span class="comment">// 记录上一次访问的右节点</span></span><br><span class="line">    TreeNode *pre = <span class="literal">nullptr</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (!st.empty() || node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="comment">// 1.遍历到最左子节点</span></span><br><span class="line">        <span class="keyword">while</span> (node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            st.push(node);</span><br><span class="line">            node = node-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        node = st.top(); st.pop();</span><br><span class="line">        <span class="comment">// 2.遍历最左子节点的右子树(右子树存在 &amp;&amp; 未访问过)</span></span><br><span class="line">        <span class="keyword">if</span> (node-&gt;right  &amp;&amp; node-&gt;right != pre) &#123;</span><br><span class="line">            <span class="comment">// 重复压栈以记录当前路径分叉节点</span></span><br><span class="line">            st.push(node);</span><br><span class="line">            node = node-&gt;right;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 后序：填充vec在node-&gt;left和node-&gt;right后面</span></span><br><span class="line">            <span class="comment">// 注意：此时node的左右子树应均已完成访问 </span></span><br><span class="line">            res.push_back(node-&gt;val);</span><br><span class="line">            <span class="comment">// 避免重复访问右子树[记录当前节点便于下一步对比]</span></span><br><span class="line">            pre = node;</span><br><span class="line">            <span class="comment">// 避免重复访问左子树[设空节点]</span></span><br><span class="line">            node = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -898,7 +906,7 @@ h_{e_1} < h_{e_2} < h_{e_3} < ... < h_{e_k} \\
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -920,7 +928,7 @@ h_{e_1} < h_{e_2} < h_{e_3} < ... < h_{e_k} \\
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
