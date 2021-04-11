@@ -91,7 +91,7 @@
 <meta property="og:description" content="题目小明的电动车电量充满时可行驶距离为 cnt，每行驶 1 单位距离消耗 1 单位电量，且花费 1 单位时间。小明想选择电动车作为代步工具。地图上共有 N 个景点，景点编号为 0 ~ N-1。他将地图信息以 [城市 A 编号,城市 B 编号,两城市间距离] 格式整理在在二维数组 paths，表示城市 A、B 间存在双向通路。初始状态，电动车电量为 0。每个城市都设有充电桩，charge[i] 表示">
 <meta property="og:image" content="965087276.github.io/2021/04/11/LeetCode-2021%E6%98%A5%E6%88%98%E9%98%9F%E8%B5%9B-3-%E7%94%B5%E5%8A%A8%E8%BD%A6%E6%B8%B8%E5%9F%8E%E5%B8%82/1.png">
 <meta property="article:published_time" content="2021-04-11T03:30:42.000Z">
-<meta property="article:modified_time" content="2021-04-11T03:40:12.303Z">
+<meta property="article:modified_time" content="2021-04-11T03:44:39.676Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="最短路">
 <meta name="twitter:card" content="summary">
@@ -362,7 +362,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  664
+                  666
                 </span>
               
 
@@ -404,7 +404,7 @@
 <blockquote>
 <p>输入：<code>paths = [[1,3,3],[3,2,1],[2,1,3],[0,1,4],[3,0,5]],cnt = 6, start = 1, end = 0, charge = [2,10,4,1]</code></p>
 <p>输出：<code>43</code></p>
-<p>解释：最佳路线为：1-&gt;3-&gt;0。<br>在城市 1 仅充 3 单位电至城市 3，然后在城市 3 充 5 单位电，行驶至城市 5。<br>充电用时共 3<em>10 + 5</em>1= 35<br>行驶用时 3 + 5 = 8，此时总用时最短 43。</p>
+<p>解释：最佳路线为：1-&gt;3-&gt;0。<br>在城市 1 仅充 3 单位电至城市 3，然后在城市 3 充 5 单位电，行驶至城市 5。<br>充电用时共 3 * 10 + 5 * 1= 35<br>行驶用时 3 + 5 = 8，此时总用时最短 43。</p>
 </blockquote>
 <p><img src="1.png" alt=""></p>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>将二元组 <code>(city, charge)</code> 视为节点，然后建图，以 <code>(start, 0)</code> 为起点跑一遍 Dijkstra 算法即可得到最终的结果。</p>

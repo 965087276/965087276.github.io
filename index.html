@@ -358,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  664
+                  666
                 </span>
               
 
@@ -402,7 +402,7 @@
 <blockquote>
 <p>输入：<code>paths = [[1,3,3],[3,2,1],[2,1,3],[0,1,4],[3,0,5]],cnt = 6, start = 1, end = 0, charge = [2,10,4,1]</code></p>
 <p>输出：<code>43</code></p>
-<p>解释：最佳路线为：1-&gt;3-&gt;0。<br>在城市 1 仅充 3 单位电至城市 3，然后在城市 3 充 5 单位电，行驶至城市 5。<br>充电用时共 3<em>10 + 5</em>1= 35<br>行驶用时 3 + 5 = 8，此时总用时最短 43。</p>
+<p>解释：最佳路线为：1-&gt;3-&gt;0。<br>在城市 1 仅充 3 单位电至城市 3，然后在城市 3 充 5 单位电，行驶至城市 5。<br>充电用时共 3 * 10 + 5 * 1= 35<br>行驶用时 3 + 5 = 8，此时总用时最短 43。</p>
 </blockquote>
 <p><img src="1.png" alt=""></p>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>将二元组 <code>(city, charge)</code> 视为节点，然后建图，以 <code>(start, 0)</code> 为起点跑一遍 Dijkstra 算法即可得到最终的结果。</p>
